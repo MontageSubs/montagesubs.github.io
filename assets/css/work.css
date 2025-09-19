@@ -1,0 +1,76 @@
+/* 作品详情页样式 */
+.work-page-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+@media (min-width: 768px) {
+    .work-page-main {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 3rem;
+    }
+}
+
+.work-page-left {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.work-page-right {
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+.work-page-right p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.work-page-poster {
+    max-width: 200px;
+    height: auto;
+    margin-top: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.work-details {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.2);
+}
+
+.info-card {
+    background: rgba(33, 37, 41, 0.7);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex: 1;
+}
+
+.work-details h3 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.work-details ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.work-details li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #ced4da;
+}

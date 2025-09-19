@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>蒙太奇字幕组 - {{ page.title }}</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    {% if page.url == '/' %}
+    <link rel="stylesheet" href="/assets/css/index.css">
+    {% endif %}
+
+    {% if page.layout == 'work' %}
+    <link rel="stylesheet" href="/assets/css/work.css">
+    {% endif %}
+
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="navbar-left">
+            <span class="navbar-logo">🎬</span>
+            <div class="navbar-title">
+                <span class="group-name">蒙太奇字幕组</span>
+                <span class="slogan">用爱发电 ❤️ Powered by love</span>
+            </div>
+        </div>
+        <div class="navbar-right">
+            <a href="/index.html" class="nav-link{% if page.url == '/' or page.collection == 'works' %} active{% endif %}">✨ 翻译作品</a>
+
+            {% for p in site.pages %}
+            <a href="{{p.url}}" class="nav-link{% if page.url == p.url %} active{% endif %}">{{p.icon}} {{p.title}}</a>
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <div class="container">
+        {{ content }}
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            &copy; {{ site.time | date: "%Y" }} <a href="https://montagesubs.github.io">MontageSubs</a>. All rights reserved.
+        </div>
+    </footer>
+</body>
+
+</html>
