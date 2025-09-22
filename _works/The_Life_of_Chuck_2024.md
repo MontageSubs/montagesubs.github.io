@@ -32,3 +32,20 @@ tmdb_link: https://www.themoviedb.org/movie/842924-the-life-of-chuck?language=zh
         </ul>
     </div>
 </div>
+<br />
+<hr />
+<script src="https://giscus.app/client.js"
+        data-repo="MontageSubs/The_Life_of_Chuck_2024"
+        data-repo-id="R_kgDOPdcsjw"
+        data-category-id="DIC_kwDOPdcsj84Cvve7"
+        data-mapping="og:title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="cobalt"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
