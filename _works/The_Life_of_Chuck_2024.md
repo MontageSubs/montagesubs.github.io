@@ -2,7 +2,7 @@
 layout: work
 title: 《查克的一生》
 poster: https://www.themoviedb.org/t/p/w1280/2nbnPVh2OIRK3sbwBM4Kxpyxavi.jpg
-year: 2025
+year: 2024
 douban_link: https://m.douban.com/movie/subject/36399569/
 imdb_link: https://www.imdb.com/title/tt12908150/
 tmdb_link: https://www.themoviedb.org/movie/842924-the-life-of-chuck?language=zh-CN
