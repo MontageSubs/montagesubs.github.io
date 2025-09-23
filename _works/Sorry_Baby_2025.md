@@ -33,3 +33,20 @@ tmdb_link: https://www.themoviedb.org/movie/1205515-sorry-baby?language=zh-CN
         </ul>
     </div>
 </div>
+<br />
+<hr />
+<script src="https://giscus.app/client.js"
+        data-repo="MontageSubs/Sorry_Baby_2025"
+        data-repo-id="R_kgDOPggC7A"
+        data-category-id="DIC_kwDOPggC7M4Cvx_H"
+        data-mapping="og:title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="cobalt"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+</script>
