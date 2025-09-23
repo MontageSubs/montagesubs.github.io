@@ -14,7 +14,7 @@ tmdb_link: https://www.themoviedb.org/movie/1205515-sorry-baby?language=zh-CN
 * **年份:** {{ page.year }}
 * **豆瓣:** [{{ page.title }}]({{ page.douban_link }})
 * **IMDb:** [{{ page.title }}]({{ page.imdb_link }})
-* **TMDb:** [{{ page.title }}]({{ page.tmdb_link }})
+* **TMDB:** [{{ page.title }}]({{ page.tmdb_link }})
 
 <div class="work-details">
     <div>
