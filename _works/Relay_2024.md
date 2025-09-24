@@ -21,8 +21,8 @@ tmdb_link: https://www.themoviedb.org/movie/1088166-relay?language=zh-CN
         <h3>字幕信息</h3>
         <ul>
             <li>翻译: 小p</li>
-            <li>校对: -</li>
-            <li>后期: -</li>
+            <li>校对: novaeye、Lei</li>
+            <li>后期: Hyde</li>
         </ul>
     </div>
     <div>
