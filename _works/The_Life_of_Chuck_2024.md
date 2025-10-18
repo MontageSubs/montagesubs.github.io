@@ -27,7 +27,7 @@ tmdb_link: https://www.themoviedb.org/movie/842924-the-life-of-chuck?language=zh
     <div>
         <h3>字幕下载</h3>
         <ul>
-            <li><a href="https://subhd.tv/a/595208">SubHD 链接</a></li>
+            <li><a href="https://subhd.tv/a/599619">SubHD 链接</a></li>
             <li><a href="https://zimuku.org/detail/220569.html">字幕库 链接</a></li>
             <li><a href="https://assrt.net/xml/sub/668/668049.xml">射手网(伪) 链接</a></li>
         </ul>
