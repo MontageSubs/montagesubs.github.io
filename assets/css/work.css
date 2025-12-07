@@ -74,3 +74,9 @@
     margin-bottom: 0.5rem;
     color: #ced4da;
 }
+
+@media (max-width: 767px) {
+    .work-details {
+        flex-direction: column;
+    }
+}

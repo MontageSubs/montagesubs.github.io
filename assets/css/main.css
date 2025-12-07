@@ -61,6 +61,7 @@ body {
 .navbar-title .group-name {
     font-size: 1.8rem;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .navbar-title .slogan {
@@ -107,6 +108,30 @@ a.nav-link.active {
     color: #ffc107 !important;
 }
 
+@media (max-width: 767px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-left {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+
+    .navbar-right {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+    }
+
+    .nav-link {
+        margin: 0 0.5rem;
+    }
+}
+
 /* 通用链接样式 */
 a {
     color: #ffc107;
@@ -128,36 +153,33 @@ a:hover {
     flex-shrink: 0;
 }
 
-.social-links-fixed {
-    position: fixed;
-    bottom: 10px;
-    right: 30px;
+.social-links {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    display: flex;
     gap: 16px;
-    z-index: 10000;
+    margin-bottom: 1rem;
 }
 
-.social-links-fixed a {
+.social-links a {
     position: relative;
     color: #e9ecef;
     font-size: 16px;
     transition: transform 0.2s ease-in-out;
 }
 
-.social-links-fixed a:hover {
+.social-links a:hover {
     transform: scale(1.2);
 }
 
 /* 调整悬停标题样式 */
-.social-links-fixed a[data-tooltip]::after {
+.social-links a[data-tooltip]::after {
     content: attr(data-tooltip);
     position: absolute;
     bottom: 120%;
-    /* 弹出到图标上方 */
     left: 50%;
     transform: translateX(-50%);
-    /* 居中对齐 */
     white-space: nowrap;
     background-color: #333;
     color: #fff;
@@ -169,22 +191,22 @@ a:hover {
     transition: opacity 0.3s, visibility 0.3s;
 }
 
-.social-links-fixed a[data-tooltip]:hover::after {
+.social-links a[data-tooltip]:hover::after {
     opacity: 1;
     visibility: visible;
 }
 
 /* SubHD.tv 图标样式 */
-.social-links-fixed .subhd-icon {
+.social-links .subhd-icon {
     font-size: 14px;
 }
 
-.social-links-fixed .subhd-icon .fa-square {
+.social-links .subhd-icon .fa-square {
     color: #00b0ff;
 }
 
 /* 字幕库图标样式 */
-.social-links-fixed .zimuku-icon {
+.social-links .zimuku-icon {
     display: inline-flex;
     justify-content: center;
     align-items: center;
