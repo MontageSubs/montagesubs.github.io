@@ -28,6 +28,8 @@ layout: default
                     {% if page.director %}<li><strong>导演:</strong> {{ page.director }}</li>{% endif %}
                     {% if page.cast %}<li><strong>主演:</strong> {{ page.cast | join: '，' }}</li>{% endif %}
                     {% if page.year %}<li><strong>年份:</strong> {{ page.year }}</li>{% endif %}
+                    {% if page.film_release_date %}<li><strong>上映时间:</strong> {{ page.film_release_date }}</li>{% endif %}
+                    {% if page.subtitle_release_date %}<li><strong>字幕发布时间:</strong> {{ page.subtitle_release_date }}</li>{% endif %}
                     {% if page.douban_link %}<li><strong>豆瓣:</strong> <a href="{{ page.douban_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
                     {% if page.imdb_link %}<li><strong>IMDb:</strong> <a href="{{ page.imdb_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
                     {% if page.tmdb_link %}<li><strong>TMDB:</strong> <a href="{{ page.tmdb_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
