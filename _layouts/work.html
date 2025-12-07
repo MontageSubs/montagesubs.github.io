@@ -5,9 +5,71 @@ layout: default
 <div class="work-page-main">
     <div class="work-page-left">
         <h1>{{ page.title }}</h1>
+        {% if page.original_title %}
+        <div class="work-original-title">
+            {{ page.original_title }}{% if page.year %} ({{ page.year }}){% endif %}
+        </div>
+        {% endif %}
         <img src="{{ page.poster }}" alt="{{ page.title }}" class="work-page-poster">
     </div>
     <div class="work-page-right">
+        {% if page.summary %}
+        <div class="work-summary">
+            {{ page.summary | markdownify }}
+        </div>
+        {% endif %}
+
         {{ content }}
+
+        <div class="work-details">
+            <div class="info-card">
+                <h3>影片信息</h3>
+                <ul>
+                    {% if page.director %}<li><strong>导演:</strong> {{ page.director }}</li>{% endif %}
+                    {% if page.cast %}<li><strong>主演:</strong> {{ page.cast | join: '，' }}</li>{% endif %}
+                    {% if page.year %}<li><strong>年份:</strong> {{ page.year }}</li>{% endif %}
+                    {% if page.douban_link %}<li><strong>豆瓣:</strong> <a href="{{ page.douban_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
+                    {% if page.imdb_link %}<li><strong>IMDb:</strong> <a href="{{ page.imdb_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
+                    {% if page.tmdb_link %}<li><strong>TMDB:</strong> <a href="{{ page.tmdb_link }}" target="_blank" rel="noopener">{{ page.title }}</a></li>{% endif %}
+                </ul>
+            </div>
+            <div class="info-card">
+                <h3>字幕信息</h3>
+                <ul>
+                    {% if page.subtitles %}
+                        {% for item in page.subtitles %}
+                        <li><strong>{{ item.label }}:</strong> {{ item.names }}</li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                {% if page.downloads %}
+                <h3>字幕下载</h3>
+                <ul>
+                    {% for dl in page.downloads %}
+                    <li><a href="{{ dl.url }}" target="_blank" rel="noopener">{{ dl.label }} (链接)</a></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if page.giscus %}
+        <hr />
+        <script src="https://giscus.app/client.js"
+                data-repo="{{ page.giscus.repo }}"
+                data-repo-id="{{ page.giscus.repo_id }}"
+                data-category-id="{{ page.giscus.category_id }}"
+                data-mapping="og:title"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="cobalt"
+                data-lang="zh-CN"
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async>
+        </script>
+        {% endif %}
     </div>
 </div>

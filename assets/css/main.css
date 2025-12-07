@@ -9,12 +9,16 @@ body {
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 1.5rem;
+    flex: 1 0 auto;
 }
 
 .navbar {
@@ -121,6 +125,7 @@ a:hover {
     padding: 2rem 0;
     font-size: 0.9rem;
     line-height: 1.5;
+    flex-shrink: 0;
 }
 
 .social-links-fixed {
