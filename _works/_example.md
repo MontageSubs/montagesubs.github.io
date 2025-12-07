@@ -3,8 +3,10 @@ layout: work
 published: false
 title: 示例电影中文名称
 original_title: Example Movie Original Title
-poster: https://example.com/poster.jpg
 year: 2026
+poster: https://example.com/poster.jpg
+film_release_date: 2026-01-01
+subtitle_release_date: 2026-02-01
 douban_link: https://movie.douban.com/subject/xxxxx/
 imdb_link: https://www.imdb.com/title/ttxxxxxxx/
 tmdb_link: https://www.themoviedb.org/movie/xxxxxx
