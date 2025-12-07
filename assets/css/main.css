@@ -221,7 +221,7 @@ a:hover {
 }
 
 /* OpenSubtitles 图标样式 */
-.social-links-fixed .opensub-icon {
+.social-links .opensub-icon {
     height: 24px;
     width: auto;
     vertical-align: middle;
