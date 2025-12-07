@@ -44,6 +44,12 @@ layout: default
                         {% endfor %}
                     {% endif %}
                 </ul>
+                {% if page.github_repo %}
+                <h3>GitHub</h3>
+                <ul>
+                    <li><a href="https://github.com/{{ page.github_repo }}" target="_blank" rel="noopener">{{ page.github_repo }}</a></li>
+                </ul>
+                {% endif %}
                 {% if page.downloads %}
                 <h3>字幕下载</h3>
                 <ul>

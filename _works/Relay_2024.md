@@ -31,6 +31,7 @@ downloads:
     url: https://zimuku.org/detail/221270.html
   - label: OpenSubtitles (中英双语注释+特效)
     url: https://www.opensubtitles.org/en/subtitles/13290613/relay-zh
+github_repo: MontageSubs/Relay_2024
 giscus:
   repo: MontageSubs/Relay_2024
   repo_id: R_kgDOPyq1fw

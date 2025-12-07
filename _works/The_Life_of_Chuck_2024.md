@@ -31,6 +31,7 @@ downloads:
     url: https://assrt.net/xml/sub/668/668049.xml
   - label: OpenSubtitles (中英双语注释+特效)
     url: https://www.opensubtitles.org/en/subtitles/13326916/the-life-of-chuck-zh
+github_repo: MontageSubs/The_Life_of_Chuck_2024
 giscus:
   repo: MontageSubs/The_Life_of_Chuck_2024
   repo_id: R_kgDOPdcsjw

@@ -31,6 +31,7 @@ downloads:
     url: https://www.opensubtitles.org/en/subtitles/13271330/sorry-baby-zh
   - label: OpenSubtitles (SRT 版本)
     url: https://www.opensubtitles.org/en/subtitles/13271335/sorry-baby-zh
+github_repo: MontageSubs/Sorry_Baby_2025
 giscus:
   repo: MontageSubs/Sorry_Baby_2025
   repo_id: R_kgDOPggC7A
