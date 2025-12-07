@@ -1,6 +1,8 @@
-theme: jekyll-theme-cayman
 collections:
   works:
     output: true
   pages:
     output: true
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
