@@ -7,7 +7,7 @@ poster: https://image.tmdb.org/t/p/w1280/367NtOUrCegbDJ2UvZjhBBGwByq.jpg
 douban_link: https://movie.douban.com/subject/36250480/
 imdb_link: https://www.imdb.com/title/tt11539996/
 tmdb_link: https://www.themoviedb.org/movie/1088166-relay?language=zh-CN
-summary: 一位匿名的问题化解高手，专门在腐败公司和威胁其破产的个人之间进行利润丰厚的回报，他通过周密的计划将自己身份保密，始终遵循一套严格的规则。当某天一位潜在客户莎拉告知她需要他的保护来活命后，规则很快开始发生改变。
+summary: 他是一名匿名的化解高手，为腐败公司与威胁其利益的人促成高额和解，一向按自己的规则行事，也从不暴露身份。直到莎拉出现，声称只有他能救她的命——他的规则从此被打破。
 film_release_date: 2025-08-22
 subtitle_release_date: 2025-09-25 首发；2025-10-30 更新
 director: 大卫·马肯兹 (David Mackenzie)
