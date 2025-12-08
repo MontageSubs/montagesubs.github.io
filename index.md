@@ -6,7 +6,7 @@ title: 翻译作品
 <div class="poster-grid">
   {% for work in site.works %}
     <div class="poster-item">
-      <a href="{{ work.url }}">
+      <a href="{{ work.url | relative_url }}">
         <img src="{{ work.poster }}" alt="{{ work.title }}">
       </a>
       <h3>{{ work.title }}</h3>
