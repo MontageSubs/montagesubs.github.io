@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-Generate a work markdown file from TMDB movie ID.
+Generate a work markdown file from TMDB movie ID (requires TMDB_API_KEY).
 Usage: python scripts/generate_work_md.py <tmdb_id> [--output <filename>]
 """
 
 import argparse
-import json
 import sys
 from pathlib import Path
 from typing import Optional
 from datetime import datetime
+import re
 
 try:
     import requests
@@ -38,22 +38,14 @@ class TMDBMovieGenerator:
         self.base_url = "https://api.themoviedb.org/3"
     
     def get_movie_data(self, tmdb_id: int) -> dict:
-        """
-        Fetch movie data from TMDB API.
-        
-        Args:
-            tmdb_id: The TMDB movie ID
-            
-        Returns:
-            Dictionary containing movie data
-        """
+        """Fetch movie data (with credits + external_ids) from TMDB API."""
         url = f"{self.base_url}/movie/{tmdb_id}"
         params = {
             'api_key': self.api_key,
-            'language': 'zh-CN'
+            'language': 'zh-CN',
+            'append_to_response': 'credits,external_ids'
         }
-        
-        response = requests.get(url, params=params)
+        response = requests.get(url, params=params, timeout=15)
         response.raise_for_status()
         return response.json()
     
@@ -70,15 +62,7 @@ class TMDBMovieGenerator:
         return [actor.get('name', '') for actor in cast_list[:5]]  # Limit to 5
     
     def format_release_date(self, date_str: str) -> str:
-        """
-        Format release date. Returns empty string if invalid.
-        
-        Args:
-            date_str: Date string in format YYYY-MM-DD
-            
-        Returns:
-            Formatted date or empty string
-        """
+        """Return YYYY-MM-DD if valid, else empty string."""
         if not date_str:
             return ''
         try:
@@ -86,6 +70,12 @@ class TMDBMovieGenerator:
             return date_str
         except ValueError:
             return ''
+
+    def slugify(self, text: str) -> str:
+        """Slugify text for filename (ASCII fallback)."""
+        text = re.sub(r'\s+', '_', text.strip())
+        text = re.sub(r'[^\w_-]+', '', text)
+        return text or 'movie'
     
     def generate_markdown(
         self,
@@ -98,22 +88,7 @@ class TMDBMovieGenerator:
         github_repo: str = '',
         output_filename: Optional[str] = None
     ) -> tuple[str, str]:
-        """
-        Generate markdown content from TMDB data.
-        
-        Args:
-            tmdb_id: TMDB movie ID
-            title: Chinese title (will fetch from TMDB if not provided)
-            original_title: Original title (will fetch from TMDB if not provided)
-            director: Director name (optional, can be filled manually)
-            summary: Movie summary (will fetch from TMDB if not provided)
-            film_release_date: Film release date (will fetch from TMDB if not provided)
-            github_repo: GitHub repository name (optional)
-            output_filename: Output filename (defaults to auto-generated from title and year)
-            
-        Returns:
-            Tuple of (markdown_content, output_filename)
-        """
+        """Generate markdown content from TMDB data."""
         # Fetch data from TMDB
         movie_data = self.get_movie_data(tmdb_id)
         
@@ -133,36 +108,44 @@ class TMDBMovieGenerator:
         
         # Format cast
         cast = self.format_cast(movie_data.get('credits', {}).get('cast', []))
+
+        # Director from crew if not provided
+        if not director:
+            crew = movie_data.get('credits', {}).get('crew', [])
+            directors = [c.get('name') for c in crew if c.get('job') == 'Director']
+            if directors:
+                director = '、'.join(directors)
         
         # Generate output filename if not provided
         if not output_filename:
-            safe_title = original_title.replace(' ', '_').replace('/', '_')
+            safe_title = self.slugify(original_title or title)
             output_filename = f"{safe_title}_{year}.md"
         
         # Get poster URL
         poster_path = movie_data.get('poster_path', '')
         poster_url = f"https://image.tmdb.org/t/p/w1280{poster_path}" if poster_path else ''
         
-        # Get IMDB ID (requires additional request to external_ids endpoint)
-        imdb_id = ''
-        try:
-            external_url = f"{self.base_url}/movie/{tmdb_id}/external_ids"
-            external_params = {'api_key': self.api_key}
-            external_response = requests.get(external_url, params=external_params)
-            external_data = external_response.json()
-            imdb_id = external_data.get('imdb_id', '')
-        except Exception:
-            pass
+        # IMDb ID from external_ids
+        imdb_id = movie_data.get('external_ids', {}).get('imdb_id', '')
         
         # Build IMDB link
         imdb_link = f"https://www.imdb.com/title/{imdb_id}/" if imdb_id else ''
         
         # Build Douban link (placeholder - you'll need to fill this manually)
         douban_link = ''
-        
+
         # Build TMDB link
-        tmdb_link = f"https://www.themoviedb.org/movie/{tmdb_id}-{original_title.lower().replace(' ', '-')}?language=zh-CN"
-        
+        tmdb_link = f"https://www.themoviedb.org/movie/{tmdb_id}?language=zh-CN"
+
+        def yaml_escape(text: str) -> str:
+            if not text:
+                return ''
+            # block literal for multi-line or colon-containing text
+            if '\n' in text or ':' in text:
+                return "|\n  " + text.replace('\n', '\n  ')
+            return text
+        yaml_summary = yaml_escape(summary)
+
         # Build markdown frontmatter
         frontmatter = f"""---
 layout: work
@@ -173,9 +156,9 @@ poster: {poster_url}
 douban_link: {douban_link}
 imdb_link: {imdb_link}
 tmdb_link: {tmdb_link}
-summary: {summary}
+summary: {yaml_summary}
 film_release_date: {film_release_date}
-subtitle_release_date: 
+subtitle_release_date:
 director: {director}
 cast:"""
         
@@ -197,15 +180,15 @@ downloads:
     url: 
   - label: 字幕库
     url: 
-  - label: OpenSubtitles
-    url: 
 github_repo: {github_repo}
 giscus:
   repo: {github_repo}
   repo_id: 
   category_id: 
 ---
-""".format(github_repo=github_repo or '')
+""".format(
+            github_repo=github_repo or ''
+        )
         
         return frontmatter, output_filename
     
