@@ -22,3 +22,12 @@ Gemfile.lock
 .ruby-version
 .bundle/
 vendor/bundle
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+ENV/

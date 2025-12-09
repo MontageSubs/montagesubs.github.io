@@ -6,3 +6,8 @@ collections:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+# Exclude scripts directory from Jekyll build
+exclude:
+  - scripts/
+  - scripts/**/*
