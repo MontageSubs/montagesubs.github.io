@@ -3,7 +3,7 @@ layout: work
 title: 对不起，宝贝
 original_title: Sorry, Baby
 year: 2025
-poster: https://image.tmdb.org/t/p/w1280/iq1QtN1H8AVEBfl1SgNAqhMgTbQ.jpg
+poster: https://image.tmdb.org/t/p/w1280/FF9u710hovjIczYHFnuttktLX4.jpg
 douban_link: https://m.douban.com/movie/subject/36809707/
 imdb_link: https://www.imdb.com/title/tt32843349/
 tmdb_link: https://www.themoviedb.org/movie/1205515-sorry-baby?language=zh-CN
