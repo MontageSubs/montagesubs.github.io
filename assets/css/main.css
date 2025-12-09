@@ -50,10 +50,13 @@ body {
 }
 
 .navbar-logo {
-    font-size: 4rem;
-    color: #ffc107;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
     margin-right: 1rem;
-    line-height: 1;
+    border-radius: 12px;
+    display: block;
+    flex-shrink: 0;
 }
 
 .navbar-title {

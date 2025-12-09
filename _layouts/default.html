@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="{{page.title}} - 字幕讨论">
     <title>蒙太奇字幕组 - {{ page.title }}</title>
-    <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+    <link rel="icon" type="image/jpeg" href="{{ '/assets/images/montagesubs_logo-256.jpg' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -27,7 +26,8 @@
     <div class="navbar">
         <div class="navbar-left">
             <a href="{{ '/' | relative_url }}">
-                <span class="navbar-logo">🎬</span>
+                <img src="{{ '/assets/images/montagesubs_logo-256.jpg' | relative_url }}" alt="MontageSubs logo"
+                    class="navbar-logo">
             </a>
             <a href="{{ '/' | relative_url }}">
                 <div class="navbar-title">
