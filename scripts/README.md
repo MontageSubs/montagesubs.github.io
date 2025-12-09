@@ -1,6 +1,6 @@
 # Work Markdown Generator
 
-生成符合网站格式的电影工作 markdown 文件的 Python 脚本。
+生成符合网站格式的电影工作 markdown 文件的 Python 脚本（依赖 TMDB_API_KEY）。
 
 ## 使用方法
 
@@ -15,7 +15,7 @@ pip install requests
    - 访问 [TMDB](https://www.themoviedb.org/) 并注册账户
    - 在设置 > API 中获取 API Key
 
-3. 设置环境变量：
+3. 设置环境变量（推荐）：
 ```bash
 export TMDB_API_KEY="your_api_key_here"
 ```
@@ -74,14 +74,13 @@ python scripts/generate_work_md.py 1088166 --output-dir ./test_output
 
 脚本生成的 markdown 文件包含以下部分（需要手动填补的部分用空值表示）：
 
-- **自动填充**：标题、海报 URL、导演、演员、IMDB 链接、TMDB 链接、简介、发布日期
+- **自动填充**：标题（zh-CN）、原始标题、海报 URL、导演（credits 里取）、演员前 5、IMDb 链接、TMDB 链接、简介、上映日期
 - **需手动填充**：
   - Douban 链接（豆瓣）
   - 字幕发布日期和更新信息
   - 字幕团队成员（翻译、校对、后期）
-  - 下载链接（SubHD、字幕库、OpenSubtitles 等）
-  - GitHub 仓库 ID
-  - Giscus 配置（repo_id、category_id）
+  - 下载链接（默认留 SubHD、字幕库 占位，可自行增减）
+  - GitHub 仓库名/ID（`github_repo`），giscus 的 `repo_id`、`category_id`
 
 ## 文件结构
 
