@@ -3,7 +3,7 @@ layout: work
 title: 传话人
 original_title: Relay
 year: 2024
-poster: https://image.tmdb.org/t/p/w1280/367NtOUrCegbDJ2UvZjhBBGwByq.jpg
+poster: https://image.tmdb.org/t/p/w1280/fO0Yuh1GMRwNKnqNmy1NE47ZtwJ.jpg
 douban_link: https://movie.douban.com/subject/36250480/
 imdb_link: https://www.imdb.com/title/tt11539996/
 tmdb_link: https://www.themoviedb.org/movie/1088166-relay?language=zh-CN
