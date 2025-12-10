@@ -32,8 +32,8 @@ downloads:
   - label: OpenSubtitles.org (中英双语注释+特效)
     url: https://www.opensubtitles.org/en/subtitles/13334794/twinless-zh
 github_repo: MontageSubs/Twinless_2025
-#giscus:
-#  repo: MontageSubs/Twinless_2025 
-#  repo_id: 
-#  category_id: 
+giscus:
+  repo: MontageSubs/Twinless_2025 
+  repo_id: R_kgDOP82V2w
+  category_id: DIC_kwDOP82V284CwXBM
 ---

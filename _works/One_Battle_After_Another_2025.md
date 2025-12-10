@@ -34,8 +34,8 @@ downloads:
   - label: OpenSubtitles.org (中英双语注释+特效)
     url: https://www.opensubtitles.org/en/subtitles/13398134/one-battle-after-another-zh
 github_repo: MontageSubs/One_Battle_After_Another_2025
-#giscus:
-#  repo: MontageSubs/One_Battle_After_Another_2025
-#  repo_id: 
-#  category_id: 
+giscus:
+  repo: MontageSubs/One_Battle_After_Another_2025
+  repo_id: R_kgDOQVeTtw
+  category_id: DIC_kwDOQVeTt84Czm0T
 ---

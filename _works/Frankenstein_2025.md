@@ -34,8 +34,8 @@ downloads:
   - label: OpenSubtitles.org
     url: https://www.opensubtitles.org/en/subtitles/13368132/frankenstein-zh
 github_repo: MontageSubs/Frankenstein_2025
-#giscus:
-#  repo: MontageSubs/Frankenstein_2025
-#  repo_id: 
-#  category_id: 
+giscus:
+  repo: MontageSubs/Frankenstein_2025
+  repo_id: R_kgDOQRBtxA
+  category_id: DIC_kwDOQRBtxM4Czmz1
 ---
