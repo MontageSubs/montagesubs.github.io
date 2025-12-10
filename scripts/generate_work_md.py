@@ -43,11 +43,31 @@ class TMDBMovieGenerator:
         params = {
             'api_key': self.api_key,
             'language': 'zh-CN',
-            'append_to_response': 'credits,external_ids'
+            'append_to_response': 'credits,external_ids,translations'
         }
         response = requests.get(url, params=params, timeout=15)
         response.raise_for_status()
         return response.json()
+
+    def get_translation_title(self, movie_data: dict, preferred: list[tuple[str, str]]) -> str:
+        """
+        Return the first non-empty title from translations matching preferred locales.
+
+        Args:
+            movie_data: Movie payload containing translations
+            preferred: Ordered list of (iso_639_1, iso_3166_1) tuples to check
+        """
+        translations = movie_data.get('translations', {}).get('translations', [])
+        for iso_639_1, iso_3166_1 in preferred:
+            for translation in translations:
+                if (
+                    translation.get('iso_639_1') == iso_639_1
+                    and translation.get('iso_3166_1') == iso_3166_1
+                ):
+                    title = translation.get('data', {}).get('title') or ''
+                    if title:
+                        return title
+        return ''
     
     def format_cast(self, cast_list: list) -> list:
         """
@@ -92,12 +112,28 @@ class TMDBMovieGenerator:
         # Fetch data from TMDB
         movie_data = self.get_movie_data(tmdb_id)
         
+        english_title = original_title
+        if not english_title:
+            english_title = self.get_translation_title(
+                movie_data,
+                preferred=[('en', 'US'), ('en', 'GB')]
+            )
+        if not english_title:
+            english_title = movie_data.get('original_title', '') or movie_data.get('title', '')
+
+        chinese_title = title
+        if not chinese_title:
+            chinese_title = self.get_translation_title(
+                movie_data,
+                preferred=[('zh', 'CN'), ('zh', 'SG')]
+            )
+        if not chinese_title:
+            chinese_title = english_title
+        
+        title = chinese_title
+        original_title = english_title
+        
         # Use provided values or fallback to TMDB data
-        if not original_title:
-            original_title = movie_data.get('title', '')
-        if not title:
-            # Try to get Chinese title from TMDB
-            title = movie_data.get('title', '')
         if not summary:
             summary = movie_data.get('overview', '')
         if not film_release_date:
