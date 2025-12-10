@@ -1,6 +1,6 @@
 # Work Markdown Generator
 
-生成符合网站格式的电影工作 markdown 文件的 Python 脚本（依赖 TMDB_API_KEY）。
+生成符合网站格式的电影/剧集 markdown 文件的 Python 脚本（依赖 TMDB_API_KEY）。
 
 ## 使用方法
 
@@ -24,6 +24,8 @@ export TMDB_API_KEY="your_api_key_here"
 
 ```bash
 python scripts/generate_work_md.py <tmdb_id>
+# 想抓电视剧：加 --media-type tv
+python scripts/generate_work_md.py <tmdb_id> --media-type tv
 ```
 
 示例：
@@ -50,6 +52,7 @@ python scripts/generate_work_md.py <tmdb_id> [options]
 - `--output <filename>` - 自定义输出文件名
 - `--output-dir <path>` - 输出目录（默认：_works）
 - `--api-key <key>` - 直接提供 API Key（推荐使用环境变量）
+- `--media-type {movie|tv}` - 抓电影或电视剧（默认：movie）
 
 ### 使用示例
 
@@ -72,7 +75,7 @@ python scripts/generate_work_md.py 1088166 --output-dir ./test_output
 
 ## 生成的文件格式
 
-脚本生成的 markdown 文件包含以下部分（需要手动填补的部分用空值表示）：
+脚本生成的 markdown 文件包含以下部分（需要手动填补的部分用空值表示，电视剧的日期取首播日）：
 
 - **自动填充**：标题（中文优先）、原始标题（英文优先）、海报 URL、导演（credits 里取）、演员前 5、IMDb 链接、TMDB 链接、简介、上映日期
 - **需手动填充**：

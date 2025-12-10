@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Generate a work markdown file from TMDB movie ID (requires TMDB_API_KEY).
+Generate a work markdown file from TMDB movie/TV ID (requires TMDB_API_KEY).
 Usage: python scripts/generate_work_md.py <tmdb_id> [--output <filename>]
 """
 
@@ -37,9 +37,11 @@ class TMDBMovieGenerator:
             )
         self.base_url = "https://api.themoviedb.org/3"
     
-    def get_movie_data(self, tmdb_id: int) -> dict:
-        """Fetch movie data (with credits + external_ids) from TMDB API."""
-        url = f"{self.base_url}/movie/{tmdb_id}"
+    def get_media_data(self, tmdb_id: int, media_type: str = 'movie') -> dict:
+        """Fetch movie/TV data (with credits + external_ids + translations) from TMDB API."""
+        if media_type not in {'movie', 'tv'}:
+            raise ValueError("media_type must be 'movie' or 'tv'")
+        url = f"{self.base_url}/{media_type}/{tmdb_id}"
         params = {
             'api_key': self.api_key,
             'language': 'zh-CN',
@@ -49,22 +51,24 @@ class TMDBMovieGenerator:
         response.raise_for_status()
         return response.json()
 
-    def get_translation_title(self, movie_data: dict, preferred: list[tuple[str, str]]) -> str:
+    def get_translation_title(self, media_data: dict, preferred: list[tuple[str, str]], media_type: str) -> str:
         """
         Return the first non-empty title from translations matching preferred locales.
 
         Args:
-            movie_data: Movie payload containing translations
+            media_data: Movie/TV payload containing translations
             preferred: Ordered list of (iso_639_1, iso_3166_1) tuples to check
+            media_type: 'movie' or 'tv'
         """
-        translations = movie_data.get('translations', {}).get('translations', [])
+        translations = media_data.get('translations', {}).get('translations', [])
+        data_key = 'title' if media_type == 'movie' else 'name'
         for iso_639_1, iso_3166_1 in preferred:
             for translation in translations:
                 if (
                     translation.get('iso_639_1') == iso_639_1
                     and translation.get('iso_3166_1') == iso_3166_1
                 ):
-                    title = translation.get('data', {}).get('title') or ''
+                    title = translation.get('data', {}).get(data_key) or ''
                     if title:
                         return title
         return ''
@@ -106,26 +110,32 @@ class TMDBMovieGenerator:
         summary: str = '',
         film_release_date: str = '',
         github_repo: str = '',
-        output_filename: Optional[str] = None
+        output_filename: Optional[str] = None,
+        media_type: str = 'movie'
     ) -> tuple[str, str]:
         """Generate markdown content from TMDB data."""
         # Fetch data from TMDB
-        movie_data = self.get_movie_data(tmdb_id)
-        
+        media_data = self.get_media_data(tmdb_id, media_type=media_type)
+
         english_title = original_title
         if not english_title:
             english_title = self.get_translation_title(
-                movie_data,
-                preferred=[('en', 'US'), ('en', 'GB')]
+                media_data,
+                preferred=[('en', 'US'), ('en', 'GB')],
+                media_type=media_type
             )
         if not english_title:
-            english_title = movie_data.get('original_title', '') or movie_data.get('title', '')
+            if media_type == 'movie':
+                english_title = media_data.get('original_title', '') or media_data.get('title', '')
+            else:
+                english_title = media_data.get('original_name', '') or media_data.get('name', '')
 
         chinese_title = title
         if not chinese_title:
             chinese_title = self.get_translation_title(
-                movie_data,
-                preferred=[('zh', 'CN'), ('zh', 'SG')]
+                media_data,
+                preferred=[('zh', 'CN'), ('zh', 'SG')],
+                media_type=media_type
             )
         if not chinese_title:
             chinese_title = english_title
@@ -135,34 +145,40 @@ class TMDBMovieGenerator:
         
         # Use provided values or fallback to TMDB data
         if not summary:
-            summary = movie_data.get('overview', '')
+            summary = media_data.get('overview', '')
         if not film_release_date:
-            film_release_date = self.format_release_date(movie_data.get('release_date', ''))
-        
+            date_key = 'release_date' if media_type == 'movie' else 'first_air_date'
+            film_release_date = self.format_release_date(media_data.get(date_key, ''))
+
         # Extract year from release date
         year = film_release_date.split('-')[0] if film_release_date else datetime.now().year
         
         # Format cast
-        cast = self.format_cast(movie_data.get('credits', {}).get('cast', []))
+        cast = self.format_cast(media_data.get('credits', {}).get('cast', []))
 
         # Director from crew if not provided
         if not director:
-            crew = movie_data.get('credits', {}).get('crew', [])
-            directors = [c.get('name') for c in crew if c.get('job') == 'Director']
-            if directors:
-                director = '、'.join(directors)
-        
+            if media_type == 'tv':
+                creators = [c.get('name') for c in media_data.get('created_by', []) if c.get('name')]
+                if creators:
+                    director = '、'.join(creators)
+            if not director:
+                crew = media_data.get('credits', {}).get('crew', [])
+                directors = [c.get('name') for c in crew if c.get('job') == 'Director']
+                if directors:
+                    director = '、'.join(directors)
+
         # Generate output filename if not provided
         if not output_filename:
             safe_title = self.slugify(original_title or title)
             output_filename = f"{safe_title}_{year}.md"
         
         # Get poster URL
-        poster_path = movie_data.get('poster_path', '')
+        poster_path = media_data.get('poster_path', '')
         poster_url = f"https://image.tmdb.org/t/p/w1280{poster_path}" if poster_path else ''
         
         # IMDb ID from external_ids
-        imdb_id = movie_data.get('external_ids', {}).get('imdb_id', '')
+        imdb_id = media_data.get('external_ids', {}).get('imdb_id', '')
         
         # Build IMDB link
         imdb_link = f"https://www.imdb.com/title/{imdb_id}/" if imdb_id else ''
@@ -171,7 +187,7 @@ class TMDBMovieGenerator:
         douban_link = ''
 
         # Build TMDB link
-        tmdb_link = f"https://www.themoviedb.org/movie/{tmdb_id}?language=zh-CN"
+        tmdb_link = f"https://www.themoviedb.org/{media_type}/{tmdb_id}?language=zh-CN"
 
         def yaml_escape(text: str) -> str:
             if not text:
@@ -251,11 +267,12 @@ def main():
     parser.add_argument('--original-title', default='', help='Original title (optional, fetched from TMDB if not provided)')
     parser.add_argument('--director', default='', help='Director name (optional, can be filled manually)')
     parser.add_argument('--summary', default='', help='Movie summary (optional, fetched from TMDB if not provided)')
-    parser.add_argument('--release-date', default='', help='Film release date in YYYY-MM-DD format')
+    parser.add_argument('--release-date', default='', help='Release date in YYYY-MM-DD (for TV, first air date)')
     parser.add_argument('--github-repo', default='', help='GitHub repository name (e.g., MontageSubs/Movie_Title_Year)')
     parser.add_argument('--output', default='', help='Output filename (defaults to auto-generated)')
     parser.add_argument('--api-key', default='', help='TMDB API key (or set TMDB_API_KEY env var)')
     parser.add_argument('--output-dir', default='_works', help='Output directory (default: _works)')
+    parser.add_argument('--media-type', default='movie', choices=['movie', 'tv'], help='TMDB media type (movie or tv)')
     
     args = parser.parse_args()
     
@@ -270,7 +287,8 @@ def main():
             summary=args.summary,
             film_release_date=args.release_date,
             github_repo=args.github_repo,
-            output_filename=args.output
+            output_filename=args.output,
+            media_type=args.media_type
         )
         
         output_path = Path(args.output_dir) / filename
