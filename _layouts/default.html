@@ -38,11 +38,13 @@
         </div>
         <div class="navbar-right">
             <a href="{{ '/index.html' | relative_url }}" class="nav-link{% if page.url == '/' or page.collection == 'works' %} active{% endif %}">✨ 翻译作品</a>
+            <a href="{{ '/tools/' | relative_url }}" class="nav-link{% if page.url == '/tools/' %} active{% endif %}">🧰 工具</a>
 
             {% for p in site.pages %}
-            <a href="{{ p.url | relative_url }}" class="nav-link{% if page.url == p.url %} active{% endif %}">{{p.icon}} {{p.title}}</a>
-            {% endfor %}
-
+              {% if p.url != '/tools/' %}
+                 <a href="{{ p.url | relative_url }}" class="nav-link{% if page.url == p.url %} active{% endif %}">{{ p.icon }} {{ p.title }}</a>
+              {% endif %}
+            % endfor %}
         </div>
     </div>
 
