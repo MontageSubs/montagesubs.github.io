@@ -2,3 +2,5 @@ User-agent: *
 Disallow:
 
 Sitemap: https://montagesubs.github.io/sitemap_index.xml
+Sitemap: https://montagesubs.github.io/ass-subset/sitemap.xml
+Sitemap: https://montagesubs.github.io/svg-to-ass/sitemap.xml
