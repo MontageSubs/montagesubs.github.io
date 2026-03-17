@@ -8,6 +8,7 @@ collections:
     output: true
   pages:
     output: true
+    permalink: /:basename/
 
 plugins:
   - jekyll-feed
