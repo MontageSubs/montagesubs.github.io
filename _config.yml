@@ -1,13 +1,17 @@
+url: "https://montagesubs.github.io" 
+baseurl: ""
+
 collections:
   works:
     output: true
   pages:
     output: true
+
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
 
-# Exclude scripts directory from Jekyll build
 exclude:
   - scripts/
   - scripts/**/*
