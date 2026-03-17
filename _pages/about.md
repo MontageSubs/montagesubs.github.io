@@ -2,6 +2,7 @@
 layout: default
 title: 关于我们
 icon: 💬
+permalink: /about/
 ---
 
 <div class="about-section">
