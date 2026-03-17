@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:title" content="{{page.title}} - 字幕讨论">
+    <meta property="og:title" content="{{ page.title }} - 字幕讨论">
     <title>蒙太奇字幕组 - {{ page.title }}</title>
     <link rel="icon" type="image/jpeg" href="{{ '/assets/images/montagesubs_logo-256.jpg' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -37,14 +37,17 @@
             </a>
         </div>
         <div class="navbar-right">
-            <a href="{{ '/index.html' | relative_url }}" class="nav-link{% if page.url == '/' or page.collection == 'works' %} active{% endif %}">✨ 翻译作品</a>
+            <a href="{{ '/index.html' | relative_url }}"
+               class="nav-link{% if page.url == '/' or page.collection == 'works' %} active{% endif %}">✨ 翻译作品</a>
+
             <a href="{{ '/tools/' | relative_url }}" class="nav-link{% if page.url == '/tools/' %} active{% endif %}">🧰 工具</a>
 
             {% for p in site.pages %}
               {% if p.url != '/tools/' %}
-                 <a href="{{ p.url | relative_url }}" class="nav-link{% if page.url == p.url %} active{% endif %}">{{ p.icon }} {{ p.title }}</a>
+                <a href="{{ p.url | relative_url }}" class="nav-link{% if page.url == p.url %} active{% endif %}">{{ p.icon }} {{ p.title }}</a>
               {% endif %}
-            % endfor %}
+            {% endfor %}
+
         </div>
     </div>
 
