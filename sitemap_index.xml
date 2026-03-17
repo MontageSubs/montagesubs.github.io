@@ -1,0 +1,14 @@
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>{{ site.url }}{{ site.baseurl }}/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://montagesubs.github.io/ass-subset/sitemap.xml</loc>
+  </sitemap>
+  <sitemap>
+    <loc>https://montagesubs.github.io/svg-to-ass/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>
