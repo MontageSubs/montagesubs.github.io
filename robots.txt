@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://montagesubs.github.io/sitemap_index.xml
+Sitemap: https://subs.js.org/sitemap_index.xml

@@ -8,9 +8,9 @@ permalink: /sitemap_index.xml
     <loc>{{ site.url }}{{ site.baseurl }}/sitemap.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://montagesubs.github.io/ass-subset/sitemap.xml</loc>
+    <loc>https://subs.js.org/ass-subset/sitemap.xml</loc>
   </sitemap>
   <sitemap>
-    <loc>https://montagesubs.github.io/svg-to-ass/sitemap.xml</loc>
+    <loc>https://subs.js.org/svg-to-ass/sitemap.xml</loc>
   </sitemap>
 </sitemapindex>
