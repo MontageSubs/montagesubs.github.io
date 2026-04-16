@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="关于我们"
+  description="了解蒙太奇字幕社区的使命、价值观与治理结构。"
+  lang="zh-hans"
+  hasTranslation={true}
+  translationPath="/en/about"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Page header -->
+    <div class="max-w-3xl mb-16">
+      <p class="text-yellow-400 text-sm font-medium mb-3">关于我们</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+        我们是谁
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed">
+        蒙太奇字幕社区（MontageSubs）是一个非营利性开源社区。我们不是影视工作者的敌人，而是桥梁——致力于连接观众、译者、开发者与影视工作者，推动影视内容的本地化与民主化创作。
+      </p>
+    </div>
+
+    <!-- Mission Section -->
+    <section id="mission" class="mb-16 scroll-mt-20">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-6">使命与愿景</h2>
+          <div class="space-y-4 text-gray-400 leading-relaxed">
+            <p>
+              我们致力于构建一个开放、透明的字幕生态，让每一个人都能参与到影视内容的创作与传播中来。
+            </p>
+            <p>
+              好的字幕不仅仅是翻译，它是跨文化沟通的艺术，是让影视作品触达更多观众的媒介。我们相信这项工作值得被认真对待、被系统化地研究，并被优秀的工具所支持。
+            </p>
+            <p>
+              我们的愿景是成为字幕生态和相关开源技术的领导者，让字幕社区有一个属于自己的家园。
+            </p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          {[
+            { title: '开放', desc: '所有工具、标准和内容均采用开源许可证发布，任何人都可以使用、修改和分发。' },
+            { title: '透明', desc: '我们的决策过程、财务状况和组织结构对社区完全透明。' },
+            { title: '协作', desc: '我们相信集体智慧，鼓励多元视角，欢迎来自各地的贡献者。' },
+            { title: '质量', desc: '我们追求卓越，在翻译质量、工具设计和文档写作上都设立了高标准。' },
+          ].map(({ title, desc }) => (
+            <div class="p-5 bg-[#111] border border-white/[0.07] rounded-xl">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                <h3 class="text-white font-semibold">{title}</h3>
+              </div>
+              <p class="text-gray-500 text-sm leading-relaxed pl-5">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Governance Section -->
+    <section id="governance" class="mb-16 pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">透明度与治理</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">非营利声明</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            蒙太奇字幕社区是一个非营利性组织。我们不以营利为目的，所有资金均用于维护社区基础设施、支持开源工具开发，以及举办社区活动。
+          </p>
+        </div>
+        <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">开源协议</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            社区内容采用 <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> 许可证，代码采用 <a href="https://opensource.org/licenses/MIT" class="text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">MIT</a> 许可证。
+          </p>
+        </div>
+        <div id="copyright" class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">版权声明</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            本站展示的影视海报版权归原始版权方所有，数据来源于 TMDB，在合理使用范围内展示。我们不托管任何受版权保护的媒体内容。
+          </p>
+        </div>
+        <div id="dmca" class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">DMCA 投诉</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            如果你认为我们的内容侵犯了你的版权，请通过 <a href="mailto:dmca@montagesubs.org" class="text-yellow-400 hover:underline">dmca@montagesubs.org</a> 联系我们，我们将在 48 小时内处理。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Press Kit Section -->
+    <section id="press-kit" class="mb-16 pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">品牌资产</h2>
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div>
+          <p class="text-gray-400 mb-6">如需在媒体报道、合作材料中使用我们的品牌资产，请遵循以下规范。</p>
+          <div class="space-y-3">
+            <div class="flex items-start gap-3">
+              <span class="text-yellow-400 mt-0.5">▸</span>
+              <div>
+                <p class="text-white text-sm font-medium">主色调</p>
+                <p class="text-gray-500 text-xs">黄色 <code class="bg-gray-900 px-1 py-0.5 rounded text-yellow-400">#FACC15</code> · 黑色背景 <code class="bg-gray-900 px-1 py-0.5 rounded">#0A0A0A</code></p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <span class="text-yellow-400 mt-0.5">▸</span>
+              <div>
+                <p class="text-white text-sm font-medium">Logo 含义</p>
+                <p class="text-gray-500 text-xs">黑色背景上的黄色 M 字，象征蒙太奇剪辑艺术中的光影</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center p-12 bg-[#111] border border-white/[0.07] rounded-2xl">
+          <div class="w-20 h-20 bg-[#0a0a0a] border border-yellow-400/30 rounded-2xl flex items-center justify-center">
+            <span class="text-yellow-400 font-black text-5xl leading-none select-none">M</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">联系我们</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { type: '媒体合作', email: 'press@montagesubs.org', desc: '媒体报道、采访请求、合作推广' },
+          { type: '版权事务', email: 'copyright@montagesubs.org', desc: 'DMCA 投诉、版权授权事宜' },
+          { type: '技术合作', email: 'dev@montagesubs.org', desc: '工具集成、开发合作' },
+        ].map(({ type, email, desc }) => (
+          <div class="p-5 bg-[#111] border border-white/[0.07] rounded-xl">
+            <h3 class="text-white font-medium mb-1">{type}</h3>
+            <a href={`mailto:${email}`} class="text-yellow-400 text-sm hover:underline block mb-2">{email}</a>
+            <p class="text-gray-500 text-xs">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

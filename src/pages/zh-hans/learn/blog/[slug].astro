@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) =>
+    data.lang === 'zh-hans' && !data.draft
+  );
+  return posts.map((post) => ({
+    params: { slug: post.slug.replace('zh-hans/', '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const dateStr = post.data.date.toLocaleDateString('zh-Hans-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description ?? ''}
+  lang="zh-hans"
+  hasTranslation={post.data.has_translation}
+  translationPath={post.data.has_translation ? `/en/learn/blog/${post.slug.replace('zh-hans/', '')}/` : undefined}
+>
+  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+
+    <!-- Back link -->
+    <a href="/zh-hans/learn" class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-sm mb-10 transition-colors">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      返回学习资源
+    </a>
+
+    <!-- Header -->
+    <header class="mb-12">
+      <div class="flex flex-wrap items-center gap-3 mb-5">
+        <time class="text-gray-500 text-sm">{dateStr}</time>
+        <span class="text-gray-700">·</span>
+        <span class="text-gray-500 text-sm">{post.data.author}</span>
+        {post.data.has_translation && (
+          <a href={`/en/learn/blog/${post.slug.replace('zh-hans/', '')}/`} class="text-xs px-2.5 py-1 bg-blue-400/10 text-blue-400 rounded-full hover:bg-blue-400/20 transition-colors">
+            English version
+          </a>
+        )}
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-5">
+        {post.data.title}
+      </h1>
+      {post.data.description && (
+        <p class="text-gray-400 text-lg leading-relaxed">{post.data.description}</p>
+      )}
+      {post.data.tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-6">
+          {post.data.tags.map((tag: string) => (
+            <span class="text-xs px-3 py-1 bg-white/5 border border-white/10 text-gray-400 rounded-full">
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Article content -->
+    <div class="prose prose-invert prose-lg prose-yellow max-w-none
+      prose-headings:font-bold prose-headings:text-white
+      prose-p:text-gray-400 prose-p:leading-relaxed
+      prose-a:text-yellow-400 prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-white
+      prose-code:text-yellow-300 prose-code:bg-gray-900 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+      prose-blockquote:border-yellow-400/30 prose-blockquote:text-gray-400
+      prose-li:text-gray-400
+      " data-pagefind-body>
+      <Content />
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-16 pt-8 border-t border-white/[0.07]">
+      <div class="flex items-center justify-between">
+        <a href="/zh-hans/learn" class="text-gray-500 hover:text-white text-sm transition-colors">
+          ← 返回学习资源
+        </a>
+        <div class="flex items-center gap-4">
+          <p class="text-gray-600 text-xs">文章采用 CC BY-SA 4.0 许可证</p>
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>

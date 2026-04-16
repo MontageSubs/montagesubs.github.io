@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) =>
+  data.lang === 'en' && !data.draft
+)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout
+  title="Learn"
+  description="Translation notes, subtitle technology tutorials, localization standards — the MontageSubs learning hub."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <div class="max-w-3xl mb-16">
+      <p class="text-yellow-400 text-sm font-medium mb-3">Learn</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">Learning Resources</h1>
+      <p class="text-gray-400 text-lg">
+        Translation thinking, technical research, subtitle standards. We document our creative process in the hope it inspires yours.
+      </p>
+    </div>
+
+    <!-- Blog -->
+    <section class="mb-20">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-2xl font-bold text-white">Blog</h2>
+        <a href="/en/rss.xml" class="flex items-center gap-2 text-gray-500 hover:text-yellow-400 text-sm transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
+          </svg>
+          RSS Feed
+        </a>
+      </div>
+
+      {posts.length === 0 ? (
+        <div class="text-center py-16 border border-white/[0.07] rounded-2xl">
+          <p class="text-gray-500 mb-2">English articles coming soon.</p>
+          <a href="/zh-hans/learn" class="text-yellow-400 text-sm hover:underline">Browse Chinese articles →</a>
+        </div>
+      ) : (
+        <div class="space-y-5">
+          {posts.map((post) => {
+            const slug = post.slug.replace('en/', '');
+            const dateStr = post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+            return (
+              <article class="group flex flex-col sm:flex-row gap-6 p-6 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-white/20 transition-all">
+                <div class="flex-1 min-w-0">
+                  <div class="flex flex-wrap items-center gap-3 mb-3">
+                    <time class="text-gray-600 text-xs">{dateStr}</time>
+                    <span class="text-gray-700">·</span>
+                    <span class="text-gray-600 text-xs">{post.data.author}</span>
+                  </div>
+                  <h3 class="text-white font-semibold text-lg mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
+                    <a href={`/en/learn/blog/${slug}/`}>{post.data.title}</a>
+                  </h3>
+                  {post.data.description && (
+                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">{post.data.description}</p>
+                  )}
+                  {post.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1.5 mt-4">
+                      {post.data.tags.map((tag: string) => (
+                        <span class="text-xs px-2 py-0.5 bg-white/5 border border-white/10 text-gray-500 rounded-full">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      )}
+    </section>
+
+    <!-- Tutorials -->
+    <section id="tutorials" class="mb-20 scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-8">Tutorials</h2>
+      <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl text-center">
+        <p class="text-gray-500 mb-2">Tutorials in progress</p>
+        <p class="text-gray-600 text-sm">We are preparing full workflow tutorials covering tools, translation techniques, and timing.</p>
+      </div>
+    </section>
+
+    <!-- Standards -->
+    <section id="standards" class="scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-8">Technical Standards</h2>
+      <div class="grid sm:grid-cols-2 gap-5">
+        {[
+          { title: 'Subtitle Format Standards', desc: 'Best practices for SRT, ASS, VTT and other common subtitle formats', status: 'Draft' },
+          { title: 'Translation Quality Standards', desc: 'Our criteria for evaluating subtitle translation quality and our review process', status: 'Draft' },
+          { title: 'Timing Guidelines', desc: 'Cue in/out points, line length, reading speed and other timing standards', status: 'Planned' },
+          { title: 'Typography Standards', desc: 'Punctuation, line-break principles, and handling of special characters', status: 'Planned' },
+        ].map(({ title, desc, status }) => (
+          <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+            <div class="flex items-start justify-between gap-4 mb-3">
+              <h3 class="text-white font-medium">{title}</h3>
+              <span class="text-xs px-2 py-0.5 bg-yellow-400/10 text-yellow-400 rounded-full shrink-0">{status}</span>
+            </div>
+            <p class="text-gray-500 text-sm leading-relaxed">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

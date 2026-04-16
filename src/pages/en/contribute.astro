@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Contribute"
+  description="Learn how to contribute to MontageSubs — as a translator, developer, or documentation writer."
+  lang="en"
+  hasTranslation={true}
+  translationPath="/zh-hans/contribute"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <div class="max-w-3xl mb-16">
+      <p class="text-yellow-400 text-sm font-medium mb-3">Contribute</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">Get Involved</h1>
+      <p class="text-gray-400 text-lg">
+        Whether you are a seasoned translator, a frontend developer, or just passionate about subtitles — there is a meaningful role for you here.
+      </p>
+    </div>
+
+    <!-- Three paths -->
+    <section class="mb-20">
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Translator -->
+        <div id="translate" class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl scroll-mt-20">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">Subtitle Translator</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            Join a subtitle translation project and bring quality localized content to Chinese audiences. We prioritize literary quality and readability.
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">You should have:</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              'Good comprehension of the source language',
+              'Fluent Chinese writing ability',
+              'A love for film and TV',
+              'Basic subtitle format knowledge (learnable)',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="https://t.me/MontageSubs" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+            Join Telegram to get in touch →
+          </a>
+        </div>
+
+        <!-- Developer -->
+        <div id="develop" class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl scroll-mt-20">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">Tool Developer</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            Build open-source tools for the subtitle community, lowering the barrier to entry and improving translation efficiency.
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">Areas we need:</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              'Frontend tools (JavaScript/TypeScript)',
+              'Subtitle format parsing libraries',
+              'Automation scripts and CLI tools',
+              'Browser extensions',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="https://github.com/MontageSubs" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+            Browse GitHub repositories →
+          </a>
+        </div>
+
+        <!-- Docs -->
+        <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">Documentation Contributor</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            Write tutorials, translation notes, and technical standards to help the community accumulate and share knowledge.
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">Contribution forms:</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              'Translation process and methodology notes',
+              'Tool usage tutorials',
+              'Technical subtitle standards',
+              'Review and improve existing docs',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="mailto:docs@montagesubs.org" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline">
+            Email us to get started →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support -->
+    <section id="support" class="scroll-mt-20">
+      <div class="p-10 bg-[#111] border border-yellow-400/10 rounded-2xl text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">Support Us</h2>
+        <p class="text-gray-500 leading-relaxed mb-6 max-w-lg mx-auto">
+          We are a fully volunteer-driven non-profit community. Your support goes toward server costs, domain maintenance, and community events.
+        </p>
+        <p class="text-gray-600 text-sm mb-2">Current ways to support us:</p>
+        <div class="flex flex-wrap gap-3 justify-center mt-4">
+          {['Contribute Code', 'Write Docs', 'Spread the Word', 'Give Feedback'].map(way => (
+            <span class="border border-white/10 text-gray-400 text-sm px-4 py-2 rounded-full">{way}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

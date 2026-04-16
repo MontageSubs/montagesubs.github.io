@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Us"
+  description="Learn about MontageSubs — our mission, values and organizational structure."
+  lang="en"
+  hasTranslation={true}
+  translationPath="/zh-hans/about"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Page header -->
+    <div class="max-w-3xl mb-16">
+      <p class="text-yellow-400 text-sm font-medium mb-3">About</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+        Who We Are
+      </h1>
+      <p class="text-gray-400 text-lg leading-relaxed">
+        MontageSubs is a non-profit, open-source community. We are not adversaries of filmmakers — we are bridges. We connect audiences, translators, developers and creators to advance open localization.
+      </p>
+    </div>
+
+    <!-- Mission -->
+    <section id="mission" class="mb-16 scroll-mt-20">
+      <div class="grid md:grid-cols-2 gap-12 items-start">
+        <div>
+          <h2 class="text-2xl font-bold text-white mb-6">Mission &amp; Vision</h2>
+          <div class="space-y-4 text-gray-400 leading-relaxed">
+            <p>We strive to build an open, transparent subtitle ecosystem where anyone can participate in the creation and distribution of localized media content.</p>
+            <p>Great subtitles are more than translation — they are the art of cross-cultural communication, the medium through which a film reaches wider audiences. We believe this work deserves to be taken seriously, systematically studied, and supported by excellent tools.</p>
+            <p>Our vision is to become a leading voice in the subtitle ecosystem and related open-source technology, giving subtitle communities a home of their own.</p>
+          </div>
+        </div>
+        <div class="space-y-4">
+          {[
+            { title: 'Open', desc: 'All tools, standards, and content are released under open licenses — free for anyone to use, modify, and distribute.' },
+            { title: 'Transparent', desc: 'Our decision-making processes, finances, and organizational structure are fully transparent to the community.' },
+            { title: 'Collaborative', desc: 'We believe in collective intelligence, celebrate diverse perspectives, and welcome contributors from everywhere.' },
+            { title: 'Quality', desc: 'We pursue excellence — high standards for translation quality, tool design, and documentation writing.' },
+          ].map(({ title, desc }) => (
+            <div class="p-5 bg-[#111] border border-white/[0.07] rounded-xl">
+              <div class="flex items-center gap-3 mb-2">
+                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                <h3 class="text-white font-semibold">{title}</h3>
+              </div>
+              <p class="text-gray-500 text-sm leading-relaxed pl-5">{desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Governance -->
+    <section id="governance" class="mb-16 pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">Transparency &amp; Governance</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">Non-Profit Statement</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            MontageSubs operates as a non-profit organization. We do not pursue profit; all funds support community infrastructure, open-source tool development, and community events.
+          </p>
+        </div>
+        <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">Open Source Licenses</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Community content is licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/" class="text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, and code under <a href="https://opensource.org/licenses/MIT" class="text-yellow-400 hover:underline" target="_blank" rel="noopener noreferrer">MIT</a>.
+          </p>
+        </div>
+        <div id="copyright" class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">Copyright Notice</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            Film posters shown on this site are copyright their respective owners, sourced from TMDB under fair use. We do not host any copyrighted media content.
+          </p>
+        </div>
+        <div id="dmca" class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+          <h3 class="text-white font-semibold mb-3">DMCA</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">
+            If you believe our content infringes your copyright, please contact <a href="mailto:dmca@montagesubs.org" class="text-yellow-400 hover:underline">dmca@montagesubs.org</a>. We will respond within 48 hours.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Privacy -->
+    <section id="privacy" class="mb-16 pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">Privacy</h2>
+      <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
+        <p class="text-gray-400 leading-relaxed">
+          MontageSubs does not use analytics, tracking pixels, or third-party cookies on this website. We use system fonts to avoid calling Google Fonts. Our website is a static site hosted on GitHub Pages with no server-side data collection.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="pt-8 border-t border-white/[0.07] scroll-mt-20">
+      <h2 class="text-2xl font-bold text-white mb-6">Contact</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { type: 'Press', email: 'press@montagesubs.org', desc: 'Media inquiries, interviews, partnerships' },
+          { type: 'Copyright', email: 'copyright@montagesubs.org', desc: 'DMCA, licensing inquiries' },
+          { type: 'Development', email: 'dev@montagesubs.org', desc: 'Tool integration, developer collaboration' },
+        ].map(({ type, email, desc }) => (
+          <div class="p-5 bg-[#111] border border-white/[0.07] rounded-xl">
+            <h3 class="text-white font-medium mb-1">{type}</h3>
+            <a href={`mailto:${email}`} class="text-yellow-400 text-sm hover:underline block mb-2">{email}</a>
+            <p class="text-gray-500 text-xs">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

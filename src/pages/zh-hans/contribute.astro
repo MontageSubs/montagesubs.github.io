@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="参与贡献"
+  description="了解如何参与蒙太奇字幕社区，无论你是译者、开发者还是文档贡献者，都有适合你的路径。"
+  lang="zh-hans"
+  hasTranslation={true}
+  translationPath="/en/contribute"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <!-- Page Header -->
+    <div class="max-w-3xl mb-16">
+      <p class="text-yellow-400 text-sm font-medium mb-3">贡献</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">参与我们</h1>
+      <p class="text-gray-400 text-lg">
+        无论你是资深译者、前端开发者，还是对字幕充满热情的普通观众，这里都有你可以发挥价值的地方。
+      </p>
+    </div>
+
+    <!-- Three paths -->
+    <section class="mb-20">
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <!-- Translator path -->
+        <div id="translate" class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl scroll-mt-20">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">字幕译者</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            参与影视作品的字幕翻译，为中文观众带来优质的本地化内容。我们注重翻译的文学性和可读性。
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">你需要具备：</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              '良好的目标语言理解能力',
+              '流畅的中文书写能力',
+              '对影视作品的热爱',
+              '基本的字幕格式知识（可学习）',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="https://t.me/MontageSubs" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+            加入 Telegram 联系我们 →
+          </a>
+        </div>
+
+        <!-- Developer path -->
+        <div id="develop" class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl scroll-mt-20">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">工具开发者</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            为字幕社区构建开源工具，降低字幕制作的技术门槛，提升翻译和制作效率。
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">我们需要的方向：</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              '前端工具开发（JavaScript/TypeScript）',
+              '字幕格式解析库',
+              '自动化脚本和 CLI 工具',
+              '浏览器扩展',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="https://github.com/MontageSubs" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline" target="_blank" rel="noopener noreferrer">
+            查看 GitHub 仓库 →
+          </a>
+        </div>
+
+        <!-- Docs path -->
+        <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h2 class="text-xl font-bold text-white mb-3">文档贡献者</h2>
+          <p class="text-gray-500 text-sm leading-relaxed mb-6">
+            撰写教程、翻译笔记、技术规范，帮助社区积累和传播知识。
+          </p>
+          <h3 class="text-white text-sm font-medium mb-3">贡献形式：</h3>
+          <ul class="space-y-2 mb-6">
+            {[
+              '翻译思维和方法记录',
+              '工具使用教程',
+              '字幕技术规范撰写',
+              '现有文档校对和改进',
+            ].map(item => (
+              <li class="flex items-start gap-2 text-sm text-gray-500">
+                <span class="text-yellow-400 mt-1">▸</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+          <a href="mailto:docs@montagesubs.org" class="inline-flex items-center gap-2 text-yellow-400 text-sm hover:underline">
+            发邮件联系我们 →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Support Section -->
+    <section id="support" class="scroll-mt-20">
+      <div class="p-10 bg-[#111] border border-yellow-400/10 rounded-2xl text-center">
+        <h2 class="text-2xl font-bold text-white mb-4">支持我们</h2>
+        <p class="text-gray-500 leading-relaxed mb-6 max-w-lg mx-auto">
+          我们是一个完全志愿者驱动的非营利社区。你的支持将用于服务器费用、域名维护和社区活动。
+        </p>
+        <p class="text-gray-600 text-sm mb-2">目前我们接受以下方式的支持：</p>
+        <div class="flex flex-wrap gap-3 justify-center mt-4">
+          {['贡献代码', '撰写文档', '分享推广', '反馈建议'].map(way => (
+            <span class="border border-white/10 text-gray-400 text-sm px-4 py-2 rounded-full">{way}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+
+  </div>
+</BaseLayout>

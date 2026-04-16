@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Search"
+  description="Search MontageSubs content"
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+    <div class="max-w-2xl mx-auto">
+      <div class="mb-10">
+        <p class="text-yellow-400 text-sm font-medium mb-3">Search</p>
+        <h1 class="text-4xl font-bold text-white mb-4">Search</h1>
+        <p class="text-gray-400">Search articles, tutorials, tools and project information.</p>
+      </div>
+
+      <div id="search" class="pagefind-ui-wrapper"></div>
+
+      <div class="mt-6 p-6 bg-[#111] border border-white/[0.07] rounded-2xl text-center text-gray-500 text-sm">
+        <p>Search is available on the live GitHub Pages site. To use locally, run <code class="bg-gray-900 text-yellow-400 px-1 py-0.5 rounded text-xs">npx pagefind --site dist</code> first.</p>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script src="/pagefind/pagefind-ui.js" is:inline></script>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof PagefindUI !== 'undefined') {
+      new PagefindUI({
+        element: '#search',
+        showSubResults: true,
+        translations: {
+          placeholder: 'Search…',
+          zero_results: 'No results found',
+        },
+      });
+    }
+  });
+</script>

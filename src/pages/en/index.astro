@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="MontageSubs"
+  description="MontageSubs — bridging audiences, translators, developers and filmmakers to build an open, transparent subtitle ecosystem."
+  lang="en"
+  hasTranslation={true}
+  translationPath="/zh-hans/"
+>
+
+  <!-- Hero Section -->
+  <section class="relative min-h-[85vh] flex items-center overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/5 via-transparent to-transparent pointer-events-none"></div>
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(to right, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 border border-yellow-400/20 bg-yellow-400/5 text-yellow-400 text-xs font-medium px-3 py-1.5 rounded-full mb-8">
+          <span class="w-1.5 h-1.5 rounded-full bg-yellow-400 animate-pulse"></span>
+          Non-profit · Open Source · Community Driven
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight tracking-tight mb-6">
+          Open Subtitles.<br />
+          <span class="text-yellow-400">Open Source.</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-gray-400 leading-relaxed mb-10 max-w-2xl">
+          MontageSubs bridges audiences, translators, developers and filmmakers to build an open, transparent subtitle ecosystem. We create tools, document standards, and foster community.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a
+            href="https://t.me/MontageSubs"
+            class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-7 py-3.5 rounded-full transition-colors text-sm"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Join the Community
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+          <a
+            href="/en/about"
+            class="inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white hover:bg-white/5 font-medium px-7 py-3.5 rounded-full transition-colors text-sm"
+          >
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Focus Section -->
+  <section class="py-24 border-t border-white/[0.07]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">What We Do</h2>
+        <p class="text-gray-500 max-w-xl mx-auto">Three core areas where we focus our work</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="group p-8 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-yellow-400/20 transition-all duration-300">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Open Source Tools</h3>
+          <p class="text-gray-500 leading-relaxed text-sm">We build and curate open source tools for subtitle creation, editing, format conversion and quality checking.</p>
+          <a href="/en/tools" class="inline-flex items-center gap-1 text-yellow-400 text-sm mt-5 hover:gap-2 transition-all">
+            Browse Tools
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="group p-8 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-yellow-400/20 transition-all duration-300">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Research & Standards</h3>
+          <p class="text-gray-500 leading-relaxed text-sm">We document translation methodologies, subtitle technical standards, and localization best practices.</p>
+          <a href="/en/learn" class="inline-flex items-center gap-1 text-yellow-400 text-sm mt-5 hover:gap-2 transition-all">
+            Read Articles
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="group p-8 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-yellow-400/20 transition-all duration-300">
+          <div class="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-6">
+            <svg class="w-6 h-6 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-3">Community</h3>
+          <p class="text-gray-500 leading-relaxed text-sm">We connect translators, developers and viewers who share a passion for quality subtitles and open localization.</p>
+          <a href="/en/community" class="inline-flex items-center gap-1 text-yellow-400 text-sm mt-5 hover:gap-2 transition-all">
+            Meet the Team
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-24 border-t border-white/[0.07]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative bg-[#111] border border-white/[0.07] rounded-3xl p-10 md:p-16 text-center overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-64 h-1 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent"></div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6 max-w-2xl mx-auto leading-tight">
+          Ready to Contribute?
+        </h2>
+        <p class="text-gray-500 mb-8 max-w-lg mx-auto">
+          We are an open community. Every translator, developer, and enthusiast is welcome.
+        </p>
+        <a
+          href="/en/contribute"
+          class="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-black font-semibold px-8 py-4 rounded-full transition-colors"
+        >
+          Get Involved
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

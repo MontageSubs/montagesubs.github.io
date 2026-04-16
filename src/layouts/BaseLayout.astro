@@ -1,0 +1,100 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  hasTranslation?: boolean;
+  translationPath?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '蒙太奇字幕社区 — 连接观众、译者、开发者与影视工作者，共同构建开放、透明的字幕生态。',
+  lang = 'zh-hans',
+  hasTranslation = false,
+  translationPath,
+  ogImage,
+} = Astro.props;
+
+const siteURL = Astro.site ?? new URL('https://montagesubs.github.io');
+const currentURL = Astro.url.href;
+const htmlLang = lang === 'zh-hans' ? 'zh-Hans' : 'en';
+const alternateLang = lang === 'zh-hans' ? 'en' : 'zh-hans';
+const alternatePath = translationPath
+  ? new URL(translationPath, siteURL).href
+  : currentURL.replace(`/${lang}/`, `/${alternateLang}/`);
+---
+
+<!DOCTYPE html>
+<html lang={htmlLang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title} | MontageSubs</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href={currentURL} />
+    <link rel="alternate" hreflang={htmlLang} href={currentURL} />
+    {hasTranslation && (
+      <link rel="alternate" hreflang={lang === 'zh-hans' ? 'en' : 'zh-Hans'} href={alternatePath} />
+    )}
+    <link rel="alternate" hreflang="x-default" href={new URL('/zh-hans/', siteURL).href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={currentURL} />
+    <meta property="og:title" content={`${title} | MontageSubs`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="MontageSubs" />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={`${title} | MontageSubs`} />
+    <meta name="twitter:description" content={description} />
+    {ogImage && <meta name="twitter:image" content={ogImage} />}
+
+    <!-- RSS -->
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={`MontageSubs ${lang === 'zh-hans' ? '博客' : 'Blog'}`}
+      href={`/${lang}/rss.xml`}
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Pagefind UI styles (generated after build) -->
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+  </head>
+
+  <body class="bg-[#0a0a0a] text-white min-h-screen flex flex-col antialiased" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;">
+    <Header lang={lang} hasTranslation={hasTranslation} translationPath={translationPath} />
+
+    <main class="flex-1" data-pagefind-body>
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+
+    <!-- Mobile menu toggle script -->
+    <script>
+      const menuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+          const isOpen = mobileMenu.classList.toggle('hidden') === false;
+          menuBtn.setAttribute('aria-expanded', String(isOpen));
+        });
+      }
+    </script>
+  </body>
+</html>
