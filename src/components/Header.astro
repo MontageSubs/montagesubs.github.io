@@ -11,17 +11,18 @@ const { lang, hasTranslation = true, translationPath } = Astro.props;
 const l = lang as Lang;
 const isZh = lang === 'zh-hans';
 
+// 根据当前语言读取导航与公共文案，缺失时回退到中文。
 function t(key: keyof typeof ui['zh-hans']): string {
   return ((ui[l] as typeof ui['zh-hans'])[key] ?? ui['zh-hans'][key]) as string;
 }
 
-const navItems: { key: keyof typeof ui['zh-hans']; href: string; n: string }[] = [
-  { key: 'nav.about',      href: `/${lang}/about`,      n: '01' },
-  { key: 'nav.projects',   href: `/${lang}/projects`,   n: '02' },
-  { key: 'nav.tools',      href: `/${lang}/tools`,      n: '03' },
-  { key: 'nav.learn',      href: `/${lang}/learn`,      n: '04' },
-  { key: 'nav.community',  href: `/${lang}/community`,  n: '05' },
-  { key: 'nav.contribute', href: `/${lang}/contribute`, n: '06' },
+const navItems: { key: keyof typeof ui['zh-hans']; href: string }[] = [
+  { key: 'nav.about',      href: `/${lang}/about` },
+  { key: 'nav.projects',   href: `/${lang}/projects` },
+  { key: 'nav.tools',      href: `/${lang}/tools` },
+  { key: 'nav.learn',      href: `/${lang}/learn` },
+  { key: 'nav.community',  href: `/${lang}/community` },
+  { key: 'nav.contribute', href: `/${lang}/contribute` },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -50,13 +51,12 @@ const alternatePath = translationPath
         </div>
       </a>
 
-      <!-- Desktop nav (numbered) -->
+      <!-- Desktop nav -->
       <div class="hidden lg:flex items-center gap-0.5">
-        {navItems.map(({ key, href, n }) => {
+        {navItems.map(({ key, href }) => {
           const active = currentPath.startsWith(href);
           return (
-            <a href={href} class={`relative group px-3 py-2 text-[13px] flex items-center gap-1.5 transition-colors ${active ? 'text-signal-yellow' : 'text-bone-dim hover:text-bone'}`}>
-              <span class={`font-mono text-[9px] tracking-[0.2em] ${active ? 'text-signal-yellow' : 'text-bone-mute'}`}>{n}</span>
+            <a href={href} class={`relative group px-3 py-2 text-[13px] transition-colors ${active ? 'text-signal-yellow' : 'text-bone-dim hover:text-bone'}`}>
               <span>{t(key)}</span>
               {active && <span class="absolute -bottom-px left-3 right-3 h-px bg-signal-yellow"></span>}
             </a>
@@ -66,9 +66,6 @@ const alternatePath = translationPath
 
       <!-- Right -->
       <div class="flex items-center gap-1 sm:gap-2">
-
-        <!-- Live clock -->
-        <span class="hidden md:inline-block font-mono text-[11px] text-bone-mute tabular-nums tracking-wider mr-3" data-clock>—</span>
 
         <!-- Search -->
         <a href={`/${lang}/search`} class="p-2 text-bone-dim hover:text-bone transition-colors" aria-label={t('nav.search')}>
@@ -133,11 +130,10 @@ const alternatePath = translationPath
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden lg:hidden border-t border-bone/[0.07] py-4">
       <div class="flex flex-col">
-        {navItems.map(({ key, href, n }) => {
+        {navItems.map(({ key, href }) => {
           const active = currentPath.startsWith(href);
           return (
-            <a href={href} class={`py-3 flex items-center gap-3 text-base transition-colors ${active ? 'text-signal-yellow' : 'text-bone-dim hover:text-bone'}`}>
-              <span class="font-mono text-[10px] text-bone-mute w-6">{n}</span>
+            <a href={href} class={`py-3 text-base transition-colors ${active ? 'text-signal-yellow' : 'text-bone-dim hover:text-bone'}`}>
               <span>{t(key)}</span>
             </a>
           );
