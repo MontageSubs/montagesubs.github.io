@@ -26,7 +26,6 @@ export default {
       },
       fontFamily: {
         sans: [
-          'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',
@@ -35,15 +34,7 @@ export default {
           '"Microsoft YaHei"',
           'sans-serif',
         ],
-        serif: [
-          '"Instrument Serif"',
-          '"Noto Serif SC"',
-          'Georgia',
-          '"Songti SC"',
-          'serif',
-        ],
         mono: [
-          '"JetBrains Mono"',
           'ui-monospace',
           'SFMono-Regular',
           '"SF Mono"',
@@ -88,8 +79,8 @@ export default {
               color: theme('colors.signal.yellow'),
               '&:hover': { color: theme('colors.signal.yellow-soft') },
             },
-            h1: { color: theme('colors.bone.DEFAULT'), fontFamily: 'Instrument Serif, serif', fontWeight: '400' },
-            h2: { color: theme('colors.bone.DEFAULT'), fontFamily: 'Instrument Serif, serif', fontWeight: '400' },
+            h1: { color: theme('colors.bone.DEFAULT'), fontWeight: '800' },
+            h2: { color: theme('colors.bone.DEFAULT'), fontWeight: '800' },
             h3: { color: theme('colors.bone.DEFAULT') },
             h4: { color: theme('colors.bone.DEFAULT') },
             strong: { color: theme('colors.bone.DEFAULT') },
@@ -98,7 +89,6 @@ export default {
               backgroundColor: theme('colors.ink.700'),
               padding: '0.2em 0.4em',
               borderRadius: '0.25rem',
-              fontFamily: 'JetBrains Mono, monospace',
             },
             blockquote: {
               borderLeftColor: theme('colors.signal.yellow'),

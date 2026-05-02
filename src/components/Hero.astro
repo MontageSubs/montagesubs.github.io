@@ -19,13 +19,6 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
   <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
   <div class="absolute inset-0 vignette-top pointer-events-none"></div>
 
-  <!-- Light layers — phosphor cone reaching up the hero -->
-  <div class="crt-light-layer" aria-hidden="true">
-    <div class="crt-uplight"></div>
-    <div class="crt-floorpool"></div>
-    <div class="crt-corecast"></div>
-  </div>
-
   <!-- Yellow corner mark -->
   <div class="absolute top-24 left-5 sm:left-8 lg:left-12 flex items-center gap-3 z-10">
     <span class="inline-block w-2 h-2 rounded-full bg-signal-yellow animate-pulse"></span>
@@ -41,19 +34,55 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
   </div>
 
   <!-- Main content -->
-  <div class="relative z-[5] max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12 pt-32 pb-[26rem]">
+  <div class="relative z-[5] max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12 pt-32 pb-32">
 
-    <!-- Display lockup -->
-    <div class="word-reveal">
-      <h1 class="font-display text-display text-bone leading-[0.92] tracking-tightest">
-        <span class="word"><span>{t('home.hero.line1')}</span></span>
-        <br/>
-        <span class="word"><span class="font-display-italic text-signal-yellow">{t('home.hero.line2')}</span></span>
-      </h1>
+    <!-- Title row: display lockup on left, CRT (with its own light) on right -->
+    <div class="grid lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-7 word-reveal">
+        <h1 class="font-display text-display text-bone leading-[0.92] tracking-tightest">
+          <span class="word"><span>{t('home.hero.line1')}</span></span>
+          <br/>
+          <span class="word"><span class="font-display-italic text-signal-yellow">{t('home.hero.line2')}</span></span>
+        </h1>
+      </div>
+
+      <!-- CRT slot: contains both the monitor body and its own light halo -->
+      <div class="lg:col-span-5 hidden lg:flex relative justify-center items-center min-h-[280px]" aria-hidden="true">
+        <!-- Light layers — emanate from this column, scoped to the CRT -->
+        <div class="crt-light-layer">
+          <div class="crt-uplight"></div>
+          <div class="crt-floorpool"></div>
+          <div class="crt-corecast"></div>
+        </div>
+        <!-- CRT body itself -->
+        <div class="crt-stage">
+          <div class="crt-body">
+            <div class="crt-vents"></div>
+            <div class="crt-screen-recess">
+              <div class="crt-screen">
+                <div class="crt-text" id="crtText">
+                  <span class="ts">[ MONTAGESUBS / TTY0 ]</span>
+                  <span class="line" id="crtLine1"></span>
+                  <span class="line" id="crtLine2"></span>
+                  <span class="line" id="crtLine3"></span>
+                  <span class="line" id="crtLine4"></span>
+                  <span class="line" id="crtLine5"><span class="cursor" id="crtCursor"></span></span>
+                </div>
+                <div class="crt-screen-vignette"></div>
+                <div class="crt-scanlines"></div>
+                <div class="crt-scanbeam"></div>
+                <div class="crt-boot-line" id="crtBootLine"></div>
+              </div>
+            </div>
+            <div class="crt-led"></div>
+            <div class="crt-label">MONTAGE-CRT 14"</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Subhead row -->
-    <div class="reveal mt-12 grid lg:grid-cols-12 gap-8 items-end">
+    <div class="reveal mt-16 grid lg:grid-cols-12 gap-8 items-end">
       <div class="lg:col-span-5">
         <p class="font-display-italic text-2xl sm:text-3xl text-bone-dim leading-snug">
           “{t('home.hero.serif')}”
@@ -80,34 +109,9 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     </div>
 
     <!-- Scroll cue -->
-    <div class="absolute bottom-8 left-5 sm:left-8 lg:left-12 hidden md:flex items-center gap-3 reveal">
+    <div class="mt-20 hidden md:flex items-center gap-3 reveal">
       <span class="font-mono text-[10px] text-bone-mute uppercase tracking-[0.22em]">{t('home.hero.scroll')}</span>
       <span class="block w-12 h-px bg-bone/30"></span>
-    </div>
-  </div>
-
-  <!-- CRT monitor — anchored at hero bottom, scrolls away with the page -->
-  <div class="crt-stage" aria-hidden="true">
-    <div class="crt-body">
-      <div class="crt-vents"></div>
-      <div class="crt-screen-recess">
-        <div class="crt-screen">
-          <div class="crt-text" id="crtText">
-            <span class="ts">[ MONTAGESUBS / TTY0 ]</span>
-            <span class="line" id="crtLine1"></span>
-            <span class="line" id="crtLine2"></span>
-            <span class="line" id="crtLine3"></span>
-            <span class="line" id="crtLine4"></span>
-            <span class="line" id="crtLine5"><span class="cursor" id="crtCursor"></span></span>
-          </div>
-          <div class="crt-screen-vignette"></div>
-          <div class="crt-scanlines"></div>
-          <div class="crt-scanbeam"></div>
-          <div class="crt-boot-line" id="crtBootLine"></div>
-        </div>
-      </div>
-      <div class="crt-led"></div>
-      <div class="crt-label">MONTAGE-CRT 14"</div>
     </div>
   </div>
 
@@ -121,20 +125,18 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     --crt-phosphor-pale: #FEF9C3;
   }
 
-  /* Light layers — anchored to hero, NOT fixed; scroll naturally with the page */
+  /* Light layers — anchored to the CRT column; bleed outward into the surrounding hero */
   .hero-stage .crt-light-layer {
     position: absolute;
-    left: 0; right: 0; bottom: 0;
-    height: 100%;
+    inset: 0;
     z-index: 1;
     pointer-events: none;
+    overflow: visible;
   }
 
-  /* CRT stage — anchored absolutely at hero bottom, scrolls naturally */
+  /* CRT stage — flows naturally inside the flex column, scrolls with the page */
   .hero-stage .crt-stage {
-    position: absolute;
-    left: 50%; bottom: 3rem;
-    transform: translateX(-50%);
+    position: relative;
     width: 360px; height: 280px;
     z-index: 2;
     pointer-events: none;
@@ -142,12 +144,12 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     transition: opacity 0.6s ease;
   }
 
-  /* Bright phosphor "core" right behind the screen — illuminates the page */
+  /* Bright phosphor "core" — tight halo right behind the screen */
   .hero-stage .crt-corecast {
     position: absolute;
-    left: 50%; bottom: calc(3rem + 100px);
+    left: 50%; top: 50%;
     width: 720px; height: 520px;
-    transform: translate(-50%, 50%) scale(var(--glow-scale, 0));
+    transform: translate(-50%, -50%) scale(var(--glow-scale, 0));
     background: radial-gradient(ellipse 60% 55% at 50% 50%,
       rgba(254, 243, 199, 0.55) 0%,
       rgba(250, 204, 21, 0.32) 18%,
@@ -164,25 +166,22 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     50%      { filter: blur(2px) brightness(1.05); }
   }
 
-  /* Upward light cone reaching the hero text */
+  /* Larger ambient cone — bleeds left into the title area */
   .hero-stage .crt-uplight {
     position: absolute;
-    left: 50%; bottom: 0;
-    width: 1300px;
-    height: 100%;
-    transform: translateX(-50%) scale(var(--glow-scale, 0));
-    transform-origin: bottom center;
+    left: 50%; top: 50%;
+    width: 1200px; height: 800px;
+    transform: translate(-50%, -50%) scale(var(--glow-scale, 0));
     background:
-      radial-gradient(ellipse 42% 65% at 50% 100%,
-        rgba(253, 224, 71, 0.28) 0%,
-        rgba(245, 158, 11, 0.16) 18%,
-        rgba(180, 83, 9, 0.08) 38%,
-        rgba(120, 53, 15, 0.03) 60%,
-        transparent 82%);
+      radial-gradient(ellipse 50% 50% at 50% 50%,
+        rgba(253, 224, 71, 0.22) 0%,
+        rgba(245, 158, 11, 0.12) 20%,
+        rgba(180, 83, 9, 0.05) 45%,
+        transparent 70%);
     mix-blend-mode: screen;
     pointer-events: none;
     transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
-    filter: blur(3px);
+    filter: blur(8px);
     animation: crt-uplight-breathe 5.2s ease-in-out infinite;
   }
   @keyframes crt-uplight-breathe {
@@ -190,19 +189,19 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     50%      { opacity: 1.04; }
   }
 
-  /* Floor pool — light spilling on the desk surface */
+  /* Soft pool below the CRT — like reflected light on a surface */
   .hero-stage .crt-floorpool {
     position: absolute;
-    left: 50%; bottom: calc(3rem - 30px);
-    width: 720px; height: 130px;
+    left: 50%; top: calc(50% + 160px);
+    width: 600px; height: 110px;
     transform: translateX(-50%) scale(var(--glow-scale, 0));
     background: radial-gradient(ellipse 50% 50% at 50% 50%,
-      rgba(253, 224, 71, 0.38) 0%,
-      rgba(245, 158, 11, 0.18) 30%,
-      rgba(180, 83, 9, 0.06) 60%,
-      transparent 80%);
+      rgba(253, 224, 71, 0.32) 0%,
+      rgba(245, 158, 11, 0.14) 35%,
+      rgba(180, 83, 9, 0.05) 65%,
+      transparent 82%);
     mix-blend-mode: screen;
-    filter: blur(10px);
+    filter: blur(12px);
     transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
   }
 
