@@ -72,9 +72,9 @@ const colYear = new Date().getFullYear();
 
   <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16">
 
-    <!-- Five-column grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
-      <div class="col-span-2 md:col-span-3 lg:col-span-2">
+    <!-- Footer main groups -->
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,4fr)] mb-14">
+      <div>
         <p class="micro-label mb-5">{isZh ? '关于本站' : 'About this site'}</p>
         <p class="text-bone-dim text-sm leading-relaxed max-w-sm">
           {t('footer.tagline')}
@@ -87,41 +87,43 @@ const colYear = new Date().getFullYear();
         </div>
       </div>
 
-      <div>
-        <h3 class="micro-label mb-5">{t('footer.quicklinks')}</h3>
-        <ul class="space-y-2.5">
-          {quickLinks.map(({ label, href }) => (
-            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
-          ))}
-        </ul>
-      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-10">
+        <div>
+          <h3 class="micro-label mb-5">{t('footer.quicklinks')}</h3>
+          <ul class="space-y-2.5">
+            {quickLinks.map(({ label, href }) => (
+              <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
+            ))}
+          </ul>
+        </div>
 
-      <div>
-        <h3 class="micro-label mb-5">{t('footer.learn_resources')}</h3>
-        <ul class="space-y-2.5">
-          {learnLinks.map(({ label, href }) => (
-            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
-          ))}
-        </ul>
-      </div>
+        <div>
+          <h3 class="micro-label mb-5">{t('footer.learn_resources')}</h3>
+          <ul class="space-y-2.5">
+            {learnLinks.map(({ label, href }) => (
+              <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
+            ))}
+          </ul>
+        </div>
 
-      <div>
-        <h3 class="micro-label mb-5">{t('footer.community')}</h3>
-        <ul class="space-y-2.5">
-          {communityLinks.map(({ label, href, external }) => (
-            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors"
-                target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{label}</a></li>
-          ))}
-        </ul>
-      </div>
+        <div>
+          <h3 class="micro-label mb-5">{t('footer.community')}</h3>
+          <ul class="space-y-2.5">
+            {communityLinks.map(({ label, href, external }) => (
+              <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors"
+                  target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{label}</a></li>
+            ))}
+          </ul>
+        </div>
 
-      <div>
-        <h3 class="micro-label mb-5">{t('footer.contribute')}</h3>
-        <ul class="space-y-2.5">
-          {contributeLinks.map(({ label, href }) => (
-            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
-          ))}
-        </ul>
+        <div>
+          <h3 class="micro-label mb-5">{t('footer.contribute')}</h3>
+          <ul class="space-y-2.5">
+            {contributeLinks.map(({ label, href }) => (
+              <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
 
