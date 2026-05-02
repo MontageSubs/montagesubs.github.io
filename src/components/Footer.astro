@@ -33,14 +33,11 @@ const contributeLinks = [
 ];
 const socials = [
   { name: 'Telegram',   href: 'https://t.me/MontageSubs' },
-  { name: 'Discord',    href: 'https://discord.gg/montagesubs' },
   { name: 'YouTube',    href: 'https://youtube.com/@MontageSubs' },
   { name: 'GitHub',     href: 'https://github.com/MontageSubs' },
-  { name: 'Twitter / X',href: 'https://twitter.com/MontageSubs' },
+  { name: 'X',          href: 'https://twitter.com/MontageSubs' },
   { name: 'Bluesky',    href: 'https://bsky.app/profile/montagesubs.bsky.social' },
   { name: 'Mastodon',   href: 'https://mastodon.social/@MontageSubs' },
-  { name: 'B站',        href: 'https://space.bilibili.com/MontageSubs' },
-  { name: '微博',       href: 'https://weibo.com/MontageSubs' },
   { name: 'Instagram',  href: 'https://instagram.com/MontageSubs' },
 ];
 const legalLinks = [
@@ -61,7 +58,6 @@ const colYear = new Date().getFullYear();
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-10">
       <div class="flex items-end justify-between gap-6 flex-wrap">
         <div>
-          <p class="micro-label mb-6">{isZh ? '回到顶部 ↑' : 'Back to top ↑'} <a href="#top" class="text-bone-dim hover:text-signal-yellow ml-2">↑</a></p>
           <h2 class="font-display text-[clamp(3rem,10vw,9rem)] leading-[0.9] tracking-tightest text-bone">
             Montage<span class="font-display-italic text-signal-yellow">Subs.</span>
           </h2>
@@ -82,7 +78,7 @@ const colYear = new Date().getFullYear();
         <div class="mt-6 flex items-center gap-3">
           <span class="inline-flex w-2 h-2 rounded-full bg-live"></span>
           <span class="font-mono text-[11px] text-bone-mute uppercase tracking-[0.18em]">
-            {isZh ? '社区开放中' : 'Community online'} · v0.1
+            {isZh ? '社区开放中' : 'Community online'}
           </span>
         </div>
       </div>
@@ -136,7 +132,6 @@ const colYear = new Date().getFullYear();
             {name}
           </a>
         ))}
-        <span class="text-bone-mute self-center">·</span>
         <a href={`/${lang}/rss.xml`} class="text-bone-mute hover:text-signal-yellow text-[13px] transition-colors">RSS</a>
         <a href="https://substack.com/@montagesubs" target="_blank" rel="noopener noreferrer"
            class="text-bone-mute hover:text-bone text-[13px] transition-colors">Substack</a>
