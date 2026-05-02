@@ -44,12 +44,12 @@ export default {
         ],
       },
       letterSpacing: {
-        tightest: '-0.04em',
+        tightest: '-0.02em',
         microcaps: '0.18em',
       },
       fontSize: {
-        'display': ['clamp(3.5rem, 11vw, 12rem)', { lineHeight: '0.92', letterSpacing: '-0.04em' }],
-        'mega': ['clamp(2.5rem, 7vw, 6rem)', { lineHeight: '0.96', letterSpacing: '-0.03em' }],
+        'display': ['clamp(2.75rem, 8vw, 8rem)', { lineHeight: '1.0', letterSpacing: '-0.02em' }],
+        'mega': ['clamp(2rem, 4.5vw, 4.5rem)', { lineHeight: '1.05', letterSpacing: '-0.015em' }],
       },
       animation: {
         'marquee': 'marquee 40s linear infinite',
