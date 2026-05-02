@@ -131,7 +131,7 @@ draft: false
 | `text-display` | 首屏 / 二级页 hero h1 |
 | `text-mega` | section h2 |
 
-**字体**：纯系统字体栈，**不引入任何外部字体文件**（PingFang SC / SF Pro / SF Mono）。
+**字体**：纯系统字体栈，**不引入任何外部字体文件**（不加载 Google Fonts、不打包字体）。具体显示哪个字体由用户的操作系统决定——Mac/iOS 是 SF Pro + PingFang SC，Windows 是 Segoe UI + Microsoft YaHei，Android/Linux 走 Noto Sans SC。
 
 ---
 

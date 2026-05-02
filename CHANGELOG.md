@@ -19,7 +19,7 @@
 
 ### 改进
 
-- **字体策略**：移除所有外部字体依赖（包括 Google Fonts CDN），全站统一系统字体栈（PingFang SC / SF Pro / SF Mono）。首屏加载更快，无外部网络请求。
+- **字体策略**：移除所有外部字体依赖（包括 Google Fonts CDN），全站使用系统字体栈，具体字体由用户的操作系统决定（Mac 上是 SF Pro / PingFang SC，Windows 上是 Segoe UI / Microsoft YaHei，等等）。首屏加载更快，无外部网络请求。
 - **字号比例**重新校准，避免粗体 sans 下整体显得过满。
 - **Header / Footer 重做**：保留原版那个带边框的黄色 "M" logo；语言切换简化为 ZH / EN 直接切换。
 - **博客列表读取方式**改为从 Astro Content Collection 取数据：新增博客只需在 `src/content/blog/{zh-hans,en}/` 下加一个 markdown 文件即可。
