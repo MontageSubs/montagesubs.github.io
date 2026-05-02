@@ -1,0 +1,462 @@
+---
+import { ui, type Lang } from '../i18n';
+
+interface Props { lang: string; }
+const { lang } = Astro.props;
+const l = lang as Lang;
+const isZh = lang === 'zh-hans';
+
+function t(k: keyof typeof ui['zh-hans']) {
+  return ((ui[l] as typeof ui['zh-hans'])[k] ?? ui['zh-hans'][k]) as string;
+}
+
+const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
+---
+
+<section class="hero-stage relative min-h-[100vh] overflow-hidden" data-hero-parallax>
+
+  <!-- Background grid + vignette -->
+  <div class="absolute inset-0 bg-grid opacity-60 pointer-events-none"></div>
+  <div class="absolute inset-0 vignette-top pointer-events-none"></div>
+
+  <!-- Light layers — phosphor cone reaching up the hero -->
+  <div class="crt-light-layer" aria-hidden="true">
+    <div class="crt-uplight"></div>
+    <div class="crt-floorpool"></div>
+    <div class="crt-corecast"></div>
+  </div>
+
+  <!-- Yellow corner mark -->
+  <div class="absolute top-24 left-5 sm:left-8 lg:left-12 flex items-center gap-3 z-10">
+    <span class="inline-block w-2 h-2 rounded-full bg-signal-yellow animate-pulse"></span>
+    <span class="font-mono text-[11px] uppercase tracking-[0.22em] text-bone-mute">
+      {t('home.hero.eyebrow')}
+    </span>
+  </div>
+
+  <!-- Side index marker -->
+  <div class="hidden md:flex absolute top-24 right-5 sm:right-8 lg:right-12 flex-col items-end gap-1 z-10">
+    <span class="font-mono text-[10px] text-bone-mute tracking-[0.2em]">N° 001</span>
+    <span class="font-mono text-[10px] text-signal-yellow tracking-[0.2em]">{isZh ? '主页' : 'INDEX'}</span>
+  </div>
+
+  <!-- Main content -->
+  <div class="relative z-[5] max-w-[1400px] w-full mx-auto px-5 sm:px-8 lg:px-12 pt-32 pb-[26rem]">
+
+    <!-- Display lockup -->
+    <div class="word-reveal">
+      <h1 class="font-display text-display text-bone leading-[0.92] tracking-tightest">
+        <span class="word"><span>{t('home.hero.line1')}</span></span>
+        <br/>
+        <span class="word"><span class="font-display-italic text-signal-yellow">{t('home.hero.line2')}</span></span>
+      </h1>
+    </div>
+
+    <!-- Subhead row -->
+    <div class="reveal mt-12 grid lg:grid-cols-12 gap-8 items-end">
+      <div class="lg:col-span-5">
+        <p class="font-display-italic text-2xl sm:text-3xl text-bone-dim leading-snug">
+          “{t('home.hero.serif')}”
+        </p>
+      </div>
+      <div class="lg:col-span-6 lg:col-start-7">
+        <p class="text-bone-dim text-base sm:text-lg leading-relaxed max-w-xl">
+          {t('home.hero.subtitle')}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <span class="magnetic">
+            <a href="https://t.me/MontageSubs" target="_blank" rel="noopener noreferrer" class="btn-primary">
+              {t('home.hero.cta_primary')}
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+              </svg>
+            </a>
+          </span>
+          <a href={`/${lang}/about`} class="btn-ghost">
+            {t('home.hero.cta_secondary')}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-8 left-5 sm:left-8 lg:left-12 hidden md:flex items-center gap-3 reveal">
+      <span class="font-mono text-[10px] text-bone-mute uppercase tracking-[0.22em]">{t('home.hero.scroll')}</span>
+      <span class="block w-12 h-px bg-bone/30"></span>
+    </div>
+  </div>
+
+  <!-- CRT monitor — anchored at hero bottom, scrolls away with the page -->
+  <div class="crt-stage" aria-hidden="true">
+    <div class="crt-body">
+      <div class="crt-vents"></div>
+      <div class="crt-screen-recess">
+        <div class="crt-screen">
+          <div class="crt-text" id="crtText">
+            <span class="ts">[ MONTAGESUBS / TTY0 ]</span>
+            <span class="line" id="crtLine1"></span>
+            <span class="line" id="crtLine2"></span>
+            <span class="line" id="crtLine3"></span>
+            <span class="line" id="crtLine4"></span>
+            <span class="line" id="crtLine5"><span class="cursor" id="crtCursor"></span></span>
+          </div>
+          <div class="crt-screen-vignette"></div>
+          <div class="crt-scanlines"></div>
+          <div class="crt-scanbeam"></div>
+          <div class="crt-boot-line" id="crtBootLine"></div>
+        </div>
+      </div>
+      <div class="crt-led"></div>
+      <div class="crt-label">MONTAGE-CRT 14"</div>
+    </div>
+  </div>
+
+</section>
+
+<style is:global>
+  /* CRT phosphor tokens — yellow brand variant */
+  :root {
+    --crt-phosphor: #FACC15;
+    --crt-phosphor-deep: #B45309;
+    --crt-phosphor-pale: #FEF9C3;
+  }
+
+  /* Light layers — anchored to hero, NOT fixed; scroll naturally with the page */
+  .hero-stage .crt-light-layer {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* CRT stage — anchored absolutely at hero bottom, scrolls naturally */
+  .hero-stage .crt-stage {
+    position: absolute;
+    left: 50%; bottom: 3rem;
+    transform: translateX(-50%);
+    width: 360px; height: 280px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: var(--crt-visible, 0);
+    transition: opacity 0.6s ease;
+  }
+
+  /* Bright phosphor "core" right behind the screen — illuminates the page */
+  .hero-stage .crt-corecast {
+    position: absolute;
+    left: 50%; bottom: calc(3rem + 100px);
+    width: 720px; height: 520px;
+    transform: translate(-50%, 50%) scale(var(--glow-scale, 0));
+    background: radial-gradient(ellipse 60% 55% at 50% 50%,
+      rgba(254, 243, 199, 0.55) 0%,
+      rgba(250, 204, 21, 0.32) 18%,
+      rgba(180, 83, 9, 0.14) 40%,
+      rgba(120, 53, 15, 0.05) 65%,
+      transparent 82%);
+    mix-blend-mode: screen;
+    filter: blur(2px);
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+    animation: crt-corecast-flicker 0.16s steps(2) infinite;
+  }
+  @keyframes crt-corecast-flicker {
+    0%, 100% { filter: blur(2px) brightness(1); }
+    50%      { filter: blur(2px) brightness(1.05); }
+  }
+
+  /* Upward light cone reaching the hero text */
+  .hero-stage .crt-uplight {
+    position: absolute;
+    left: 50%; bottom: 0;
+    width: 1300px;
+    height: 100%;
+    transform: translateX(-50%) scale(var(--glow-scale, 0));
+    transform-origin: bottom center;
+    background:
+      radial-gradient(ellipse 42% 65% at 50% 100%,
+        rgba(253, 224, 71, 0.28) 0%,
+        rgba(245, 158, 11, 0.16) 18%,
+        rgba(180, 83, 9, 0.08) 38%,
+        rgba(120, 53, 15, 0.03) 60%,
+        transparent 82%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+    filter: blur(3px);
+    animation: crt-uplight-breathe 5.2s ease-in-out infinite;
+  }
+  @keyframes crt-uplight-breathe {
+    0%, 100% { opacity: 0.92; }
+    50%      { opacity: 1.04; }
+  }
+
+  /* Floor pool — light spilling on the desk surface */
+  .hero-stage .crt-floorpool {
+    position: absolute;
+    left: 50%; bottom: calc(3rem - 30px);
+    width: 720px; height: 130px;
+    transform: translateX(-50%) scale(var(--glow-scale, 0));
+    background: radial-gradient(ellipse 50% 50% at 50% 50%,
+      rgba(253, 224, 71, 0.38) 0%,
+      rgba(245, 158, 11, 0.18) 30%,
+      rgba(180, 83, 9, 0.06) 60%,
+      transparent 80%);
+    mix-blend-mode: screen;
+    filter: blur(10px);
+    transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* CRT body — beige plastic */
+  .crt-body {
+    position: absolute;
+    left: 50%; bottom: 0;
+    transform: translateX(-50%);
+    width: 320px; height: 250px;
+    background: linear-gradient(180deg, #c4baa6 0%, #a99e88 60%, #847a66 100%);
+    border-radius: 18px 18px 14px 14px;
+    box-shadow:
+      inset 0 2px 0 rgba(255,250,235,.18),
+      inset 0 -3px 8px rgba(0,0,0,.45),
+      inset 3px 0 6px rgba(0,0,0,.25),
+      inset -3px 0 6px rgba(0,0,0,.25),
+      0 8px 24px rgba(0,0,0,.6),
+      0 0 0 1px rgba(0,0,0,.4);
+  }
+  .crt-vents {
+    position: absolute;
+    right: 14px; top: 22px;
+    width: 26px; height: 90px;
+    background: repeating-linear-gradient(180deg,
+      rgba(0,0,0,.4) 0px, rgba(0,0,0,.4) 2px,
+      transparent 2px, transparent 6px);
+    border-radius: 2px;
+    opacity: .7;
+  }
+
+  /* Screen recess — dark CRT glass */
+  .crt-screen-recess {
+    position: absolute;
+    left: 50%; top: 18px;
+    transform: translateX(-50%);
+    width: 280px; height: 200px;
+    border-radius: 22px / 28px;
+    background: #060503;
+    box-shadow:
+      inset 0 0 0 6px #2a2418,
+      inset 0 0 0 8px #14110a,
+      inset 0 4px 20px rgba(0,0,0,.9),
+      inset 0 -3px 12px rgba(254, 249, 195, 0.06);
+    overflow: hidden;
+  }
+
+  /* Phosphor screen */
+  .crt-screen {
+    position: absolute;
+    inset: 8px;
+    border-radius: 16px / 22px;
+    background:
+      radial-gradient(ellipse 100% 100% at 50% 50%,
+        rgba(40, 25, 5, 1) 0%,
+        rgba(20, 12, 0, 1) 70%,
+        rgba(0, 0, 0, 1) 100%);
+    overflow: hidden;
+    transform: perspective(800px);
+    box-shadow: inset 0 0 60px rgba(180, 83, 9, 0.25);
+    animation: crt-flicker 0.13s steps(3) infinite;
+  }
+  @keyframes crt-flicker {
+    0%, 100% { filter: brightness(1); }
+    33%      { filter: brightness(1.04); }
+    66%      { filter: brightness(0.98); }
+  }
+
+  .crt-scanlines {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg,
+      rgba(0,0,0,0) 0px,
+      rgba(0,0,0,0) 2px,
+      rgba(0,0,0,0.32) 2px,
+      rgba(0,0,0,0.32) 3px);
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .crt-scanbeam {
+    position: absolute;
+    left: 0; right: 0;
+    height: 16px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(253, 224, 71, 0.10) 40%,
+      rgba(254, 243, 199, 0.18) 50%,
+      rgba(253, 224, 71, 0.10) 60%,
+      transparent 100%);
+    mix-blend-mode: screen;
+    animation: crt-scanbeam 6s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes crt-scanbeam {
+    0%   { top: -20px; opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { top: 100%; opacity: 0; }
+  }
+
+  .crt-screen-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 110% 100% at 50% 50%,
+      transparent 50%,
+      rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+  }
+
+  /* Phosphor text */
+  .crt-text {
+    position: absolute;
+    inset: 0;
+    padding: 22px 24px;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--crt-phosphor);
+    text-shadow:
+      0 0 1px rgba(254, 249, 195, 1),
+      0 0 4px rgba(250, 204, 21, 0.85),
+      0 0 12px rgba(180, 83, 9, 0.7),
+      0 0 22px rgba(180, 83, 9, 0.4);
+    letter-spacing: 0.04em;
+    pointer-events: none;
+    z-index: 2;
+    overflow: hidden;
+  }
+  .crt-text .ts {
+    color: rgba(254, 243, 199, 0.55);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    display: block;
+  }
+  .crt-text .line {
+    display: block;
+    min-height: 1.55em;
+  }
+  .crt-text .cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    background: var(--crt-phosphor);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: crt-cursor 1s steps(2) infinite;
+    box-shadow: 0 0 6px rgba(250, 204, 21, 0.9);
+  }
+  @keyframes crt-cursor {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+
+  /* Power LED */
+  .crt-led {
+    position: absolute;
+    right: 30px; bottom: 16px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #ff3b3b;
+    box-shadow:
+      0 0 6px rgba(255, 60, 60, 0.95),
+      0 0 14px rgba(255, 40, 40, 0.7),
+      0 0 24px rgba(255, 0, 0, 0.35);
+    animation: crt-led-breath 1.8s ease-in-out infinite;
+  }
+  @keyframes crt-led-breath {
+    0%, 100% { opacity: 0.85; transform: scale(1); }
+    50%      { opacity: 1; transform: scale(1.1); }
+  }
+
+  .crt-label {
+    position: absolute;
+    left: 24px; bottom: 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.24em;
+    color: rgba(0,0,0,0.55);
+    text-transform: uppercase;
+  }
+
+  /* Boot flash */
+  .crt-boot-line {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%) scaleY(0);
+    width: 90%; height: 2px;
+    background: rgba(255,255,255,0.95);
+    box-shadow: 0 0 8px rgba(255,255,255,0.9);
+    z-index: 3;
+    transform-origin: center;
+  }
+  .crt-boot-line.flash { animation: crt-boot 0.55s ease-out forwards; }
+  @keyframes crt-boot {
+    0%   { transform: translate(-50%, -50%) scaleY(0) scaleX(0); opacity: 0; }
+    25%  { transform: translate(-50%, -50%) scaleY(1) scaleX(0.05); opacity: 1; }
+    55%  { transform: translate(-50%, -50%) scaleY(1) scaleX(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scaleY(80) scaleX(1); opacity: 0; }
+  }
+
+  /* Hide on small screens — editorial flourish, not core content */
+  @media (max-width: 640px) {
+    .hero-stage .crt-stage,
+    .hero-stage .crt-light-layer { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .crt-screen, .crt-corecast, .crt-uplight, .crt-scanbeam, .crt-led, .crt-text .cursor, .crt-floorpool {
+      animation: none !important;
+    }
+  }
+</style>
+
+<script is:inline define:vars={{ finalLine }}>
+  (function crtBoot() {
+    const root = document.documentElement.style;
+    const bootLine = document.getElementById('crtBootLine');
+    const lines = [
+      document.getElementById('crtLine1'),
+      document.getElementById('crtLine2'),
+      document.getElementById('crtLine3'),
+      document.getElementById('crtLine4'),
+      document.getElementById('crtLine5'),
+    ];
+    if (!bootLine || lines.some(l => !l)) return;
+
+    function typeInto(el, text, perChar) {
+      perChar = perChar || 32;
+      return new Promise((resolve) => {
+        let i = 0;
+        function step() {
+          el.textContent = text.slice(0, i);
+          i++;
+          if (i <= text.length) setTimeout(step, perChar + Math.random() * 18);
+          else resolve();
+        }
+        step();
+      });
+    }
+
+    setTimeout(() => { root.setProperty('--crt-visible', '1'); }, 400);
+    setTimeout(() => { bootLine.classList.add('flash'); }, 900);
+    setTimeout(() => { root.setProperty('--glow-scale', '1'); }, 1450);
+
+    (async function bootSequence() {
+      await new Promise(r => setTimeout(r, 1700));
+      await typeInto(lines[0], '> LOADING SUBTITLE.SYS ......... OK', 28);
+      await new Promise(r => setTimeout(r, 180));
+      await typeInto(lines[1], '> CONNECTING /BRIDGE ........... OK', 24);
+      await new Promise(r => setTimeout(r, 180));
+      await typeInto(lines[2], '> MOUNTING TRANSLATIONS ........ OK', 26);
+      await new Promise(r => setTimeout(r, 320));
+      await typeInto(lines[3], '> ' + finalLine, 80);
+    })();
+  })();
+</script>

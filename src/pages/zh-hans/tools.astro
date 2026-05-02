@@ -1,170 +1,93 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../i18n';
 import { tools } from '../../data/tools';
 
+const lang = 'zh-hans';
+const t = (k: keyof typeof ui['zh-hans']) => ui['zh-hans'][k];
+
 const filters = [
-  { label: '全部', value: 'all' },
-  { label: '在线工具', value: 'type:online' },
-  { label: '安装型', value: 'type:installable' },
-  { label: '开发中', value: 'status:beta' },
+  { label: t('tools.filter.all'),         value: 'all' },
+  { label: t('tools.filter.online'),      value: 'type:online' },
+  { label: t('tools.filter.installable'), value: 'type:installable' },
+  { label: t('tools.filter.beta'),        value: 'status:beta' },
 ] as const;
 ---
 
-<BaseLayout
-  title="工具库"
-  description="蒙太奇字幕社区开发和收录的字幕工具，包括在线编辑器、时间轴工具、自动化脚本等。"
-  lang="zh-hans"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<BaseLayout title="工具库" description="蒙太奇字幕社区开发和收录的开源字幕工具。" lang={lang}>
 
-    <!-- Page Header -->
-    <div class="max-w-3xl mb-12">
-      <p class="text-yellow-400 text-sm font-medium mb-3">工具</p>
-      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">工具库</h1>
-      <p class="text-gray-400 text-lg">
-        我们开发并收录了一系列开源字幕工具，覆盖时间轴编辑、格式转换、质量检查等场景。
-      </p>
+  <section class="relative pt-24 md:pt-32 pb-16 border-b border-bone/[0.08]">
+    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6 reveal">{t('tools.kicker')}</p>
+      <div class="grid lg:grid-cols-12 gap-10">
+        <h1 class="lg:col-span-7 font-display text-display text-bone leading-[0.92] tracking-tightest reveal">
+          工具<span class="font-display-italic text-signal-yellow">库</span>
+        </h1>
+        <p class="lg:col-span-5 self-end text-bone-dim text-lg leading-relaxed reveal">{t('tools.lead')}</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Filter -->
-    <div class="flex flex-wrap gap-2 mb-10" data-tool-filters>
-      {filters.map(({ label, value }, i) => (
-        <button
-          type="button"
-          data-tool-filter={value}
-          data-active={i === 0 ? 'true' : 'false'}
-          class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
-            i === 0
-              ? 'bg-yellow-400 text-black font-medium'
-              : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
-          }`}
-        >
-          {label}
-        </button>
-      ))}
+  <section class="py-12 border-b border-bone/[0.08] sticky top-16 z-30 bg-ink/95 backdrop-blur">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between gap-6 flex-wrap">
+      <div class="flex flex-wrap gap-1">
+        {filters.map(({ label, value }, i) => (
+          <button type="button" data-tool-filter={value} data-active={i===0?'true':'false'}
+            class="px-4 py-2 text-[13px] font-mono uppercase tracking-[0.1em] border border-bone/10 transition-all data-[active=true]:bg-signal-yellow data-[active=true]:text-ink data-[active=true]:border-signal-yellow text-bone-dim hover:text-bone hover:border-bone/40">
+            {label}
+          </button>
+        ))}
+      </div>
+      <span class="font-mono text-[11px] text-bone-mute tracking-[0.18em]">{tools.length} TOOLS</span>
     </div>
+  </section>
 
-    <!-- Tools Grid (App Store style) -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-tool-grid>
-      {tools.map((tool) => (
-        <article
-          data-tool-card
-          data-type={tool.type}
-          data-status={tool.status}
-          class="group flex flex-col bg-[#111] border border-white/[0.07] rounded-2xl p-6 hover:border-yellow-400/20 transition-all duration-300"
-        >
-
-          <!-- Header -->
-          <div class="flex items-start justify-between mb-4">
-            <div class="w-14 h-14 bg-[#0a0a0a] border border-white/10 rounded-2xl flex items-center justify-center shrink-0">
-              <span class="text-yellow-400 font-black text-xl">{tool.name.charAt(0)}</span>
+  <section class="py-20">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/[0.08] border border-bone/[0.08]" data-tool-grid>
+        {tools.map((tool, i) => (
+          <article data-tool-card data-type={tool.type} data-status={tool.status}
+            class="group bg-ink p-8 hover:bg-ink-800 transition-colors flex flex-col">
+            <div class="flex items-start justify-between mb-8">
+              <div class="w-14 h-14 border border-signal-yellow/40 flex items-center justify-center group-hover:bg-signal-yellow/10 transition-colors">
+                <span class="font-display-italic text-3xl text-signal-yellow leading-none">{tool.name.charAt(0)}</span>
+              </div>
+              <span class="font-mono text-[10px] text-bone-mute tracking-[0.2em]">N° {String(i+1).padStart(2,'0')}</span>
             </div>
-            <div class="flex flex-col items-end gap-1.5">
-              <span class={`text-xs px-2.5 py-1 rounded-full font-medium ${
-                tool.type === 'online'
-                  ? 'bg-blue-400/10 text-blue-400'
-                  : 'bg-purple-400/10 text-purple-400'
-              }`}>
-                {tool.type === 'online' ? '在线工具' : '安装型'}
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              <span class={`font-mono text-[10px] uppercase tracking-[0.1em] px-2 py-0.5 ${tool.type==='online' ? 'text-signal-yellow border border-signal-yellow/30' : 'text-bone-dim border border-bone/15'}`}>
+                {tool.type==='online' ? t('common.type.online') : t('common.type.installable')}
               </span>
-              <span class={`text-xs px-2.5 py-1 rounded-full ${
-                tool.status === 'active'
-                  ? 'bg-green-400/10 text-green-400'
-                  : tool.status === 'beta'
-                  ? 'bg-yellow-400/10 text-yellow-400'
-                  : 'bg-gray-400/10 text-gray-400'
-              }`}>
-                {tool.status === 'active' ? '稳定版' : tool.status === 'beta' ? '测试版' : '已归档'}
+              <span class={`font-mono text-[10px] uppercase tracking-[0.1em] px-2 py-0.5 ${tool.status==='active'?'text-live border border-live/30':tool.status==='beta'?'text-signal-yellow border border-signal-yellow/30':'text-bone-mute border border-bone/15'}`}>
+                {tool.status==='active'?t('common.status.active'):tool.status==='beta'?t('common.status.beta'):t('common.status.archived')}
               </span>
             </div>
-          </div>
+            <h2 class="font-display text-3xl text-bone group-hover:text-signal-yellow transition-colors mb-3">{tool.name}</h2>
+            <p class="text-bone-dim text-sm leading-relaxed flex-1 mb-6">{tool.description_zh}</p>
+            <div class="flex flex-wrap gap-1 mb-6">
+              {tool.tags.map(tag => (
+                <span class="font-mono text-[10px] text-bone-mute">#{tag}</span>
+              ))}
+            </div>
+            <div class="flex items-center justify-between pt-5 border-t border-bone/[0.07]">
+              <span class="font-mono text-[11px] text-bone-mute">by {tool.author}</span>
+              {tool.url && <a href={tool.url} target="_blank" rel="noopener noreferrer" class="text-signal-yellow text-sm flex items-center gap-1.5 hover:underline">{tool.type==='online'?'打开工具':'查看详情'} ↗</a>}
+              {!tool.url && tool.repo && <a href={tool.repo} target="_blank" rel="noopener noreferrer" class="text-signal-yellow text-sm flex items-center gap-1.5 hover:underline">查看源码 ↗</a>}
+            </div>
+          </article>
+        ))}
+      </div>
 
-          <!-- Info -->
-          <h2 class="text-white font-semibold text-lg mb-2 group-hover:text-yellow-400 transition-colors">
-            {tool.name}
-          </h2>
-          <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-5">
-            {tool.description_zh}
-          </p>
+      <div class="mt-10 text-center py-12 border border-bone/[0.08] hidden" data-empty-state>
+        <p class="text-bone-mute">{t('tools.empty')}</p>
+      </div>
 
-          <!-- Tags -->
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            {tool.tags.map((tag) => (
-              <span class="text-xs px-2 py-0.5 bg-white/5 border border-white/10 text-gray-500 rounded-full font-mono">
-                {tag}
-              </span>
-            ))}
-          </div>
-
-          <!-- Author & CTA -->
-          <div class="flex items-center justify-between pt-4 border-t border-white/[0.07]">
-            <span class="text-gray-600 text-xs">by {tool.author}</span>
-            {tool.url && (
-              <a
-                href={tool.url}
-                class="flex items-center gap-1.5 text-yellow-400 text-sm hover:underline"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {tool.type === 'online' ? '打开工具' : '查看详情'}
-                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-            )}
-          </div>
-        </article>
-      ))}
+      <div class="mt-12 p-12 border border-bone/[0.08] text-center reveal">
+        <h3 class="font-display text-3xl text-bone mb-3">{t('tools.submit.title')}</h3>
+        <p class="text-bone-dim mb-6 max-w-xl mx-auto text-sm">{t('tools.submit.body')}</p>
+        <a href="mailto:tools@montagesubs.org" class="btn-ghost">{t('tools.submit.cta')} →</a>
+      </div>
     </div>
-
-    <!-- Empty filter state -->
-    <div class="mt-10 text-center py-12 border border-white/[0.07] rounded-2xl hidden" data-empty-state>
-      <p class="text-gray-500">这个筛选下暂时没有工具</p>
-    </div>
-
-    <!-- Submit Tool CTA -->
-    <div class="mt-12 p-8 bg-[#111] border border-white/[0.07] rounded-2xl text-center">
-      <h3 class="text-white font-semibold mb-2">有好工具想分享？</h3>
-      <p class="text-gray-500 text-sm mb-5">我们欢迎社区成员提交自己开发的字幕工具。目前处于审核阶段，请通过邮件联系我们。</p>
-      <a
-        href="mailto:tools@montagesubs.org"
-        class="inline-flex items-center gap-2 border border-yellow-400/30 text-yellow-400 hover:bg-yellow-400/5 text-sm px-6 py-2.5 rounded-full transition-colors"
-      >
-        提交工具申请
-      </a>
-    </div>
-
-  </div>
+  </section>
 </BaseLayout>
-
-<script>
-  const ACTIVE = 'bg-yellow-400 text-black font-medium';
-  const INACTIVE = 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30';
-  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tool-filter]');
-  const cards = document.querySelectorAll<HTMLElement>('[data-tool-card]');
-  const empty = document.querySelector<HTMLElement>('[data-empty-state]');
-
-  function matches(card: HTMLElement, filter: string): boolean {
-    if (filter === 'all') return true;
-    const [key, value] = filter.split(':');
-    return card.dataset[key as 'type' | 'status'] === value;
-  }
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.toolFilter ?? 'all';
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.dataset.active = String(active);
-        b.className = `px-4 py-1.5 rounded-full text-sm transition-colors ${active ? ACTIVE : INACTIVE}`;
-      });
-      let visible = 0;
-      cards.forEach((card) => {
-        const show = matches(card, filter);
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      if (empty) empty.classList.toggle('hidden', visible > 0);
-    });
-  });
-</script>

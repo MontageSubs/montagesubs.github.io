@@ -1,0 +1,123 @@
+---
+/**
+ * Global motion + interaction scripts.
+ * Pure DOM/IO/RAF — no dependencies.
+ */
+---
+
+<script is:inline>
+  // ───────── Reveal on scroll ─────────
+  (() => {
+    const els = document.querySelectorAll('.reveal, .reveal-up-stagger, .word-reveal');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(e => e.classList.add('is-in'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+    els.forEach(e => io.observe(e));
+  })();
+
+  // ───────── Magnetic buttons ─────────
+  (() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const targets = document.querySelectorAll('.magnetic');
+    targets.forEach((el) => {
+      const STRENGTH = 0.25;
+      el.addEventListener('mousemove', (ev) => {
+        const r = el.getBoundingClientRect();
+        const dx = (ev.clientX - (r.left + r.width / 2)) * STRENGTH;
+        const dy = (ev.clientY - (r.top + r.height / 2)) * STRENGTH;
+        el.style.transform = `translate(${dx}px, ${dy}px)`;
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.transform = '';
+      });
+    });
+  })();
+
+  // ───────── Hero parallax (light) ─────────
+  (() => {
+    const hero = document.querySelector('[data-hero-parallax]');
+    if (!hero) return;
+    const onScroll = () => {
+      const y = window.scrollY;
+      hero.style.setProperty('--shift', `${Math.min(y * 0.15, 200)}px`);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  })();
+
+  // ───────── Live local time clock ─────────
+  (() => {
+    const el = document.querySelector('[data-clock]');
+    if (!el) return;
+    const tick = () => {
+      const d = new Date();
+      const hh = String(d.getHours()).padStart(2, '0');
+      const mm = String(d.getMinutes()).padStart(2, '0');
+      const ss = String(d.getSeconds()).padStart(2, '0');
+      el.textContent = `${hh}:${mm}:${ss}`;
+    };
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // ───────── Mobile menu ─────────
+  (() => {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('hidden') === false;
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  })();
+
+  // ───────── Tools page filter ─────────
+  (() => {
+    const buttons = document.querySelectorAll('[data-tool-filter]');
+    if (!buttons.length) return;
+    const cards = document.querySelectorAll('[data-tool-card]');
+    const empty = document.querySelector('[data-empty-state]');
+    const matches = (card, filter) => {
+      if (filter === 'all') return true;
+      const [k, v] = filter.split(':');
+      return card.dataset[k] === v;
+    };
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.toolFilter || 'all';
+        buttons.forEach((b) => b.dataset.active = String(b === btn));
+        let visible = 0;
+        cards.forEach((c) => {
+          const show = matches(c, f);
+          c.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        if (empty) empty.classList.toggle('hidden', visible > 0);
+      });
+    });
+  })();
+
+  // ───────── Projects page filter ─────────
+  (() => {
+    const buttons = document.querySelectorAll('[data-project-filter]');
+    if (!buttons.length) return;
+    const cards = document.querySelectorAll('[data-project-card]');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.projectFilter || 'all';
+        buttons.forEach((b) => b.dataset.active = String(b === btn));
+        cards.forEach((c) => {
+          c.style.display = (f === 'all' || c.dataset.status === f) ? '' : 'none';
+        });
+      });
+    });
+  })();
+</script>

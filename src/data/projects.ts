@@ -5,7 +5,7 @@ export interface Project {
   description_zh: string;
   description_en: string;
   tmdb_poster_path?: string;
-  status: 'ongoing' | 'completed' | 'hiatus';
+  status: 'active' | 'completed' | 'hiatus';
   lang: string[];
   members: string[];
   related_tools: string[];
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     description_zh: '系统性地翻译莎士比亚戏剧改编影视作品，注重文学性与可读性的平衡。每部作品附带详细的翻译思维记录，探讨古典文学在现代影视中的本地化方法。',
     description_en: 'Systematically translating film and TV adaptations of Shakespeare plays, balancing literary quality with readability. Each work includes detailed translation notes exploring localization methods for classical literature in modern media.',
     tmdb_poster_path: undefined,
-    status: 'ongoing',
+    status: 'active',
     lang: ['zh-hans'],
     members: ['akibarika'],
     related_tools: ['subtitle-flow'],
@@ -36,7 +36,7 @@ export const projects: Project[] = [
     title_en: 'Nordic Noir Subtitle Project',
     description_zh: '专注于斯堪的纳维亚犯罪剧的字幕翻译，在保留北欧文化特色的同时确保中文观众的观看体验。',
     description_en: 'Focused on subtitling Scandinavian crime dramas, preserving Nordic cultural nuances while ensuring a smooth viewing experience for Chinese audiences.',
-    status: 'ongoing',
+    status: 'active',
     lang: ['zh-hans'],
     members: ['akibarika'],
     related_tools: ['subtitle-flow', 'sub-lint'],

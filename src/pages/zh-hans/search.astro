@@ -7,23 +7,24 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   description="搜索蒙太奇字幕社区的内容"
   lang="zh-hans"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <section class="relative pt-24 md:pt-32 pb-16 border-b border-bone/[0.08]">
+    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6 reveal">搜索 / Search</p>
+      <h1 class="font-display text-display text-bone leading-[0.92] tracking-tightest reveal">
+        搜索<span class="font-display-italic text-signal-yellow">内容</span>
+      </h1>
+    </div>
+  </section>
 
-    <div class="max-w-2xl mx-auto">
-      <div class="mb-10">
-        <p class="text-yellow-400 text-sm font-medium mb-3">搜索</p>
-        <h1 class="text-4xl font-bold text-white mb-4">搜索内容</h1>
-        <p class="text-gray-400">搜索博客文章、教程、工具和项目信息。</p>
-      </div>
-
+  <section class="py-20">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 lg:px-12">
       <div id="search" class="pagefind-ui-wrapper"></div>
-
-      <p class="mt-6 text-gray-600 text-xs text-center">
-        搜索范围涵盖博客文章、教程、工具与项目页。
+      <p class="mt-8 font-mono text-[11px] text-bone-mute tracking-[0.18em] uppercase text-center">
+        — 范围：博客 · 教程 · 工具 · 项目页 —
       </p>
     </div>
-
-  </div>
+  </section>
 </BaseLayout>
 
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
@@ -34,10 +35,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       new PagefindUI({
         element: '#search',
         showSubResults: true,
-        translations: {
-          placeholder: '输入关键词…',
-          zero_results: '未找到结果',
-        },
+        translations: { placeholder: '输入关键词…', zero_results: '未找到结果' },
       });
     }
   });

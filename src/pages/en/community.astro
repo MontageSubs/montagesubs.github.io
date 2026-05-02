@@ -1,118 +1,67 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { members } from '../../data/members';
-
-const roleLabels: Record<string, string> = {
-  developer: 'Developer',
-  translator: 'Translator',
-  editor: 'Editor',
-  researcher: 'Researcher',
-};
+import { ui } from '../../i18n';
+import { members } from '../../data/community';
+const lang = 'en';
+const t = (k: keyof typeof ui['zh-hans']) => ui['en'][k];
+const conduct = [
+  { key: 'respect', ok: true }, { key: 'constructive', ok: true },
+  { key: 'open', ok: true }, { key: 'zero', ok: false },
+] as const;
 ---
-
-<BaseLayout
-  title="Community"
-  description="Meet the MontageSubs community — core members, their backgrounds, roles and contributions."
-  lang="en"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-
-    <div class="max-w-3xl mb-16">
-      <p class="text-yellow-400 text-sm font-medium mb-3">Community</p>
-      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">Community</h1>
-      <p class="text-gray-400 text-lg">
-        A small but passionate team from diverse backgrounds, united by a love for quality subtitles.
-      </p>
+<BaseLayout title="Community" description="Members, discussions and code of conduct." lang={lang}>
+  <section class="relative pt-24 md:pt-32 pb-16 border-b border-bone/[0.08]">
+    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6 reveal">{t('community.kicker')}</p>
+      <div class="grid lg:grid-cols-12 gap-10">
+        <h1 class="lg:col-span-7 font-display text-display text-bone leading-[0.92] tracking-tightest reveal"><span class="font-display-italic text-signal-yellow">Comm</span>unity</h1>
+        <p class="lg:col-span-5 self-end text-bone-dim text-lg leading-relaxed reveal">{t('community.lead')}</p>
+      </div>
     </div>
-
-    <!-- Members -->
-    <section class="mb-20">
-      <h2 class="text-2xl font-bold text-white mb-8">Core Members</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-        {members.map((member) => {
-          return (
-            <div class="p-6 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-white/20 transition-all">
-              <div class="w-14 h-14 bg-[#0a0a0a] border border-white/10 rounded-2xl flex items-center justify-center mb-4">
-                <span class="text-yellow-400 font-bold text-xl">{member.name.charAt(0).toUpperCase()}</span>
+  </section>
+  <section class="py-24 border-b border-bone/[0.08]">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <h2 class="font-display text-mega text-bone leading-[0.95] mb-12 reveal">{t('community.members.title')}</h2>
+      <div class="grid md:grid-cols-2 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
+        {members.map((m) => (
+          <article class="bg-ink p-8 md:p-10">
+            <div class="flex items-start gap-5 mb-6">
+              <div class="w-16 h-16 border border-signal-yellow/40 flex items-center justify-center bg-ink-800">
+                <span class="font-display-italic text-4xl text-signal-yellow leading-none">{m.initial}</span>
               </div>
-              <h3 class="text-white font-semibold text-lg mb-1">{member.name}</h3>
-              <div class="flex flex-wrap gap-1.5 mb-4">
-                {member.role.map((r) => (
-                  <span class="text-xs px-2.5 py-0.5 bg-yellow-400/10 text-yellow-400/80 rounded-full">
-                    {roleLabels[r] ?? r}
-                  </span>
-                ))}
-              </div>
-              <p class="text-gray-500 text-sm leading-relaxed mb-4">{member.bio_en}</p>
-              <p class="text-gray-700 text-xs">Since {member.joined}</p>
-            </div>
-          );
-        })}
-
-        <!-- Join card -->
-        <div class="p-6 bg-[#111] border border-yellow-400/10 border-dashed rounded-2xl flex flex-col items-center justify-center text-center min-h-[200px]">
-          <div class="w-14 h-14 border border-yellow-400/20 rounded-2xl flex items-center justify-center mb-4">
-            <span class="text-yellow-400 text-2xl">+</span>
-          </div>
-          <h3 class="text-white font-medium mb-2">There's a place for you here</h3>
-          <p class="text-gray-500 text-sm mb-4">Whether you're a translator, developer, or enthusiast</p>
-          <a href="/en/contribute" class="text-yellow-400 text-sm hover:underline">Learn how to join →</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Discussions -->
-    <section class="mb-20">
-      <h2 class="text-2xl font-bold text-white mb-6">Discussions</h2>
-      <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl flex flex-col sm:flex-row items-start sm:items-center gap-6">
-        <div class="flex-1">
-          <h3 class="text-white font-semibold mb-2">GitHub Discussions</h3>
-          <p class="text-gray-500 text-sm leading-relaxed">
-            We use GitHub Discussions as our main async space, covering project discussions, tool suggestions, and translation questions.
-          </p>
-        </div>
-        <a
-          href="https://github.com/MontageSubs/community/discussions"
-          class="shrink-0 inline-flex items-center gap-2 border border-white/20 hover:border-white/40 text-white text-sm px-5 py-2.5 rounded-full transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Visit Discussions
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-          </svg>
-        </a>
-      </div>
-    </section>
-
-    <!-- Code of Conduct -->
-    <section id="conduct" class="scroll-mt-20">
-      <h2 class="text-2xl font-bold text-white mb-6">Code of Conduct</h2>
-      <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl">
-        <p class="text-gray-400 leading-relaxed mb-6">
-          We are committed to providing a welcoming, safe, and inclusive environment for all participants. This code applies to all community spaces.
-        </p>
-        <div class="grid sm:grid-cols-2 gap-4">
-          {[
-            { icon: '✓', title: 'Be Respectful', desc: 'Respect every member regardless of background, skill level, or opinion' },
-            { icon: '✓', title: 'Be Constructive', desc: 'Offer criticism constructively, focusing on improvement rather than blame' },
-            { icon: '✓', title: 'Be Open', desc: 'Stay open to different viewpoints and approaches' },
-            { icon: '✗', title: 'Zero Tolerance', desc: 'Harassment, discrimination, and personal attacks of any kind are not tolerated' },
-          ].map(({ icon, title, desc }) => (
-            <div class="flex gap-3">
-              <span class={`text-sm font-bold mt-0.5 ${icon === '✓' ? 'text-green-400' : 'text-red-400'}`}>{icon}</span>
               <div>
-                <p class="text-white text-sm font-medium mb-1">{title}</p>
-                <p class="text-gray-500 text-xs leading-relaxed">{desc}</p>
+                <h3 class="font-display text-3xl text-bone">{m.name}</h3>
+                <p class="font-mono text-[11px] text-bone-mute uppercase tracking-[0.15em] mt-1">{m.role_en}</p>
               </div>
             </div>
-          ))}
-        </div>
-        <p class="text-gray-600 text-xs mt-6">
-          Report violations to <a href="mailto:conduct@montagesubs.org" class="text-yellow-400 hover:underline">conduct@montagesubs.org</a>
-        </p>
+            <p class="text-bone-dim text-sm leading-relaxed mb-6">{m.bio_en}</p>
+            <div class="flex items-center justify-between pt-5 border-t border-bone/[0.07]">
+              <span class="font-mono text-[11px] text-bone-mute">Joined {m.joined}</span>
+              {m.github && <a href={m.github} target="_blank" rel="noopener noreferrer" class="text-signal-yellow text-sm hover:underline">GitHub ↗</a>}
+            </div>
+          </article>
+        ))}
       </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
+  <section id="conduct" class="py-24">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <h2 class="font-display text-mega text-bone leading-[0.95] mb-6 reveal">{t('community.conduct.title')}</h2>
+      <p class="max-w-2xl text-bone-dim leading-relaxed mb-12 reveal">{t('community.conduct.body')}</p>
+      <div class="grid md:grid-cols-2 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
+        {conduct.map(c => (
+          <div class="bg-ink p-8">
+            <div class="flex items-start gap-4">
+              <span class={`mt-1 font-mono text-lg ${c.ok ? 'text-live' : 'text-signal-yellow'}`}>{c.ok ? '✓' : '✗'}</span>
+              <div>
+                <h3 class="font-display text-2xl text-bone mb-2">{t(`community.conduct.${c.key}.title` as any)}</h3>
+                <p class="text-bone-dim text-sm leading-relaxed">{t(`community.conduct.${c.key}.body` as any)}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>

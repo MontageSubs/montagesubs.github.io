@@ -1,185 +1,158 @@
 ---
 import { ui, type Lang } from '../i18n';
 
-interface Props {
-  lang: string;
-}
-
+interface Props { lang: string; }
 const { lang } = Astro.props;
 const l = lang as Lang;
+const isZh = lang === 'zh-hans';
 
 function t(key: keyof typeof ui['zh-hans']): string {
   return ((ui[l] as typeof ui['zh-hans'])[key] ?? ui['zh-hans'][key]) as string;
 }
 
-const isZh = lang === 'zh-hans';
-
 const quickLinks = [
-  { label: t('nav.about'), href: `/${lang}/about` },
+  { label: t('nav.about'),    href: `/${lang}/about` },
   { label: t('nav.projects'), href: `/${lang}/projects` },
-  { label: t('nav.tools'), href: `/${lang}/tools` },
+  { label: t('nav.tools'),    href: `/${lang}/tools` },
 ];
-
 const learnLinks = [
-  { label: isZh ? '博客' : 'Blog', href: `/${lang}/learn` },
-  { label: isZh ? '教程' : 'Tutorials', href: `/${lang}/learn#tutorials` },
+  { label: isZh ? '博客' : 'Blog',          href: `/${lang}/learn` },
+  { label: isZh ? '教程' : 'Tutorials',     href: `/${lang}/learn#tutorials` },
   { label: isZh ? '技术规范' : 'Standards', href: `/${lang}/learn#standards` },
 ];
-
 const communityLinks = [
-  { label: isZh ? '成员名录' : 'Members', href: `/${lang}/community` },
-  { label: isZh ? '讨论区' : 'Discussions', href: 'https://github.com/MontageSubs/community/discussions', external: true },
-  { label: isZh ? '行为准则' : 'Code of Conduct', href: `/${lang}/community#conduct` },
+  { label: isZh ? '成员名录' : 'Members',          href: `/${lang}/community` },
+  { label: isZh ? '讨论区' : 'Discussions',        href: 'https://github.com/MontageSubs/community/discussions', external: true },
+  { label: isZh ? '行为准则' : 'Code of Conduct',  href: `/${lang}/community#conduct` },
 ];
-
 const contributeLinks = [
   { label: isZh ? '如何贡献' : 'How to Contribute', href: `/${lang}/contribute` },
-  { label: isZh ? '翻译参与' : 'Translation', href: `/${lang}/contribute#translate` },
-  { label: isZh ? '工具开发' : 'Development', href: `/${lang}/contribute#develop` },
-  { label: isZh ? '支持我们' : 'Support Us', href: `/${lang}/contribute#support` },
+  { label: isZh ? '翻译参与' : 'Translation',       href: `/${lang}/contribute#translate` },
+  { label: isZh ? '工具开发' : 'Development',       href: `/${lang}/contribute#develop` },
+  { label: isZh ? '支持我们' : 'Support Us',        href: `/${lang}/contribute#support` },
 ];
-
 const socials = [
-  { name: 'Telegram', href: 'https://t.me/MontageSubs' },
-  { name: 'Discord', href: 'https://discord.gg/montagesubs' },
-  { name: 'YouTube', href: 'https://youtube.com/@MontageSubs' },
-  { name: 'GitHub', href: 'https://github.com/MontageSubs' },
-  { name: 'Twitter / X', href: 'https://twitter.com/MontageSubs' },
-  { name: 'Bluesky', href: 'https://bsky.app/profile/montagesubs.bsky.social' },
-  { name: 'Mastodon', href: 'https://mastodon.social/@MontageSubs' },
-  { name: 'B站', href: 'https://space.bilibili.com/MontageSubs' },
-  { name: '微博', href: 'https://weibo.com/MontageSubs' },
-  { name: 'Instagram', href: 'https://instagram.com/MontageSubs' },
+  { name: 'Telegram',   href: 'https://t.me/MontageSubs' },
+  { name: 'Discord',    href: 'https://discord.gg/montagesubs' },
+  { name: 'YouTube',    href: 'https://youtube.com/@MontageSubs' },
+  { name: 'GitHub',     href: 'https://github.com/MontageSubs' },
+  { name: 'Twitter / X',href: 'https://twitter.com/MontageSubs' },
+  { name: 'Bluesky',    href: 'https://bsky.app/profile/montagesubs.bsky.social' },
+  { name: 'Mastodon',   href: 'https://mastodon.social/@MontageSubs' },
+  { name: 'B站',        href: 'https://space.bilibili.com/MontageSubs' },
+  { name: '微博',       href: 'https://weibo.com/MontageSubs' },
+  { name: 'Instagram',  href: 'https://instagram.com/MontageSubs' },
+];
+const legalLinks = [
+  { label: t('footer.nonprofit'),         href: `/${lang}/about#governance` },
+  { label: t('footer.opensource'),        href: 'https://github.com/MontageSubs', external: true },
+  { label: t('footer.copyright_notice'),  href: `/${lang}/about#copyright` },
+  { label: t('footer.dmca'),              href: `/${lang}/about#dmca` },
+  { label: t('footer.privacy'),           href: `/${lang}/about#privacy` },
 ];
 
-const legalLinks = [
-  { label: t('footer.nonprofit'), href: `/${lang}/about#governance` },
-  { label: t('footer.opensource'), href: 'https://github.com/MontageSubs', external: true },
-  { label: t('footer.copyright_notice'), href: `/${lang}/about#copyright` },
-  { label: t('footer.dmca'), href: `/${lang}/about#dmca` },
-  { label: t('footer.privacy'), href: `/${lang}/about#privacy` },
-];
+const colYear = new Date().getFullYear();
 ---
 
-<footer class="bg-[#0a0a0a] border-t border-white/[0.07] mt-auto" data-pagefind-ignore>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<footer class="relative bg-ink border-t border-bone/[0.07] mt-auto" data-pagefind-ignore>
 
-    <!-- Main columns -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
+  <!-- Giant wordmark — editorial closer -->
+  <div class="overflow-hidden border-b border-bone/[0.06]">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 pt-20 pb-10">
+      <div class="flex items-end justify-between gap-6 flex-wrap">
+        <div>
+          <p class="micro-label mb-6">{isZh ? '回到顶部 ↑' : 'Back to top ↑'} <a href="#top" class="text-bone-dim hover:text-signal-yellow ml-2">↑</a></p>
+          <h2 class="font-display text-[clamp(4rem,16vw,16rem)] leading-[0.85] tracking-tightest text-bone">
+            Montage<span class="font-display-italic text-signal-yellow">Subs.</span>
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <!-- Brand -->
-      <div class="col-span-2 md:col-span-3 lg:col-span-1">
-        <a href={`/${lang}/`} class="inline-flex items-center gap-3 mb-5 group">
-          <div class="w-10 h-10 bg-[#0a0a0a] border border-yellow-400/30 rounded-md flex items-center justify-center group-hover:border-yellow-400/60 transition-colors">
-            <span class="text-yellow-400 font-black text-2xl leading-none select-none">M</span>
-          </div>
-          <span class="text-white font-semibold">{isZh ? '蒙太奇字幕社区' : 'MontageSubs'}</span>
-        </a>
-        <p class="text-gray-500 text-sm leading-relaxed max-w-[220px]">
+  <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16">
+
+    <!-- Five-column grid -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 mb-14">
+      <div class="col-span-2 md:col-span-3 lg:col-span-2">
+        <p class="micro-label mb-5">— {isZh ? '关于本站' : 'About this site'}</p>
+        <p class="text-bone-dim text-sm leading-relaxed max-w-sm">
           {t('footer.tagline')}
         </p>
+        <div class="mt-6 flex items-center gap-3">
+          <span class="inline-flex w-2 h-2 rounded-full bg-live"></span>
+          <span class="font-mono text-[11px] text-bone-mute uppercase tracking-[0.18em]">
+            {isZh ? '社区开放中' : 'Community online'} · v0.1
+          </span>
+        </div>
       </div>
 
-      <!-- Quick Links -->
       <div>
-        <h3 class="text-white text-xs font-semibold uppercase tracking-wider mb-4">{t('footer.quicklinks')}</h3>
-        <ul class="space-y-3">
+        <h3 class="micro-label mb-5">— {t('footer.quicklinks')}</h3>
+        <ul class="space-y-2.5">
           {quickLinks.map(({ label, href }) => (
-            <li>
-              <a href={href} class="text-gray-500 hover:text-gray-200 text-sm transition-colors">{label}</a>
-            </li>
+            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
           ))}
         </ul>
       </div>
 
-      <!-- Learn -->
       <div>
-        <h3 class="text-white text-xs font-semibold uppercase tracking-wider mb-4">{t('footer.learn_resources')}</h3>
-        <ul class="space-y-3">
+        <h3 class="micro-label mb-5">— {t('footer.learn_resources')}</h3>
+        <ul class="space-y-2.5">
           {learnLinks.map(({ label, href }) => (
-            <li>
-              <a href={href} class="text-gray-500 hover:text-gray-200 text-sm transition-colors">{label}</a>
-            </li>
+            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
           ))}
         </ul>
       </div>
 
-      <!-- Community -->
       <div>
-        <h3 class="text-white text-xs font-semibold uppercase tracking-wider mb-4">{t('footer.community')}</h3>
-        <ul class="space-y-3">
+        <h3 class="micro-label mb-5">— {t('footer.community')}</h3>
+        <ul class="space-y-2.5">
           {communityLinks.map(({ label, href, external }) => (
-            <li>
-              <a
-                href={href}
-                class="text-gray-500 hover:text-gray-200 text-sm transition-colors"
-                target={external ? '_blank' : undefined}
-                rel={external ? 'noopener noreferrer' : undefined}
-              >
-                {label}
-              </a>
-            </li>
+            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors"
+                target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{label}</a></li>
           ))}
         </ul>
       </div>
 
-      <!-- Contribute -->
       <div>
-        <h3 class="text-white text-xs font-semibold uppercase tracking-wider mb-4">{t('footer.contribute')}</h3>
-        <ul class="space-y-3">
+        <h3 class="micro-label mb-5">— {t('footer.contribute')}</h3>
+        <ul class="space-y-2.5">
           {contributeLinks.map(({ label, href }) => (
-            <li>
-              <a href={href} class="text-gray-500 hover:text-gray-200 text-sm transition-colors">{label}</a>
-            </li>
+            <li><a href={href} class="text-bone-dim hover:text-signal-yellow text-[14px] transition-colors">{label}</a></li>
           ))}
         </ul>
       </div>
     </div>
 
-    <!-- Social links + RSS -->
-    <div class="py-8 border-t border-white/[0.07]">
-      <div class="flex flex-wrap gap-x-5 gap-y-3">
+    <!-- Socials marquee -->
+    <div class="py-6 border-t border-bone/[0.06]">
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
         {socials.map(({ name, href }) => (
-          <a
-            href={href}
-            class="text-gray-500 hover:text-gray-300 text-sm transition-colors"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={name}
-          >
+          <a href={href} target="_blank" rel="noopener noreferrer"
+             class="text-bone-mute hover:text-bone text-[13px] transition-colors">
             {name}
           </a>
         ))}
-        <span class="text-gray-700 self-center">·</span>
-        <a href={`/${lang}/rss.xml`} class="text-gray-500 hover:text-yellow-400 text-sm transition-colors" aria-label="RSS">
-          RSS
-        </a>
-        <a
-          href="https://substack.com/@montagesubs"
-          class="text-gray-500 hover:text-gray-300 text-sm transition-colors"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Substack
-        </a>
+        <span class="text-bone-mute self-center">·</span>
+        <a href={`/${lang}/rss.xml`} class="text-bone-mute hover:text-signal-yellow text-[13px] transition-colors">RSS</a>
+        <a href="https://substack.com/@montagesubs" target="_blank" rel="noopener noreferrer"
+           class="text-bone-mute hover:text-bone text-[13px] transition-colors">Substack</a>
       </div>
     </div>
 
-    <!-- Legal bar -->
-    <div class="pt-6 border-t border-white/[0.07] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-      <p class="text-gray-600 text-xs">{t('footer.copyright')}</p>
-      <div class="flex flex-wrap gap-x-4 gap-y-1.5">
+    <!-- Legal -->
+    <div class="pt-6 border-t border-bone/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <p class="font-mono text-[11px] text-bone-mute tracking-wider">
+        {t('footer.copyright')} · {colYear}
+      </p>
+      <div class="flex flex-wrap gap-x-5 gap-y-1.5">
         {legalLinks.map(({ label, href, external }) => (
-          <a
-            href={href}
-            class="text-gray-600 hover:text-gray-400 text-xs transition-colors"
-            target={external ? '_blank' : undefined}
-            rel={external ? 'noopener noreferrer' : undefined}
-          >
-            {label}
-          </a>
+          <a href={href} class="text-bone-mute hover:text-bone text-[11px] font-mono uppercase tracking-[0.12em] transition-colors"
+            target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>{label}</a>
         ))}
       </div>
     </div>
+
   </div>
 </footer>

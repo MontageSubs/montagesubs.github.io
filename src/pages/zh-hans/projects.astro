@@ -1,153 +1,97 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../i18n';
 import { projects } from '../../data/projects';
 
-const zhProjects = projects.filter(p => p.lang.includes('zh-hans'));
+const lang = 'zh-hans';
+const t = (k: keyof typeof ui['zh-hans']) => ui['zh-hans'][k];
 
 const filters = [
-  { label: '全部', value: 'all' },
-  { label: '进行中', value: 'ongoing' },
-  { label: '已完成', value: 'completed' },
-  { label: '暂停', value: 'hiatus' },
+  { label: t('projects.filter.all'),       value: 'all' },
+  { label: t('projects.filter.active'),    value: 'active' },
+  { label: t('projects.filter.completed'), value: 'completed' },
+  { label: t('projects.filter.hiatus'),    value: 'hiatus' },
 ] as const;
+
+const statusLabel = {
+  active: t('common.status.active'),
+  completed: t('common.status.completed'),
+  hiatus: t('common.status.hiatus'),
+};
 ---
 
-<BaseLayout
-  title="字幕项目"
-  description="蒙太奇字幕社区的所有字幕翻译项目，包含莎士比亚系列、北欧犯罪剧等。"
-  lang="zh-hans"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<BaseLayout title="字幕项目" description="蒙太奇字幕社区进行中与已完成的字幕项目。" lang={lang}>
 
-    <!-- Page Header -->
-    <div class="max-w-3xl mb-12">
-      <p class="text-yellow-400 text-sm font-medium mb-3">项目</p>
-      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">字幕项目</h1>
-      <p class="text-gray-400 text-lg">
-        我们的字幕项目注重文学性与可读性的平衡。每个项目都附带翻译思维记录，记录我们的创作过程。
-      </p>
+  <section class="relative pt-24 md:pt-32 pb-16 border-b border-bone/[0.08]">
+    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6 reveal">{t('projects.kicker')}</p>
+      <div class="grid lg:grid-cols-12 gap-10">
+        <h1 class="lg:col-span-7 font-display text-display text-bone leading-[0.92] tracking-tightest reveal">
+          字幕<span class="font-display-italic text-signal-yellow">项目</span>
+        </h1>
+        <p class="lg:col-span-5 self-end text-bone-dim text-lg leading-relaxed reveal">{t('projects.lead')}</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Filter tabs -->
-    <div class="flex gap-2 mb-10" data-project-filters>
-      {filters.map(({ label, value }, i) => (
-        <button
-          type="button"
-          data-project-filter={value}
-          data-active={i === 0 ? 'true' : 'false'}
-          class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
-            i === 0
-              ? 'bg-yellow-400 text-black font-medium'
-              : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
-          }`}
-        >
-          {label}
-        </button>
-      ))}
+  <section class="py-12 border-b border-bone/[0.08] sticky top-16 z-30 bg-ink/95 backdrop-blur">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between gap-6 flex-wrap">
+      <div class="flex flex-wrap gap-1">
+        {filters.map(({ label, value }, i) => (
+          <button type="button" data-project-filter={value} data-active={i===0?'true':'false'}
+            class="px-4 py-2 text-[13px] font-mono uppercase tracking-[0.1em] border border-bone/10 transition-all data-[active=true]:bg-signal-yellow data-[active=true]:text-ink data-[active=true]:border-signal-yellow text-bone-dim hover:text-bone hover:border-bone/40">
+            {label}
+          </button>
+        ))}
+      </div>
+      <span class="font-mono text-[11px] text-bone-mute tracking-[0.18em]">{projects.length} ITEMS</span>
     </div>
+  </section>
 
-    <!-- Projects Grid -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-project-grid>
-      {zhProjects.map((project) => (
-        <article
-          data-project-card
-          data-status={project.status}
-          class="group bg-[#111] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/20 transition-all duration-300"
-        >
-          <!-- Poster area -->
-          <div class="aspect-[2/3] max-h-48 bg-[#0a0a0a] flex items-center justify-center border-b border-white/[0.07] overflow-hidden">
-            {project.tmdb_poster_path ? (
-              <img
-                src={`https://image.tmdb.org/t/p/w342${project.tmdb_poster_path}`}
-                alt={project.title_zh}
-                width="342"
-                height="513"
-                loading="lazy"
-                class="w-full h-full object-cover"
-              />
-            ) : (
-              <div class="text-gray-700 text-center p-6">
-                <svg class="w-12 h-12 mx-auto mb-2 opacity-30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
-                </svg>
-                <p class="text-xs">暂无海报</p>
+  <section class="py-20">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <ol class="grid gap-px bg-bone/[0.08] border border-bone/[0.08]">
+        {projects.map((p, i) => (
+          <li data-project-card data-status={p.status} class="bg-ink hover:bg-ink-800 transition-colors group">
+            <a href={`/${lang}/projects/${p.id}`} class="grid md:grid-cols-12 gap-6 p-6 md:p-10 items-start">
+              <div class="md:col-span-1">
+                <span class="font-mono text-[11px] text-bone-mute tracking-[0.18em]">N° {String(i+1).padStart(2,'0')}</span>
               </div>
-            )}
-          </div>
-
-          <!-- Content -->
-          <div class="p-6">
-            <!-- Status badge -->
-            <div class="flex items-center justify-between mb-3">
-              <span class={`inline-flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full font-medium ${
-                project.status === 'ongoing'
-                  ? 'bg-green-400/10 text-green-400'
-                  : project.status === 'completed'
-                  ? 'bg-blue-400/10 text-blue-400'
-                  : 'bg-gray-400/10 text-gray-400'
-              }`}>
-                <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                {project.status === 'ongoing' ? '进行中' : project.status === 'completed' ? '已完成' : '暂停'}
-              </span>
-              {project.year && <span class="text-gray-600 text-xs">{project.year}</span>}
-            </div>
-
-            <h2 class="text-white font-semibold mb-2 group-hover:text-yellow-400 transition-colors">
-              {project.title_zh}
-            </h2>
-            <p class="text-gray-500 text-sm leading-relaxed mb-4 line-clamp-3">
-              {project.description_zh}
-            </p>
-
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-1.5">
-              {project.tags_zh.map((tag) => (
-                <span class="text-xs px-2 py-0.5 bg-white/5 border border-white/10 text-gray-400 rounded-full">
-                  {tag}
+              <div class="md:col-span-2 flex items-center gap-2">
+                <span class={`inline-block w-1.5 h-1.5 rounded-full ${p.status==='active'?'bg-live animate-pulse':p.status==='completed'?'bg-signal-yellow':'bg-bone-mute'}`}></span>
+                <span class="font-mono text-[11px] text-bone-dim uppercase tracking-[0.1em]">{statusLabel[p.status]}</span>
+              </div>
+              <div class="md:col-span-5">
+                <h2 class="font-display text-3xl md:text-4xl text-bone group-hover:text-signal-yellow transition-colors leading-tight">
+                  {p.title_zh}
+                </h2>
+                <p class="mt-3 text-bone-dim text-sm leading-relaxed max-w-xl">{p.description_zh}</p>
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  {p.tags_zh.map(tag => (
+                    <span class="font-mono text-[11px] text-bone-mute border border-bone/10 px-2 py-0.5">{tag}</span>
+                  ))}
+                </div>
+              </div>
+              <div class="md:col-span-2 md:text-right">
+                <span class="font-display text-3xl text-bone-mute group-hover:text-signal-yellow transition-colors">{p.year}</span>
+              </div>
+              <div class="md:col-span-2 md:text-right self-center">
+                <span class="inline-flex items-center gap-2 text-bone text-sm group-hover:text-signal-yellow transition-colors">
+                  详情
+                  <svg class="w-4 h-4 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M17 7H8M17 7v9"/></svg>
                 </span>
-              ))}
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
 
-    <!-- Empty state shown only when filter has no matches -->
-    <div class="mt-12 text-center py-12 border border-white/[0.07] rounded-2xl hidden" data-empty-state>
-      <p class="text-gray-500 mb-2">这个筛选下暂时没有项目</p>
+      <div class="mt-16 p-12 border border-bone/[0.08] text-center reveal">
+        <p class="font-display text-3xl text-bone mb-4">{t('projects.cta.title')}</p>
+        <p class="text-bone-dim mb-6">{t('projects.cta.body')}</p>
+        <a href={`/${lang}/contribute`} class="btn-ghost">参与我们的项目 →</a>
+      </div>
     </div>
-
-    <!-- More coming -->
-    <div class="mt-12 text-center py-12 border border-white/[0.07] rounded-2xl">
-      <p class="text-gray-500 mb-2">更多项目正在进行中</p>
-      <a href="/zh-hans/contribute" class="text-yellow-400 text-sm hover:underline">想参与我们的项目？→</a>
-    </div>
-
-  </div>
+  </section>
 </BaseLayout>
-
-<script>
-  const ACTIVE = 'bg-yellow-400 text-black font-medium';
-  const INACTIVE = 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30';
-  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-project-filter]');
-  const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
-  const empty = document.querySelector<HTMLElement>('[data-empty-state]');
-
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const filter = btn.dataset.projectFilter;
-      buttons.forEach((b) => {
-        const active = b === btn;
-        b.dataset.active = String(active);
-        b.className = `px-4 py-1.5 rounded-full text-sm transition-colors ${active ? ACTIVE : INACTIVE}`;
-      });
-      let visible = 0;
-      cards.forEach((card) => {
-        const show = filter === 'all' || filter === card.dataset.status;
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-      if (empty) empty.classList.toggle('hidden', visible > 0);
-    });
-  });
-</script>

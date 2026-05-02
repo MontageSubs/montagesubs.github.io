@@ -1,0 +1,25 @@
+---
+/**
+ * SectionHeader — editorial section head used across pages.
+ * Number / kicker / serif title.
+ */
+interface Props {
+  num: string;
+  kicker: string;
+  title: string;
+  serifAccent?: string; // optional italic word
+  align?: 'left' | 'center';
+}
+const { num, kicker, title, serifAccent, align = 'left' } = Astro.props;
+---
+<header class={`reveal ${align === 'center' ? 'text-center mx-auto max-w-3xl' : 'max-w-4xl'}`}>
+  <div class={`flex items-center gap-3 mb-6 ${align === 'center' ? 'justify-center' : ''}`}>
+    <span class="font-mono text-[11px] text-signal-yellow tracking-[0.2em]">{num}</span>
+    <span class="h-px w-10 bg-bone/20"></span>
+    <span class="font-mono text-[11px] text-bone-mute uppercase tracking-[0.2em]">{kicker}</span>
+  </div>
+  <h2 class="font-display text-mega text-bone leading-[0.95]">
+    {title}
+    {serifAccent && <span class="font-display-italic text-signal-yellow"> {serifAccent}</span>}
+  </h2>
+</header>

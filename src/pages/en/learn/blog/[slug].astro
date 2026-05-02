@@ -14,12 +14,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
-
-const dateStr = post.data.date.toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const dateStr = post.data.date.toISOString().slice(0, 10);
 ---
 
 <BaseLayout
@@ -29,56 +24,58 @@ const dateStr = post.data.date.toLocaleDateString('en-US', {
   hasTranslation={post.data.has_translation}
   translationPath={post.data.has_translation ? `/zh-hans/learn/blog/${post.slug.replace('en/', '')}/` : undefined}
 >
-  <article class="max-w-3xl mx-auto px-4 sm:px-6 py-16">
+  <article class="max-w-3xl mx-auto px-5 sm:px-8 py-24">
 
-    <a href="/en/learn" class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-sm mb-10 transition-colors">
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <a href="/en/learn" class="inline-flex items-center gap-2 font-mono text-[11px] text-bone-mute hover:text-signal-yellow uppercase tracking-[0.18em] mb-12 transition-colors">
+      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
       Back to Learn
     </a>
 
-    <header class="mb-12">
-      <div class="flex flex-wrap items-center gap-3 mb-5">
-        <time class="text-gray-500 text-sm">{dateStr}</time>
-        <span class="text-gray-700">·</span>
-        <span class="text-gray-500 text-sm">{post.data.author}</span>
+    <header class="mb-16">
+      <div class="flex flex-wrap items-center gap-3 mb-6 font-mono text-[11px] text-bone-mute tracking-[0.12em]">
+        <time>{dateStr}</time>
+        <span>·</span>
+        <span>{post.data.author}</span>
         {post.data.has_translation && (
-          <a href={`/zh-hans/learn/blog/${post.slug.replace('en/', '')}/`} class="text-xs px-2.5 py-1 bg-blue-400/10 text-blue-400 rounded-full hover:bg-blue-400/20 transition-colors">
-            中文版本
-          </a>
+          <>
+            <span>·</span>
+            <a href={`/zh-hans/learn/blog/${post.slug.replace('en/', '')}/`} class="text-signal-yellow hover:underline">中文版本 ↗</a>
+          </>
         )}
       </div>
-      <h1 class="text-3xl sm:text-4xl font-bold text-white leading-tight mb-5">{post.data.title}</h1>
+      <h1 class="font-display text-[clamp(2.4rem,5vw,4.5rem)] text-bone leading-[1.05] tracking-tightest mb-6">
+        {post.data.title}
+      </h1>
       {post.data.description && (
-        <p class="text-gray-400 text-lg leading-relaxed">{post.data.description}</p>
+        <p class="text-bone-dim text-lg leading-relaxed">{post.data.description}</p>
       )}
       {post.data.tags.length > 0 && (
-        <div class="flex flex-wrap gap-2 mt-6">
+        <div class="flex flex-wrap gap-1.5 mt-8">
           {post.data.tags.map((tag: string) => (
-            <span class="text-xs px-3 py-1 bg-white/5 border border-white/10 text-gray-400 rounded-full">{tag}</span>
+            <span class="font-mono text-[11px] text-bone-mute border border-bone/10 px-2 py-0.5">{tag}</span>
           ))}
         </div>
       )}
     </header>
 
-    <div class="prose prose-invert prose-lg prose-yellow max-w-none
-      prose-headings:font-bold prose-headings:text-white
-      prose-p:text-gray-400 prose-p:leading-relaxed
-      prose-a:text-yellow-400 prose-a:no-underline hover:prose-a:underline
-      prose-strong:text-white
-      prose-code:text-yellow-300 prose-code:bg-gray-900 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
-      prose-blockquote:border-yellow-400/30 prose-blockquote:text-gray-400
-      prose-li:text-gray-400
+    <div class="prose prose-invert prose-lg max-w-none
+      prose-headings:font-display prose-headings:font-normal prose-headings:text-bone
+      prose-p:text-bone-dim prose-p:leading-relaxed
+      prose-a:text-signal-yellow prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-bone
+      prose-code:text-signal-yellow prose-code:bg-ink-700 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:font-mono
+      prose-blockquote:border-signal-yellow/30 prose-blockquote:text-bone-dim
+      prose-li:text-bone-dim
+      prose-hr:border-bone/10
       " data-pagefind-body>
       <Content />
     </div>
 
-    <footer class="mt-16 pt-8 border-t border-white/[0.07]">
-      <div class="flex items-center justify-between">
-        <a href="/en/learn" class="text-gray-500 hover:text-white text-sm transition-colors">← Back to Learn</a>
-        <p class="text-gray-600 text-xs">Licensed CC BY-SA 4.0</p>
-      </div>
+    <footer class="mt-20 pt-8 border-t border-bone/[0.08] flex items-center justify-between">
+      <a href="/en/learn" class="font-mono text-[11px] text-bone-mute hover:text-signal-yellow uppercase tracking-[0.18em] transition-colors">← Back to Learn</a>
+      <p class="font-mono text-[10px] text-bone-mute">CC BY-SA 4.0</p>
     </footer>
   </article>
 </BaseLayout>

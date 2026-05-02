@@ -1,112 +1,114 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ui } from '../../i18n';
 import { getCollection } from 'astro:content';
+
+const lang = 'zh-hans';
+const t = (k: keyof typeof ui['zh-hans']) => ui['zh-hans'][k];
 
 const posts = (await getCollection('blog', ({ data }) =>
   data.lang === 'zh-hans' && !data.draft
 )).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const standards = [
+  { key: 'formats',  status: 'published' },
+  { key: 'quality',  status: 'published' },
+  { key: 'timing',   status: 'draft' },
+  { key: 'layout',   status: 'planned' },
+] as const;
+
+const statusMap = {
+  published: t('learn.status.published'),
+  draft: t('learn.status.draft'),
+  planned: t('learn.status.planned'),
+};
 ---
 
-<BaseLayout
-  title="学习资源"
-  description="翻译笔记、字幕技术教程、本地化标准文档——蒙太奇字幕社区的学习资源中心。"
-  lang="zh-hans"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<BaseLayout title="学习资源" description="蒙太奇字幕社区的学习资源、博客、教程与技术规范。" lang={lang}>
 
-    <!-- Page Header -->
-    <div class="max-w-3xl mb-16">
-      <p class="text-yellow-400 text-sm font-medium mb-3">学习</p>
-      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">学习资源</h1>
-      <p class="text-gray-400 text-lg">
-        翻译思考、技术研究、字幕标准。我们记录下创作过程中的点滴，希望对你有所启发。
-      </p>
+  <section class="relative pt-24 md:pt-32 pb-16 border-b border-bone/[0.08]">
+    <div class="absolute inset-0 bg-grid opacity-50 pointer-events-none"></div>
+    <div class="relative max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6 reveal">{t('learn.kicker')}</p>
+      <div class="grid lg:grid-cols-12 gap-10">
+        <h1 class="lg:col-span-7 font-display text-display text-bone leading-[0.92] tracking-tightest reveal">
+          学习<span class="font-display-italic text-signal-yellow">资源</span>
+        </h1>
+        <p class="lg:col-span-5 self-end text-bone-dim text-lg leading-relaxed reveal">{t('learn.lead')}</p>
+      </div>
     </div>
+  </section>
 
-    <!-- Section: Blog -->
-    <section class="mb-20">
-      <div class="flex items-center justify-between mb-8">
-        <h2 class="text-2xl font-bold text-white">博客</h2>
-        <a href="/zh-hans/rss.xml" class="flex items-center gap-2 text-gray-500 hover:text-yellow-400 text-sm transition-colors">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M6.18 15.64a2.18 2.18 0 0 1 2.18 2.18C8.36 19.01 7.38 20 6.18 20C4.98 20 4 19.01 4 17.82a2.18 2.18 0 0 1 2.18-2.18M4 4.44A15.56 15.56 0 0 1 19.56 20h-2.83A12.73 12.73 0 0 0 4 7.27V4.44m0 5.66a9.9 9.9 0 0 1 9.9 9.9h-2.83A7.07 7.07 0 0 0 4 12.93V10.1z"/>
-          </svg>
-          RSS 订阅
+  <!-- Blog -->
+  <section id="blog" class="py-24 border-b border-bone/[0.08]">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <div class="flex items-end justify-between mb-12 reveal">
+        <h2 class="font-display text-mega text-bone leading-[0.95]">{t('learn.blog.title')}</h2>
+        <a href={`/${lang}/rss.xml`} class="font-mono text-[12px] text-bone-dim hover:text-signal-yellow transition-colors flex items-center gap-2">
+          ↻ {t('learn.blog.rss')}
         </a>
       </div>
-
       {posts.length === 0 ? (
-        <div class="text-center py-16 border border-white/[0.07] rounded-2xl">
-          <p class="text-gray-500">文章正在撰写中，敬请期待。</p>
+        <div class="p-12 border border-bone/[0.08] text-center reveal">
+          <p class="text-bone-mute">文章正在撰写中，敬请期待。</p>
         </div>
       ) : (
-        <div class="space-y-5">
-          {posts.map((post) => {
+        <ol class="grid gap-px bg-bone/[0.08] border border-bone/[0.08]">
+          {posts.map((post, i) => {
             const slug = post.slug.replace('zh-hans/', '');
-            const dateStr = post.data.date.toLocaleDateString('zh-Hans-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+            const dateStr = post.data.date.toISOString().slice(0, 10);
             return (
-              <article class="group flex flex-col sm:flex-row gap-6 p-6 bg-[#111] border border-white/[0.07] rounded-2xl hover:border-white/20 transition-all duration-300">
-                <div class="flex-1 min-w-0">
-                  <div class="flex flex-wrap items-center gap-3 mb-3">
-                    <time class="text-gray-600 text-xs">{dateStr}</time>
-                    <span class="text-gray-700">·</span>
-                    <span class="text-gray-600 text-xs">{post.data.author}</span>
-                    {post.data.has_translation && (
-                      <span class="text-xs px-2 py-0.5 bg-blue-400/10 text-blue-400 rounded-full">双语</span>
-                    )}
+              <li class="bg-ink hover:bg-ink-800 transition-colors group">
+                <a href={`/${lang}/learn/blog/${slug}/`} class="grid md:grid-cols-12 gap-6 p-6 md:p-8 items-center">
+                  <div class="md:col-span-1 font-mono text-[11px] text-bone-mute">N° {String(i+1).padStart(2,'0')}</div>
+                  <div class="md:col-span-2 font-mono text-[11px] text-bone-dim">{dateStr}</div>
+                  <div class="md:col-span-2 font-mono text-[11px] text-bone-mute">{post.data.author}</div>
+                  <h3 class="md:col-span-5 font-display text-2xl text-bone group-hover:text-signal-yellow transition-colors">{post.data.title}</h3>
+                  <div class="md:col-span-2 md:text-right">
+                    {post.data.tags.map((tag: string) => (
+                      <span class="inline-block font-mono text-[10px] text-bone-mute border border-bone/10 px-2 py-0.5 ml-1">{tag}</span>
+                    ))}
                   </div>
-                  <h3 class="text-white font-semibold text-lg mb-2 group-hover:text-yellow-400 transition-colors line-clamp-2">
-                    <a href={`/zh-hans/learn/blog/${slug}/`}>{post.data.title}</a>
-                  </h3>
-                  {post.data.description && (
-                    <p class="text-gray-500 text-sm leading-relaxed line-clamp-2">{post.data.description}</p>
-                  )}
-                  {post.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1.5 mt-4">
-                      {post.data.tags.map((tag: string) => (
-                        <span class="text-xs px-2 py-0.5 bg-white/5 border border-white/10 text-gray-500 rounded-full">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </article>
+                </a>
+              </li>
             );
           })}
-        </div>
+        </ol>
       )}
-    </section>
+    </div>
+  </section>
 
-    <!-- Section: Tutorials -->
-    <section id="tutorials" class="mb-20 scroll-mt-20">
-      <h2 class="text-2xl font-bold text-white mb-8">教程</h2>
-      <div class="p-8 bg-[#111] border border-white/[0.07] rounded-2xl text-center">
-        <p class="text-gray-500 mb-2">教程正在撰写中</p>
-        <p class="text-gray-600 text-sm">我们正在整理字幕制作全流程教程，涵盖工具使用、翻译技巧、时间轴调整等内容。</p>
+  <!-- Tutorials -->
+  <section id="tutorials" class="py-24 border-b border-bone/[0.08]">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <h2 class="font-display text-mega text-bone leading-[0.95] mb-12 reveal">{t('learn.tutorials.title')}</h2>
+      <div class="p-12 md:p-20 border border-bone/[0.08] text-center reveal">
+        <p class="font-display text-3xl text-bone mb-4">{t('learn.tutorials.empty.title')} <span class="caret"></span></p>
+        <p class="text-bone-dim max-w-xl mx-auto">{t('learn.tutorials.empty.body')}</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Section: Standards -->
-    <section id="standards" class="scroll-mt-20">
-      <h2 class="text-2xl font-bold text-white mb-8">技术规范</h2>
-      <div class="grid sm:grid-cols-2 gap-5">
-        {[
-          { title: '字幕格式规范', desc: 'SRT、ASS、VTT 等格式的使用规范和最佳实践', status: '草案中' },
-          { title: '翻译质量标准', desc: '我们对字幕翻译质量的评估标准和审校流程', status: '草案中' },
-          { title: '时间轴规范', desc: '字幕出入点、行长度、阅读速度等时间轴制作规范', status: '计划中' },
-          { title: '排版规范', desc: '中文字幕的标点使用、分行原则、特殊字符处理', status: '计划中' },
-        ].map(({ title, desc, status }) => (
-          <div class="p-6 bg-[#111] border border-white/[0.07] rounded-xl">
-            <div class="flex items-start justify-between gap-4 mb-3">
-              <h3 class="text-white font-medium">{title}</h3>
-              <span class="text-xs px-2 py-0.5 bg-yellow-400/10 text-yellow-400 rounded-full shrink-0">{status}</span>
+  <!-- Standards -->
+  <section id="standards" class="py-24">
+    <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <h2 class="font-display text-mega text-bone leading-[0.95] mb-12 reveal">{t('learn.standards.title')}</h2>
+      <div class="grid md:grid-cols-2 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
+        {standards.map((s, i) => (
+          <a href={`/${lang}/learn/standards/${s.key}`} class="group bg-ink p-8 hover:bg-ink-800 transition-colors">
+            <div class="flex items-center justify-between mb-6">
+              <span class="font-mono text-[11px] text-bone-mute tracking-[0.2em]">0{i+1} / SPEC</span>
+              <span class={`font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-0.5 border ${s.status==='published'?'text-live border-live/30':s.status==='draft'?'text-signal-yellow border-signal-yellow/30':'text-bone-mute border-bone/15'}`}>
+                {statusMap[s.status]}
+              </span>
             </div>
-            <p class="text-gray-500 text-sm leading-relaxed">{desc}</p>
-          </div>
+            <h3 class="font-display text-3xl text-bone group-hover:text-signal-yellow transition-colors mb-3">
+              {t(`learn.standards.${s.key}.title` as any)}
+            </h3>
+            <p class="text-bone-dim text-sm leading-relaxed">{t(`learn.standards.${s.key}.body` as any)}</p>
+          </a>
         ))}
       </div>
-    </section>
-
-  </div>
+    </div>
+  </section>
 </BaseLayout>
