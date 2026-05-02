@@ -1,6 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { tools } from '../../data/tools';
+
+const filters = [
+  { label: 'All', value: 'all' },
+  { label: 'Online', value: 'type:online' },
+  { label: 'Desktop', value: 'type:installable' },
+  { label: 'In Development', value: 'status:beta' },
+] as const;
 ---
 
 <BaseLayout
@@ -20,18 +27,30 @@ import { tools } from '../../data/tools';
     </div>
 
     <!-- Filter -->
-    <div class="flex flex-wrap gap-2 mb-10">
-      {(['All', 'Online', 'Desktop', 'In Development'] as const).map((label, i) => (
-        <button class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
-          i === 0 ? 'bg-yellow-400 text-black font-medium' : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
-        }`}>{label}</button>
+    <div class="flex flex-wrap gap-2 mb-10" data-tool-filters>
+      {filters.map(({ label, value }, i) => (
+        <button
+          type="button"
+          data-tool-filter={value}
+          data-active={i === 0 ? 'true' : 'false'}
+          class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
+            i === 0 ? 'bg-yellow-400 text-black font-medium' : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
+          }`}
+        >
+          {label}
+        </button>
       ))}
     </div>
 
     <!-- Tools Grid -->
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" data-tool-grid>
       {tools.map((tool) => (
-        <article class="group flex flex-col bg-[#111] border border-white/[0.07] rounded-2xl p-6 hover:border-yellow-400/20 transition-all duration-300">
+        <article
+          data-tool-card
+          data-type={tool.type}
+          data-status={tool.status}
+          class="group flex flex-col bg-[#111] border border-white/[0.07] rounded-2xl p-6 hover:border-yellow-400/20 transition-all duration-300"
+        >
           <div class="flex items-start justify-between mb-4">
             <div class="w-14 h-14 bg-[#0a0a0a] border border-white/10 rounded-2xl flex items-center justify-center shrink-0">
               <span class="text-yellow-400 font-black text-xl">{tool.name.charAt(0)}</span>
@@ -71,6 +90,11 @@ import { tools } from '../../data/tools';
       ))}
     </div>
 
+    <!-- Empty filter state -->
+    <div class="mt-10 text-center py-12 border border-white/[0.07] rounded-2xl hidden" data-empty-state>
+      <p class="text-gray-500">No tools match this filter.</p>
+    </div>
+
     <!-- Submit CTA -->
     <div class="mt-12 p-8 bg-[#111] border border-white/[0.07] rounded-2xl text-center">
       <h3 class="text-white font-semibold mb-2">Want to submit a tool?</h3>
@@ -82,3 +106,35 @@ import { tools } from '../../data/tools';
 
   </div>
 </BaseLayout>
+
+<script>
+  const ACTIVE = 'bg-yellow-400 text-black font-medium';
+  const INACTIVE = 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30';
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-tool-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-tool-card]');
+  const empty = document.querySelector<HTMLElement>('[data-empty-state]');
+
+  function matches(card: HTMLElement, filter: string): boolean {
+    if (filter === 'all') return true;
+    const [key, value] = filter.split(':');
+    return card.dataset[key as 'type' | 'status'] === value;
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.toolFilter ?? 'all';
+      buttons.forEach((b) => {
+        const active = b === btn;
+        b.dataset.active = String(active);
+        b.className = `px-4 py-1.5 rounded-full text-sm transition-colors ${active ? ACTIVE : INACTIVE}`;
+      });
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = matches(card, filter);
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

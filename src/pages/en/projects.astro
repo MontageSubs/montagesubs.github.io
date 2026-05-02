@@ -3,6 +3,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { projects } from '../../data/projects';
 
 const enProjects = projects.filter(p => p.lang.includes('en'));
+
+const filters = [
+  { label: 'All', value: 'all' },
+  { label: 'Ongoing', value: 'ongoing' },
+  { label: 'Completed', value: 'completed' },
+  { label: 'On Hiatus', value: 'hiatus' },
+] as const;
 ---
 
 <BaseLayout
@@ -21,43 +28,64 @@ const enProjects = projects.filter(p => p.lang.includes('en'));
       </p>
     </div>
 
-    <!-- Filter tabs -->
-    <div class="flex gap-2 mb-10">
-      {(['All', 'Ongoing', 'Completed', 'Paused'] as const).map((label, i) => (
-        <button class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
-          i === 0
-            ? 'bg-yellow-400 text-black font-medium'
-            : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
-        }`}>
-          {label}
-        </button>
-      ))}
-    </div>
-
-    <!-- Projects Grid -->
     {enProjects.length === 0 ? (
       <div class="py-20 text-center">
         <p class="text-gray-500 mb-2">Our projects are currently in Chinese.</p>
         <a href="/zh-hans/projects" class="text-yellow-400 hover:underline text-sm">View Chinese projects →</a>
       </div>
     ) : (
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {enProjects.map((project) => (
-          <article class="group bg-[#111] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/20 transition-all">
-            <div class="p-6">
-              <div class="flex items-center justify-between mb-3">
-                <span class={`text-xs px-2.5 py-1 rounded-full font-medium ${
-                  project.status === 'ongoing' ? 'bg-green-400/10 text-green-400' : 'bg-blue-400/10 text-blue-400'
-                }`}>
-                  {project.status === 'ongoing' ? 'Ongoing' : 'Completed'}
-                </span>
+      <>
+        <!-- Filter tabs -->
+        <div class="flex gap-2 mb-10" data-project-filters>
+          {filters.map(({ label, value }, i) => (
+            <button
+              type="button"
+              data-project-filter={value}
+              data-active={i === 0 ? 'true' : 'false'}
+              class={`px-4 py-1.5 rounded-full text-sm transition-colors ${
+                i === 0
+                  ? 'bg-yellow-400 text-black font-medium'
+                  : 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" data-project-grid>
+          {enProjects.map((project) => (
+            <article
+              data-project-card
+              data-status={project.status}
+              class="group bg-[#111] border border-white/[0.07] rounded-2xl overflow-hidden hover:border-white/20 transition-all"
+            >
+              <div class="p-6">
+                <div class="flex items-center justify-between mb-3">
+                  <span class={`text-xs px-2.5 py-1 rounded-full font-medium ${
+                    project.status === 'ongoing'
+                      ? 'bg-green-400/10 text-green-400'
+                      : project.status === 'completed'
+                      ? 'bg-blue-400/10 text-blue-400'
+                      : 'bg-gray-400/10 text-gray-400'
+                  }`}>
+                    {project.status === 'ongoing' ? 'Ongoing' : project.status === 'completed' ? 'Completed' : 'On Hiatus'}
+                  </span>
+                  {project.year && <span class="text-gray-600 text-xs">{project.year}</span>}
+                </div>
+                <h2 class="text-white font-semibold mb-2">{project.title_en ?? project.title_zh}</h2>
+                <p class="text-gray-500 text-sm leading-relaxed">{project.description_en ?? project.description_zh}</p>
               </div>
-              <h2 class="text-white font-semibold mb-2">{project.title_en ?? project.title_zh}</h2>
-              <p class="text-gray-500 text-sm leading-relaxed">{project.description_en ?? project.description_zh}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+            </article>
+          ))}
+        </div>
+
+        <!-- Empty filter state -->
+        <div class="mt-12 text-center py-12 border border-white/[0.07] rounded-2xl hidden" data-empty-state>
+          <p class="text-gray-500 mb-2">No projects match this filter.</p>
+        </div>
+      </>
     )}
 
     <!-- CTA -->
@@ -68,3 +96,29 @@ const enProjects = projects.filter(p => p.lang.includes('en'));
 
   </div>
 </BaseLayout>
+
+<script>
+  const ACTIVE = 'bg-yellow-400 text-black font-medium';
+  const INACTIVE = 'border border-white/10 text-gray-400 hover:text-white hover:border-white/30';
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-project-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-project-card]');
+  const empty = document.querySelector<HTMLElement>('[data-empty-state]');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.projectFilter;
+      buttons.forEach((b) => {
+        const active = b === btn;
+        b.dataset.active = String(active);
+        b.className = `px-4 py-1.5 rounded-full text-sm transition-colors ${active ? ACTIVE : INACTIVE}`;
+      });
+      let visible = 0;
+      cards.forEach((card) => {
+        const show = filter === 'all' || filter === card.dataset.status;
+        card.style.display = show ? '' : 'none';
+        if (show) visible++;
+      });
+      if (empty) empty.classList.toggle('hidden', visible > 0);
+    });
+  });
+</script>

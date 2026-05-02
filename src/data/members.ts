@@ -26,6 +26,6 @@ export const members: Member[] = [
     links: {
       github: 'https://github.com/akibarika',
     },
-    lang: ['zh', 'en'],
+    lang: ['zh-hans', 'en'],
   },
 ];

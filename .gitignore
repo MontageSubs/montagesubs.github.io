@@ -16,3 +16,9 @@ public/pagefind/
 # OS
 .DS_Store
 Thumbs.db
+
+# Local tooling / editor configs
+.claude/
+CLAUDE.md
+.idea/
+.vscode/

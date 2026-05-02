@@ -22,7 +22,7 @@ export const tools: Tool[] = [
     url: 'https://github.com/MontageSubs/subtitle-flow',
     tags: ['timeline', 'browser', 'javascript', 'editor'],
     status: 'active',
-    lang: ['zh', 'en'],
+    lang: ['zh-hans', 'en'],
   },
   {
     id: 'sub-lint',
@@ -34,7 +34,7 @@ export const tools: Tool[] = [
     url: 'https://github.com/MontageSubs/sub-lint',
     tags: ['linting', 'cli', 'quality', 'automation'],
     status: 'beta',
-    lang: ['zh', 'en'],
+    lang: ['zh-hans', 'en'],
   },
   {
     id: 'timing-helper',
