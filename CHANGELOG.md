@@ -4,6 +4,31 @@
 
 ---
 
+## 2026-05-03
+
+视觉简化为主：去装饰、统一节奏；工具页换上真实数据。
+
+### 新增
+
+- **工具页填充真实数据**：[`src/data/tools.ts`](src/data/tools.ts) 的三条占位（SubtitleFlow / SubLint / TimingHelper）替换为实际可用工具——**SVG to ASS Draw**、**ASS Subsetter**、**ASS to SVG**，全部托管在 `subs.js.org` 子域名下。工具页第一次能看到真东西。
+
+### 改进
+
+- **Footer 主体重组**：从五列等宽网格改成两区布局——左 1/3 站点说明 + 右 2/3 四列链接组，移动端折叠更顺。
+- **Header 导航**：去掉桌面 / 移动 nav 项左边的小数字编号（"`01 关于`" → "`关于`"）。
+- **Footer 分栏标题**：去掉左边的 "— " 横杠前缀。
+
+### 删除
+
+- 全站页面顶部的 kicker 小标签（about / projects / tools / learn / community / contribute / search 七个页面、中英两版统一移除），让 hero 区域更聚焦。
+- Header 右上角的实时时钟（同步清理了 [`src/components/MotionScripts.astro`](src/components/MotionScripts.astro) 里对应的 tick 脚本）。
+- 工具卡片右上角的 "N° XX" 编号。
+- Footer "回到顶部 ↑" 提示。
+- Footer 版本号 "v0.1" 标记。
+- Footer 社交平台缩减：移除 Discord / B站 / 微博（保留 Telegram / YouTube / GitHub / X / Bluesky / Mastodon / Instagram）。
+
+---
+
 ## 2026-05-02
 
 整体过了一遍脚手架阶段遗留问题，并完成了一次主要的视觉迭代。
