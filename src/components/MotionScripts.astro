@@ -1,7 +1,7 @@
 ---
 /**
- * Global motion + interaction scripts.
- * Pure DOM/IO/RAF — no dependencies.
+ * 全站动效与交互脚本。
+ * 仅使用 DOM、IntersectionObserver 与 requestAnimationFrame，不引入依赖。
  */
 ---
 
@@ -51,21 +51,6 @@
       hero.style.setProperty('--shift', `${Math.min(y * 0.15, 200)}px`);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
-  })();
-
-  // ───────── Live local time clock ─────────
-  (() => {
-    const el = document.querySelector('[data-clock]');
-    if (!el) return;
-    const tick = () => {
-      const d = new Date();
-      const hh = String(d.getHours()).padStart(2, '0');
-      const mm = String(d.getMinutes()).padStart(2, '0');
-      const ss = String(d.getSeconds()).padStart(2, '0');
-      el.textContent = `${hh}:${mm}:${ss}`;
-    };
-    tick();
-    setInterval(tick, 1000);
   })();
 
   // ───────── Mobile menu ─────────
