@@ -28,6 +28,78 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <script src="/pagefind/pagefind-ui.js" is:inline></script>
+
+<style is:global>
+  /* Pagefind UI — re-skinned to MontageSubs tokens */
+  .pagefind-ui-wrapper {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #f5f1e8;
+    --pagefind-ui-text: #cfc9bb;
+    --pagefind-ui-background: transparent;
+    --pagefind-ui-border: rgba(245, 241, 232, 0.12);
+    --pagefind-ui-tag: #1a1a1a;
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 0;
+    --pagefind-ui-image-border-radius: 0;
+    --pagefind-ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', 'PingFang SC', sans-serif;
+  }
+
+  .pagefind-ui-wrapper .pagefind-ui__search-input {
+    background: rgba(245, 241, 232, 0.03);
+    border: 1px solid rgba(245, 241, 232, 0.12);
+    color: var(--pagefind-ui-primary);
+    border-radius: 0;
+    padding: 1rem 1.25rem;
+    font-size: 1rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .pagefind-ui-wrapper .pagefind-ui__search-input::placeholder {
+    color: rgba(245, 241, 232, 0.35);
+  }
+  .pagefind-ui-wrapper .pagefind-ui__search-input:focus {
+    outline: none;
+    border-color: #FACC15;
+    background: rgba(250, 204, 21, 0.04);
+  }
+  .pagefind-ui-wrapper .pagefind-ui__search-clear {
+    color: var(--pagefind-ui-text);
+  }
+
+  .pagefind-ui-wrapper .pagefind-ui__result {
+    border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+    padding: 1.5rem 0;
+  }
+  .pagefind-ui-wrapper .pagefind-ui__result-link {
+    color: var(--pagefind-ui-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .pagefind-ui-wrapper .pagefind-ui__result-link:hover {
+    color: #FACC15;
+  }
+  .pagefind-ui-wrapper .pagefind-ui__result-excerpt {
+    color: var(--pagefind-ui-text);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .pagefind-ui-wrapper .pagefind-ui__result-excerpt mark {
+    background: rgba(250, 204, 21, 0.18);
+    color: #FACC15;
+    padding: 0 0.15em;
+  }
+
+  .pagefind-ui-wrapper .pagefind-ui__message {
+    color: var(--pagefind-ui-text);
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(245, 241, 232, 0.08);
+  }
+</style>
+
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     if (typeof PagefindUI !== 'undefined') {
