@@ -52,7 +52,7 @@ const statusLabel = {
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
       <ol class="grid gap-px bg-bone/[0.08] border border-bone/[0.08]">
         {projects.map((p, i) => (
-          <li data-project-card data-status={p.status} class="bg-ink hover:bg-ink-800 transition-colors group">
+          <li data-project-card data-status={p.status} class="spotlight-card bg-ink hover:bg-ink-800 transition-colors group">
             <a href={`/${lang}/projects/${p.id}`} class="grid md:grid-cols-12 gap-6 p-6 md:p-10 items-start">
               <div class="md:col-span-1">
                 <span class="font-mono text-[11px] text-bone-mute tracking-[0.18em]">N° {String(i+1).padStart(2,'0')}</span>

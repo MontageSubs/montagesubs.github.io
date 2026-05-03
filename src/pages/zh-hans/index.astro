@@ -22,7 +22,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
   <Hero lang={lang} />
 
   <!-- ── Manifesto / 01 ── -->
-  <section class="relative py-32 md:py-40 border-t border-bone/[0.08]">
+  <section class="relative py-32 md:py-40 divider-scan-top">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10">
         <div class="lg:col-span-3 reveal">
@@ -42,7 +42,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
   </section>
 
   <!-- Marquee strip — language pairs -->
-  <section class="border-t border-b border-bone/[0.08] py-6 overflow-hidden">
+  <section class="border-b border-bone/[0.08] py-6 overflow-hidden divider-scan-top" style="--scan-delay: -4s">
     <div class="marquee-track">
       {[...langPairs, ...langPairs].map((p, i) => (
         <div class="flex items-center gap-8 px-6 whitespace-nowrap">
@@ -84,7 +84,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
   </section>
 
   <!-- ── CTA / 03 ── -->
-  <section class="relative py-32 md:py-40 border-t border-bone/[0.08]">
+  <section class="relative py-32 md:py-40 divider-scan-top" style="--scan-delay: -8s">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
       <div class="grid lg:grid-cols-12 gap-10 items-end">
         <div class="lg:col-span-8 reveal">

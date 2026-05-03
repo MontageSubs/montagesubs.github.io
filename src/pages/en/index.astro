@@ -18,7 +18,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
   <a id="top"></a>
   <Hero lang={lang} />
 
-  <section class="py-32 md:py-40 border-t border-bone/[0.08]">
+  <section class="py-32 md:py-40 divider-scan-top">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10">
       <div class="lg:col-span-3 reveal">
         <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase">{t('home.manifesto.kicker')}</p>
@@ -33,7 +33,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
     </div>
   </section>
 
-  <section class="border-t border-b border-bone/[0.08] py-6 overflow-hidden">
+  <section class="border-b border-bone/[0.08] py-6 overflow-hidden divider-scan-top" style="--scan-delay: -4s">
     <div class="marquee-track">
       {[...langPairs, ...langPairs].map((p) => (
         <div class="flex items-center gap-8 px-6 whitespace-nowrap">
@@ -65,7 +65,7 @@ const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中�
     </div>
   </section>
 
-  <section class="py-32 md:py-40 border-t border-bone/[0.08]">
+  <section class="py-32 md:py-40 divider-scan-top" style="--scan-delay: -8s">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 grid lg:grid-cols-12 gap-10 items-end">
       <div class="lg:col-span-8 reveal">
         <p class="font-mono text-[11px] text-signal-yellow tracking-[0.22em] uppercase mb-6">{t('home.cta.kicker')}</p>

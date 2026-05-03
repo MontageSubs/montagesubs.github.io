@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="No Signal · 404"
+  description="This channel has no content."
+  lang="zh-hans"
+  hasTranslation={false}
+>
+  <section class="relative min-h-[80vh] flex flex-col items-center justify-center px-5 py-20 overflow-hidden">
+
+    <!-- Faint scanline overlay over the whole 404 area -->
+    <div class="absolute inset-0 pointer-events-none opacity-[0.06]" aria-hidden="true"
+      style="background: repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(245,241,232,1) 2px, rgba(245,241,232,1) 3px);">
+    </div>
+
+    <!-- SMPTE-ish color bars, brand-tinted -->
+    <div class="relative grid grid-cols-7 w-full max-w-md h-32 md:h-40 mb-12 border border-bone/15" aria-hidden="true">
+      <div style="background:#f5f1e8"></div>
+      <div style="background:#FACC15"></div>
+      <div style="background:#22c55e"></div>
+      <div style="background:#06b6d4"></div>
+      <div style="background:#a855f7"></div>
+      <div style="background:#ef4444"></div>
+      <div style="background:#0a0a0a"></div>
+    </div>
+
+    <p class="relative font-mono text-[11px] text-signal-yellow uppercase tracking-[0.22em] mb-4 flex items-center gap-2">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-signal-yellow animate-pulse"></span>
+      No Signal · 频道丢失
+    </p>
+
+    <h1 class="relative font-display text-[clamp(5rem,18vw,12rem)] text-bone leading-none tracking-tightest mb-8">
+      4<span class="font-display-italic text-signal-yellow">0</span>4
+    </h1>
+
+    <p class="relative text-bone-dim mb-2">这个频道暂时没有内容。</p>
+    <p class="relative text-bone-mute text-sm mb-10">This channel has no content.</p>
+
+    <div class="relative flex flex-wrap gap-3 justify-center">
+      <span class="magnetic">
+        <a href="/zh-hans/" class="btn-primary">
+          返回首页
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>
+          </svg>
+        </a>
+      </span>
+      <a href="/en/" class="btn-ghost">Back to home</a>
+    </div>
+
+    <p class="relative mt-16 font-mono text-[10px] text-bone-mute/50 tracking-[0.24em] uppercase">
+      Montage-CRT 14" · Channel not found
+    </p>
+  </section>
+</BaseLayout>

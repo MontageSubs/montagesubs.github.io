@@ -105,4 +105,17 @@
       });
     });
   })();
+
+  // ───────── Spotlight cards (cursor-driven glow) ─────────
+  (() => {
+    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const cards = document.querySelectorAll('.spotlight-card');
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (ev) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty('--spot-x', `${ev.clientX - r.left}px`);
+        card.style.setProperty('--spot-y', `${ev.clientY - r.top}px`);
+      });
+    });
+  })();
 </script>

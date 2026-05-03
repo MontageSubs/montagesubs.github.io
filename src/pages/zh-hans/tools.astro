@@ -47,7 +47,7 @@ const filters = [
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-bone/[0.08] border border-bone/[0.08]" data-tool-grid>
         {tools.map((tool, i) => (
           <article data-tool-card data-type={tool.type} data-status={tool.status}
-            class="group bg-ink p-8 hover:bg-ink-800 transition-colors flex flex-col">
+            class="spotlight-card group bg-ink p-8 hover:bg-ink-800 transition-colors flex flex-col">
             <div class="flex items-start justify-between mb-8">
               <div class="w-14 h-14 border border-signal-yellow/40 flex items-center justify-center group-hover:bg-signal-yellow/10 transition-colors">
                 <span class="font-display-italic text-3xl text-signal-yellow leading-none">{tool.name.charAt(0)}</span>

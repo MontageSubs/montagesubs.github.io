@@ -11,6 +11,11 @@
 ### 新增
 
 - **工具页填充真实数据**：[`src/data/tools.ts`](src/data/tools.ts) 的三条占位（SubtitleFlow / SubLint / TimingHelper）替换为实际可用工具——**SVG to ASS Draw**、**ASS Subsetter**、**ASS to SVG**，全部托管在 `subs.js.org` 子域名下。工具页第一次能看到真东西。
+- **CRT 隐喻延伸到全站**：
+  - section divider 加了一条**黄色扫描线**沿分隔线扫过的动画（12s 周期，相邻分隔线错位 4s），把 hero 的 CRT 视觉延伸到下面所有 section
+  - footer 底部加了一行极淡的 "TRANSMITTING ON MONTAGE-CRT 14"  /  SIGNAL: STABLE" 信号条，呼应 hero 那台显示器的型号
+  - 自定义了 [404 页面](src/pages/404.astro)：SMPTE 风格的彩条 + 全屏扫描线纹理 + 巨号 "404"（中间 0 是 italic 黄色）+ "NO SIGNAL · 频道丢失" eyebrow + 双语提示，整页是 CRT 收不到信号的视觉
+- **项目 / 工具卡片 spotlight 光晕**：鼠标 hover 卡片时背后会出现一个 280px 的黄色光晕跟随光标移动（300ms fade 进出）。触屏设备不触发。
 
 ### 改进
 

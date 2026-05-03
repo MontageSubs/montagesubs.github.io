@@ -271,6 +271,60 @@
     font-size: 11px;
     letter-spacing: 0.05em;
   }
+
+  /* ───────── Section divider with CRT scan-line sweep ───────── */
+  .divider-scan-top {
+    position: relative;
+  }
+  .divider-scan-top::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: rgba(245, 241, 232, 0.08);
+    pointer-events: none;
+  }
+  .divider-scan-top::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    height: 1px;
+    width: 24%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(250, 204, 21, 0.6) 50%,
+      transparent 100%);
+    pointer-events: none;
+    animation: divider-scan 12s linear infinite;
+    animation-delay: var(--scan-delay, 0s);
+    will-change: transform, opacity;
+  }
+  @keyframes divider-scan {
+    0%   { transform: translateX(-100%); opacity: 0; }
+    8%   { opacity: 1; }
+    92%  { opacity: 1; }
+    100% { transform: translateX(450%); opacity: 0; }
+  }
+
+  /* ───────── Card spotlight border (cursor-driven glow) ───────── */
+  .spotlight-card {
+    position: relative;
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+      rgba(250, 204, 21, 0.10),
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .spotlight-card:hover::before { opacity: 1; }
+
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -281,4 +335,5 @@
   }
   .marquee-track { animation: none !important; }
   .caret::after { animation: none !important; }
+  .divider-scan-top::after { animation: none !important; opacity: 0 !important; }
 }
