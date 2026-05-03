@@ -24,7 +24,7 @@
 - **Footer 分栏标题**：去掉左边的 "— " 横杠前缀。
 - **Hero 高度改用 `100dvh`**：替代原本的 `100vh`，避免 iOS Safari 地址栏出现/隐藏时首屏跳动。
 - **按钮 tactile 反馈**：`.btn-primary` / `.btn-ghost` 加 `:active` 状态（`translateY(1px) scale(0.98)`），点击有"被按下"的物理感，移动端尤其明显。
-- **磁吸按钮强度**：`STRENGTH` 从 `0.25` 提到 `0.45`，hero CTA 的磁吸效果现在能感觉到了。
+- **磁吸按钮强度**：`STRENGTH` 从 `0.25` 提到 `0.45`，hero CTA 的磁吸效果现在能感觉到了；hero 副 CTA"我们的使命 / Our mission"也补上了 `.magnetic` 包裹，跟主 CTA 一致。
 - **Footer 大字 hover 微动**：footer 的 "MontageSubs." 大字 hover 时，黄色 italic 的 "Subs." 部分会轻微右移并倾斜（700ms ease-out），克制但有存在感。
 - **搜索页 Pagefind UI 重皮肤**：原本 Pagefind 默认蓝白圆角的"插件感"换掉了——输入框直角 / 深底 / focus 时黄边框，结果高亮 mark 用黄色，全站字体栈与全站一致。中英两版都做了。
 
