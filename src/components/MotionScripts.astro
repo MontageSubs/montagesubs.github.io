@@ -29,7 +29,7 @@
     if (window.matchMedia('(pointer: coarse)').matches) return;
     const targets = document.querySelectorAll('.magnetic');
     targets.forEach((el) => {
-      const STRENGTH = 0.25;
+      const STRENGTH = 0.45;
       el.addEventListener('mousemove', (ev) => {
         const r = el.getBoundingClientRect();
         const dx = (ev.clientX - (r.left + r.width / 2)) * STRENGTH;
