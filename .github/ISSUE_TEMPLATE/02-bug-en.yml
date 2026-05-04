@@ -1,0 +1,84 @@
+name: Bug Report
+description: Report issues with the website
+title: "[Bug] "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting this issue! Please provide the information below to help us identify and resolve it quickly.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the issue in one clear sentence so the team can understand it at a glance
+      placeholder: "Example: 404 error appears after clicking the features button"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Explain what you expected to happen versus what actually happened. Include screenshots or screen recordings if applicable.
+      placeholder: |
+        **Expected behavior:** Clicking the button should load the page normally and display the feature list.
+
+        **Actual behavior:** Page shows 404 error and nothing loads.
+
+        **Screenshots/Video:** [paste or attach]
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction Steps
+      description: What specific actions trigger this issue? Please list each step clearly.
+      placeholder: |
+        1. Open the homepage
+        2. Click the "Features" button
+        3. 404 error appears
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide your system, browser, and any other relevant context.
+      placeholder: |
+        - Browser: Chrome 120.0
+        - Operating System: Windows 11
+        - Screen Resolution: 1920x1080
+        - Other Details: VPN use, special network setup, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context (Optional)
+      description: Anything else to share? Feel free to add observations, potential causes, or suggested fixes.
+      placeholder: "Example: ideas, possible solutions, related findings, etc."
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: How much does this issue impact the site?
+      options:
+        - Critical (feature is completely broken)
+        - High (major functionality affected)
+        - Medium (some functionality affected)
+        - Low (minor impact or cosmetic issue)
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before Submitting
+      options:
+        - label: I've confirmed the report is clear and complete, with reproduction steps, environment details, and a comparison of expected vs actual behavior. I've checked for duplicate reports.
+          required: true
