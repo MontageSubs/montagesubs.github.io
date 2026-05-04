@@ -76,5 +76,5 @@ body:
     attributes:
       label: Before Submitting
       options:
-        - label: I have searched for similar enhancements and confirmed this is not a duplicate; my description is clear, complete, and easy to understand
+        - label: I have searched for similar enhancements and confirmed this is not a duplicate; my description is clear, complete, and easy to understand.
           required: true
