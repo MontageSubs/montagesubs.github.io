@@ -76,5 +76,5 @@ body:
     attributes:
       label: 提交前检查
       options:
-        - label: 我已搜索相似功能，确认不存在重复；描述清晰、完整、易于理解
+        - label: 我已搜索相似功能，确认不存在重复；描述清晰、完整、易于理解。
           required: true
