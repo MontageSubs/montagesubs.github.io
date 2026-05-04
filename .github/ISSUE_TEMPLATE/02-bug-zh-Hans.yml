@@ -48,7 +48,7 @@ body:
     id: environment
     attributes:
       label: 环境信息
-      description: 提供你的系统和浏览器信息，以及任何其他相关的上下文
+      description: 提供你的系统和浏览器信息，以及任何其他相关的上下文。
       placeholder: |
         - 浏览器：Chrome 120.0
         - 操作系统：Windows 11
@@ -61,8 +61,8 @@ body:
     id: additional
     attributes:
       label: 补充说明（可选）
-      description: 有其他信息想补充吗？例如错误日志、临时解决方案、相关讨论等
-      placeholder: "例如：在控制台看到的错误信息、临时规避方案等"
+      description: 还有什么想分享吗？欢迎补充你的想法、发现的规律、可能的原因或任何相关信息。
+      placeholder: "例如：你的想法、想到的解决方案、相关的发现等"
 
   - type: dropdown
     id: severity
