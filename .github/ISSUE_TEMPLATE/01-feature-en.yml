@@ -1,0 +1,83 @@
+name: Feature Request
+description: Suggest a new feature or improvement
+title: "[Feature] "
+labels: ["feature"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your feature suggestion. Please provide a clear description to help us understand and prioritize your request.
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Background and Use Case
+      description: Why is this feature needed? What scenarios or user needs does it address?
+      placeholder: "Example: Currently, when working with...scenario...it becomes difficult. If we could support..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: What exactly should be implemented? List specific points and mention affected modules.
+      placeholder: |
+        - Feature point 1
+        - Feature point 2
+        - Feature point 3 (module: X)
+    validations:
+      required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Implementation Constraints (Optional)
+      description: Are there any limitations to consider? For example, timeline, performance, or compatibility requirements.
+      placeholder: |
+        Examples:
+        - Timeline: Must be completed by [date]
+        - Performance: Cannot degrade existing response times
+        - Compatibility: Must support Chrome, Firefox, Safari
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: How will we verify this feature is complete? List measurable success criteria.
+      placeholder: |
+        - Feature works correctly in all intended scenarios
+        - Tested on Chrome, Firefox, Safari
+        - Performance meets target threshold
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: References (Optional)
+      description: Screenshots, design mockups, links, or other supporting information.
+      placeholder: "Include screenshots, links, or relevant context"
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this feature?
+      options:
+        - High
+        - Medium
+        - Low
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Before Submitting
+      options:
+        - label: I have searched for similar requests and confirmed this is not a duplicate
+          required: true
+        - label: My description is clear, complete, and easy to understand
+          required: true
