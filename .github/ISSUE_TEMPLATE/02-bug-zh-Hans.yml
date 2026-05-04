@@ -1,0 +1,70 @@
+name: 缺陷报告
+description: 报告网站中的问题
+title: "[Bug] "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你报告这个问题！清晰的问题描述将帮助我们更快地定位和修复。请填写以下信息。
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述（含截图/视频）
+      description: 发生了什么问题？请说明预期行为与实际行为的对比，如有必要请附上截图或录屏。
+      placeholder: |
+        **预期行为：** 点击按钮后，页面应该正常加载
+
+        **实际行为：** 页面显示404错误
+
+        **截图/视频：** [粘贴或上传]
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 重现步骤
+      description: 如何才能看到这个问题？请列举具体操作步骤。
+      placeholder: |
+        1. 打开首页
+        2. 点击"功能"按钮
+        3. 看到404错误
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境信息
+      description: 提供你的系统和浏览器信息，以及任何其他相关的上下文
+      placeholder: |
+        - 浏览器：Chrome 120.0
+        - 操作系统：Windows 11
+        - 屏幕尺寸：1920x1080
+        - 其他信息：使用代理、特殊网络环境等
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: 严重程度
+      description: 这个问题的影响程度如何？
+      options:
+        - Critical（严重 - 功能完全不可用）
+        - High（高 - 主要功能受影响）
+        - Medium（中 - 部分功能受影响）
+        - Low（低 - 轻微影响或视觉问题）
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已确认问题报告清晰完整，包含重现步骤、环境信息和预期vs实际行为的对比；我已搜索确认不存在重复报告。
+          required: true
