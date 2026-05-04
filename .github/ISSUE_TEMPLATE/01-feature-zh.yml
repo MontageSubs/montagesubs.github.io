@@ -60,12 +60,21 @@ body:
       description: 截图、设计稿、相关链接或其他参考信息
       placeholder: "粘贴截图、链接或其他有用的上下文"
 
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 优先级
+      description: 这个功能的紧急程度是多少？
+      options:
+        - High（高）
+        - Medium（中）
+        - Low（低）
+    validations:
+
   - type: checkboxes
     id: checklist
     attributes:
       label: 提交前检查
       options:
-        - label: 我已搜索相似功能，确认不存在重复
-          required: true
-        - label: 我的描述清晰、完整、易于理解
+        - label: 我已搜索相似功能，确认不存在重复；描述清晰、完整、易于理解
           required: true
