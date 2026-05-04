@@ -10,6 +10,8 @@
 
 ### 改进
 
+- **Hero CRT 外壳换材质**：从米黄塑料（Apple II / VT100 那种 beige）换成品牌 amber 棕调电木——`#A85B00 → #7A3D00 → #3D1800` 三档渐变（顶部亮、中部、底部深），顶边一条 `#FCAB02` 高光模拟塑料反光。屏幕周围 bezel 同步加深到 `#1F0A00 / #0a0500`，保留「凹进去」的层次感。铭牌文字从黑字改成 amber 暗色才读得出来。整体观感从「老 Apple」变成「老电视/老示波器」，跟我们的暖黄磷光更搭。
+- **磷光光晕加厚**：corecast halo 从 4 档加到 5 档，新增 `glow-high #FFE872` 这一过渡，光晕更厚更暖；`text-shadow` 内核改用品牌 `core-white #FFFCE0`，外圈改用 `amber-deep #A85B00`；uplight / floorpool / scanbeam 一并改用 `yellow-lit / amber / amber-deep` 精确品牌色。
 - **主黄对齐品牌定锚**：`#FACC15`（柠檬黄）→ `#FBC100`（金黄）。CSS 变量、Tailwind token、所有 `rgba(250, 204, 21, ...)` 形态、Hero CRT 磷光屏、404 彩条、Pagefind 搜索 UI 全部一次性换齐。视觉上从冷黄变暖黄，跟 CRT 隐喻更搭。
 - **背景暖化**：`--ink` 从纯黑 `#0a0a0a` 换成带极轻微红黄底的 `#0E0B07`（品牌 `ink-deep`），跟黄色叠加时不再有"塑料黑+霓虹黄"的廉价感。
 - **卡片 hover 暖化**：`--ink-2`（用于 `bg-ink-800` 卡片 hover 底）从冷灰 `#111111` 换成暖灰 `#1A1410`（品牌 `ink-soft`），首页 focus 卡片、projects/tools 列表 hover 时整体氛围更一致。

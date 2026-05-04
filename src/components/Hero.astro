@@ -153,11 +153,12 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     width: 720px; height: 520px;
     transform: translate(-50%, -50%) scale(var(--glow-scale, 0));
     background: radial-gradient(ellipse 60% 55% at 50% 50%,
-      rgba(254, 243, 199, 0.55) 0%,
-      rgba(251, 193, 0, 0.32) 18%,
-      rgba(180, 83, 9, 0.14) 40%,
-      rgba(120, 53, 15, 0.05) 65%,
-      transparent 82%);
+      rgba(255, 252, 224, 0.55) 0%,    /* core-white */
+      rgba(255, 232, 114, 0.42) 14%,   /* glow-high */
+      rgba(251, 193, 0, 0.28) 28%,     /* yellow */
+      rgba(168, 91, 0, 0.13) 50%,      /* amber-deep */
+      rgba(61, 24, 0, 0.05) 70%,       /* amber-bk */
+      transparent 85%);
     mix-blend-mode: screen;
     filter: blur(2px);
     transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
@@ -176,9 +177,9 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     transform: translate(-50%, -50%) scale(var(--glow-scale, 0));
     background:
       radial-gradient(ellipse 50% 50% at 50% 50%,
-        rgba(253, 224, 71, 0.22) 0%,
-        rgba(245, 158, 11, 0.12) 20%,
-        rgba(180, 83, 9, 0.05) 45%,
+        rgba(253, 211, 56, 0.22) 0%,    /* yellow-lit */
+        rgba(252, 171, 2, 0.12) 20%,    /* amber */
+        rgba(168, 91, 0, 0.05) 45%,     /* amber-deep */
         transparent 70%);
     mix-blend-mode: screen;
     pointer-events: none;
@@ -198,43 +199,46 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     width: 600px; height: 110px;
     transform: translateX(-50%) scale(var(--glow-scale, 0));
     background: radial-gradient(ellipse 50% 50% at 50% 50%,
-      rgba(253, 224, 71, 0.32) 0%,
-      rgba(245, 158, 11, 0.14) 35%,
-      rgba(180, 83, 9, 0.05) 65%,
+      rgba(253, 211, 56, 0.32) 0%,    /* yellow-lit */
+      rgba(252, 171, 2, 0.14) 35%,    /* amber */
+      rgba(168, 91, 0, 0.05) 65%,     /* amber-deep */
       transparent 82%);
     mix-blend-mode: screen;
     filter: blur(12px);
     transition: transform 1.4s cubic-bezier(.2,.7,.2,1);
   }
 
-  /* CRT body — beige plastic */
+  /* CRT body — amber bakelite, 4-stop case modeling */
   .crt-body {
     position: absolute;
     left: 50%; bottom: 0;
     transform: translateX(-50%);
     width: 320px; height: 250px;
-    background: linear-gradient(180deg, #c4baa6 0%, #a99e88 60%, #847a66 100%);
+    background: linear-gradient(180deg,
+      #A85B00 0%,    /* amber-deep — lit edge */
+      #7A3D00 50%,   /* amber-dk — case mid */
+      #3D1800 100%); /* amber-bk — case shadow */
     border-radius: 18px 18px 14px 14px;
     box-shadow:
-      inset 0 2px 0 rgba(255,250,235,.18),
-      inset 0 -3px 8px rgba(0,0,0,.45),
-      inset 3px 0 6px rgba(0,0,0,.25),
-      inset -3px 0 6px rgba(0,0,0,.25),
-      0 8px 24px rgba(0,0,0,.6),
-      0 0 0 1px rgba(0,0,0,.4);
+      inset 0 2px 0 rgba(252, 171, 2, 0.45),  /* amber sheen on top edge */
+      inset 0 -3px 10px rgba(0,0,0,.65),
+      inset 3px 0 8px rgba(0,0,0,.4),
+      inset -3px 0 8px rgba(0,0,0,.4),
+      0 10px 26px rgba(0,0,0,.7),
+      0 0 0 1px rgba(0,0,0,.55);
   }
   .crt-vents {
     position: absolute;
     right: 14px; top: 22px;
     width: 26px; height: 90px;
     background: repeating-linear-gradient(180deg,
-      rgba(0,0,0,.4) 0px, rgba(0,0,0,.4) 2px,
+      rgba(0,0,0,.65) 0px, rgba(0,0,0,.65) 2px,
       transparent 2px, transparent 6px);
     border-radius: 2px;
-    opacity: .7;
+    opacity: .85;
   }
 
-  /* Screen recess — dark CRT glass */
+  /* Screen recess — dark CRT glass; bezel deeper than amber-bk to preserve recess */
   .crt-screen-recess {
     position: absolute;
     left: 50%; top: 18px;
@@ -243,10 +247,10 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     border-radius: 22px / 28px;
     background: #060503;
     box-shadow:
-      inset 0 0 0 6px #2a2418,
-      inset 0 0 0 8px #14110a,
+      inset 0 0 0 6px #1F0A00,
+      inset 0 0 0 8px #0a0500,
       inset 0 4px 20px rgba(0,0,0,.9),
-      inset 0 -3px 12px rgba(254, 249, 195, 0.06);
+      inset 0 -3px 12px rgba(255, 252, 224, 0.07);
     overflow: hidden;
   }
 
@@ -289,9 +293,9 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     height: 16px;
     background: linear-gradient(180deg,
       transparent 0%,
-      rgba(253, 224, 71, 0.10) 40%,
-      rgba(254, 243, 199, 0.18) 50%,
-      rgba(253, 224, 71, 0.10) 60%,
+      rgba(253, 211, 56, 0.10) 40%,    /* yellow-lit */
+      rgba(255, 252, 224, 0.18) 50%,   /* core-white */
+      rgba(253, 211, 56, 0.10) 60%,    /* yellow-lit */
       transparent 100%);
     mix-blend-mode: screen;
     animation: crt-scanbeam 6s linear infinite;
@@ -323,17 +327,17 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     line-height: 1.55;
     color: var(--crt-phosphor);
     text-shadow:
-      0 0 1px rgba(254, 249, 195, 1),
-      0 0 4px rgba(251, 193, 0, 0.85),
-      0 0 12px rgba(180, 83, 9, 0.7),
-      0 0 22px rgba(180, 83, 9, 0.4);
+      0 0 1px rgba(255, 252, 224, 1),     /* core-white */
+      0 0 4px rgba(251, 193, 0, 0.85),    /* yellow */
+      0 0 12px rgba(168, 91, 0, 0.7),     /* amber-deep */
+      0 0 22px rgba(168, 91, 0, 0.4);     /* amber-deep */
     letter-spacing: 0.04em;
     pointer-events: none;
     z-index: 2;
     overflow: hidden;
   }
   .crt-text .ts {
-    color: rgba(254, 243, 199, 0.55);
+    color: rgba(255, 252, 224, 0.55);  /* core-white */
     font-size: 11px;
     letter-spacing: 0.08em;
     margin-bottom: 6px;
@@ -382,7 +386,7 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
     letter-spacing: 0.24em;
-    color: rgba(0,0,0,0.55);
+    color: rgba(252, 171, 2, 0.55);  /* amber, faded */
     text-transform: uppercase;
   }
 
