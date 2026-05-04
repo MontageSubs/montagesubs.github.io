@@ -1,0 +1,53 @@
+name: Design Improvement
+description: UI/UX design improvements or new features
+title: "[design] "
+labels:
+  - design
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the design suggestion! Please clearly describe the issue and your improvement idea. Design mockups or screenshots really help.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page or Component
+      description: Full page URL or component name.
+      placeholder: "https://example.com or 'Navigation Bar'"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issue
+    attributes:
+      label: Design Issue
+      description: What's wrong with the current design? Is it a usability problem, visual inconsistency, accessibility issue, or something else?
+      placeholder: |
+        Examples:
+        - Button is too small on mobile, hard to tap
+        - Color contrast is poor, text is hard to read
+        - Layout breaks on certain screen sizes
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: Suggested Improvement
+      description: How should it be improved? Explain your design thinking and why.
+      placeholder: |
+        Examples:
+        - Increase button height from 32px to 44px for better mobile usability
+        - Adjust background or text color to improve contrast and readability
+        - Use responsive grid system to handle small screens properly
+    validations:
+      required: true
+
+  - type: textarea
+    id: design-reference
+    attributes:
+      label: Design Mockups or Reference (Optional)
+      description: Figma link, screenshots, wireframes, or other reference material.
+      placeholder: "Paste Figma link or screenshot"
