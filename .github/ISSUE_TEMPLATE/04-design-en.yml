@@ -1,8 +1,7 @@
 name: Design Improvement
 description: UI/UX design improvements or new features
-title: "[design] "
-labels:
-  - design
+title: "[Design] "
+labels: ["design"]
 
 body:
   - type: markdown
