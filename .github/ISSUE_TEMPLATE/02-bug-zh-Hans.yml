@@ -13,7 +13,8 @@ body:
     id: summary
     attributes:
       label: 问题概述
-      placeholder: "例如：点击功能按钮后页面显示404错误，无法访问功能列表"
+      description: 用一句话简洁描述问题，便于其他成员快速理解
+      placeholder: "例如：点击功能按钮后页面显示404错误"
     validations:
       required: true
 
