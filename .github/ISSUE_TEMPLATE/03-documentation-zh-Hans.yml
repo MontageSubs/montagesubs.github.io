@@ -1,0 +1,64 @@
+name: 文档改进
+description: 改进或补充网站文档内容
+title: "[文档] "
+labels: ["documentation"]
+assignees: ''
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的建议！这将帮助我们改进文档质量。
+        
+        注意：
+        - Wiki 和 Docs 部分的改进，请到 MontageSubs/wiki 或 MontageSubs/docs 仓库提交
+        - Blog 内容改进，请到 MontageSubs/blog 仓库提交
+
+  - type: dropdown
+    id: doc-section
+    attributes:
+      label: 文档所属区域
+      description: 请选择这是关于哪个部分的改进。
+      options:
+        - 网站首页/概览
+        - 使用指南
+        - API 参考
+        - FAQ/常见问题
+        - 安装/配置
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: 具体位置
+      description: 提供文档的准确位置（页面 URL、章节名称等）。
+      placeholder: "例如：https://xxx.com/docs/installation 的『环境要求』章节"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 现存问题
+      description: 文档哪里不清楚、不完整或有误？具体描述问题。
+      placeholder: "例如：缺少示例代码、步骤不够详细、表述容易误解等"
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 改进建议
+      description: 应该如何改进？提供具体的改进方案或示例。
+      placeholder: "例如：添加代码示例、补充配置参数说明、修正错误信息等"
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: 参考资料（可选）
+      description: 相关的链接、截图或其他参考信息。
+      placeholder: "粘贴链接、截图或其他有用的上下文"
