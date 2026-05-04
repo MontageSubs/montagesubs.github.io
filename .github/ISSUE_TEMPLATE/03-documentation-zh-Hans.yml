@@ -11,8 +11,9 @@ body:
         感谢你的建议！这将帮助提高文档质量。
         
         注意：
-        - Wiki 和 Docs 部分的改进，请到 MontageSubs/wiki 或 MontageSubs/docs 仓库提交
-        - Blog 内容改进，请到 MontageSubs/blog 仓库提交
+        - Wiki 和 Docs 部分的改进，请到 [MontageSubs/wiki](https://github.com/MontageSubs/wiki) 或 [MontageSubs/docs](https://github.com/MontageSubs/docs) 仓库提交
+        - Blog 内容改进，请到 [MontageSubs/blog](https://github.com/MontageSubs/blog) 仓库提交
+        - 社区工具的反馈请优先使用工具作者留下的渠道；无官方渠道时，请在此提供工具名称和具体意见
 
   - type: dropdown
     id: doc-section
