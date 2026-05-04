@@ -1,19 +1,19 @@
-name: Feature Request
+name: Enhancement Request
 description: Suggest a new feature or improvement
-title: "[Feature] "
-labels: ["feature"]
+title: "[Enhancement] "
+labels: ["enhancement"]
 
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for your feature suggestion! Please describe your request clearly to help us understand and implement it faster.
+        Thank you for your enhancement suggestion! Please describe your request clearly to help us understand and implement it faster.
 
   - type: textarea
     id: background
     attributes:
       label: Background and Use Case
-      description: Why is this feature needed? What scenarios or user needs does it address?
+      description: Why is this enhancement needed? What scenarios or user needs does it address?
       placeholder: "For example: Currently in...scenario...it becomes difficult, if we could..."
     validations:
       required: true
@@ -21,12 +21,12 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Feature Description
+      label: Enhancement Description
       description: What specifically should be implemented? List key points and mention the modules involved.
       placeholder: |
-        - Feature point 1
-        - Feature point 2
-        - Feature point 3 (module involved)
+        - Enhancement point 1
+        - Enhancement point 2
+        - Enhancement point 3 (module involved)
     validations:
       required: true
 
@@ -45,9 +45,9 @@ body:
     id: acceptance
     attributes:
       label: Acceptance Criteria
-      description: How will we verify this feature is complete? List verifiable standards.
+      description: How will we verify this enhancement is complete? List verifiable standards.
       placeholder: |
-        - [ ] Feature works correctly
+        - [ ] Enhancement works correctly
         - [ ] Tested on browsers X, Y, Z
         - [ ] Performance metrics meet target X
     validations:
@@ -64,7 +64,7 @@ body:
     id: priority
     attributes:
       label: Priority
-      description: How urgent is this feature?
+      description: How urgent is this enhancement?
       options:
         - High
         - Medium
@@ -76,5 +76,5 @@ body:
     attributes:
       label: Before Submitting
       options:
-        - label: I have searched for similar features and confirmed this is not a duplicate; my description is clear, complete, and easy to understand
+        - label: I have searched for similar enhancements and confirmed this is not a duplicate; my description is clear, complete, and easy to understand
           required: true
