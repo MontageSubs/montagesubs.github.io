@@ -35,7 +35,7 @@ body:
   - type: input
     id: url
     attributes:
-      label: 文档 URL
+      label: 页面 URL
       description: 完整的页面地址。
       placeholder: "https://example.com/about"
     validations:
