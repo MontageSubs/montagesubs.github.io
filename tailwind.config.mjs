@@ -6,9 +6,9 @@ export default {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#0a0a0a',
-          900: '#0a0a0a',
-          800: '#111111',
+          DEFAULT: '#0E0B07',
+          900: '#0E0B07',
+          800: '#1A1410',
           700: '#1a1a1a',
           600: '#222222',
           500: '#2a2a2a',
@@ -19,7 +19,8 @@ export default {
           mute: '#8a857a',
         },
         signal: {
-          yellow: '#FACC15',
+          yellow: '#FBC100',
+          'yellow-lit': '#FDD338',
           'yellow-soft': '#fbe27a',
         },
         live: '#22c55e',

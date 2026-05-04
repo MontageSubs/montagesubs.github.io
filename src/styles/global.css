@@ -9,13 +9,14 @@
 
 @layer base {
   :root {
-    --ink: #0a0a0a;
-    --ink-2: #111111;
+    --ink: #0E0B07;
+    --ink-2: #1A1410;
     --ink-3: #1a1a1a;
     --bone: #f5f1e8;
     --bone-dim: #cfc9bb;
     --bone-mute: #8a857a;
-    --signal: #FACC15;
+    --signal: #FBC100;
+    --signal-lit: #FDD338;
     --grid-line: rgba(245, 241, 232, 0.06);
   }
 
@@ -86,7 +87,7 @@
   }
 
   .vignette-top {
-    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(250, 204, 21, 0.04), transparent 60%);
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(251, 193, 0, 0.04), transparent 60%);
   }
 
   /* ───────── Buttons ───────── */
@@ -105,7 +106,7 @@
     transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2), background 0.2s;
     will-change: transform;
   }
-  .btn-primary:hover { background: #fde047; }
+  .btn-primary:hover { background: var(--signal-lit); }
   .btn-primary:active {
     transform: translateY(1px) scale(0.98);
     transition-duration: 0.08s;
@@ -214,7 +215,7 @@
     transition: border-color 0.3s, transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
   }
   .card:hover {
-    border-color: rgba(250, 204, 21, 0.35);
+    border-color: rgba(251, 193, 0, 0.35);
   }
   .card-num {
     font-family: 'JetBrains Mono', monospace;
@@ -292,7 +293,7 @@
     width: 24%;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(250, 204, 21, 0.6) 50%,
+      rgba(251, 193, 0, 0.6) 50%,
       transparent 100%);
     pointer-events: none;
     animation: divider-scan 12s linear infinite;
@@ -317,7 +318,7 @@
     pointer-events: none;
     background: radial-gradient(
       280px circle at var(--spot-x, 50%) var(--spot-y, 50%),
-      rgba(250, 204, 21, 0.10),
+      rgba(251, 193, 0, 0.10),
       transparent 60%
     );
     opacity: 0;
