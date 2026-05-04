@@ -1,6 +1,6 @@
 name: 文档改进
 description: 改进或补充网站文档内容
-title: "[文档] "
+title: "[documentation] "
 labels:
   - documentation
 
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        感谢你的建议！这将帮助我们改进文档质量。
+        感谢你的建议！这将帮助提高文档质量。
         
         注意：
         - Wiki 和 Docs 部分的改进，请到 MontageSubs/wiki 或 MontageSubs/docs 仓库提交
@@ -21,10 +21,12 @@ body:
       description: 请选择这是关于哪个部分的改进。
       options:
         - 网站首页/概览
-        - 使用指南
-        - API 参考
-        - FAQ/常见问题
-        - 安装/配置
+        - 关于我们
+        - 项目页面
+        - 工具页面
+        - 学习页面
+        - 社区页面
+        - 贡献页面
         - 其他
     validations:
       required: true
