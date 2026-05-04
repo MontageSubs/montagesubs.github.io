@@ -1,0 +1,62 @@
+name: Documentation Improvement
+description: Improve or add to the website documentation
+title: "[documentation] "
+labels:
+  - documentation
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve our docs!
+        
+        Please note:
+        - For Wiki and Docs updates, please submit to [MontageSubs/wiki](https://github.com/MontageSubs/wiki) or [MontageSubs/docs](https://github.com/MontageSubs/docs) repositories
+        - For Blog content improvements, please submit to [MontageSubs/blog](https://github.com/MontageSubs/blog) repository
+        - For community tool feedback, use the tool author's designated channel if available; otherwise, provide the tool name and specific feedback here
+
+  - type: input
+    id: url
+    attributes:
+      label: Page URL
+      description: Full URL of the page.
+      placeholder: "https://example.com/about"
+    validations:
+      required: true
+
+  - type: textarea
+    id: location
+    attributes:
+      label: Specific Section
+      description: Which part of the page?
+      placeholder: "Example: 'Community Members' section"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Current Issue
+      description: What's unclear, incomplete, or incorrect in the documentation? Be specific.
+      placeholder: |
+        Examples: missing code examples, unclear steps, confusing wording, etc.
+        
+        Include screenshots if relevant (especially for UI interactions)
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Improvement
+      description: How should it be improved? Provide specific changes or examples.
+      placeholder: "Example: add clarification, correct information, provide example code, etc."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Additional Information (Optional)
+      description: Related links or other reference material.
+      placeholder: "Paste links or other useful context"
