@@ -13,7 +13,7 @@ body:
     id: summary
     attributes:
       label: Summary
-      description: Describe the issue in one clear sentence so the team can understand it at a glance
+      description: Describe the issue in one clear sentence so the team can understand it at a glance.
       placeholder: "Example: 404 error appears after clicking the features button"
     validations:
       required: true
