@@ -74,7 +74,7 @@ body:
         - Critical（严重 - 功能完全不可用）
         - High（高 - 主要功能受影响）
         - Medium（中 - 部分功能受影响）
-        - Low（低 - 轻微影响或视觉问题
+        - Low（低 - 轻微影响或视觉问题）
 
   - type: checkboxes
     id: checklist
