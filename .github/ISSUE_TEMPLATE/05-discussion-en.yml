@@ -1,0 +1,45 @@
+name: Discussion and Ideas
+description: Open discussion, feedback, and collaborative improvement
+title: "[discussion] "
+labels:
+  - discussion
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for bringing this up! This is our space for open discussion where we can find common ground and share different perspectives.
+        
+        Tips:
+        - Feel free to share any ideas, feedback, or suggestions
+        - If you have different views about changes we've already made, let's discuss
+        - After thorough discussion, if we can't reach consensus, start a voting thread in the comments using 👍 for agreement and 👎 for disagreement
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Context and Thoughts
+      description: Why are you bringing this up? What's your idea or suggestion?
+      placeholder: |
+        Examples:
+        - I noticed... and think we could...
+        - I'd like to discuss whether we should adopt a certain approach
+        - I think the current approach could be improved. I suggest...
+    validations:
+      required: true
+
+  - type: textarea
+    id: thoughts
+    attributes:
+      label: Your Perspective
+      description: Explain your views and reasoning clearly.
+      placeholder: "Share your thoughts clearly so we can discuss and understand your thinking"
+    validations:
+      required: true
+
+  - type: textarea
+    id: related
+    attributes:
+      label: Related Links (Optional)
+      description: Related issues, PRs, commits, or discussions.
+      placeholder: "Example: #123, PR #456, commit abc1234"
