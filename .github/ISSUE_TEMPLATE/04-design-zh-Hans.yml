@@ -1,0 +1,53 @@
+name: 设计改进
+description: UI/UX 设计相关的改进或新功能
+title: "[design] "
+labels:
+  - design
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的设计建议！请清晰地描述问题和改进方向，附带设计稿或截图会更有帮助。
+
+  - type: input
+    id: page-url
+    attributes:
+      label: 相关页面/组件
+      description: 完整的页面地址或组件名称。
+      placeholder: "https://example.com 或 『导航栏组件』"
+    validations:
+      required: true
+
+  - type: textarea
+    id: current-issue
+    attributes:
+      label: 设计问题
+      description: 当前的设计存在什么问题？涉及可用性、美观性、一致性或其他方面？
+      placeholder: |
+        例如：
+        - 按钮尺寸在移动端过小，难以点击
+        - 色彩对比度不足，文字可读性差
+        - 布局在某些屏幕宽度下混乱
+    validations:
+      required: true
+
+  - type: textarea
+    id: improvement
+    attributes:
+      label: 改进建议
+      description: 建议如何改进？说明设计思路和原因。
+      placeholder: |
+        例如：
+        - 将按钮高度从 32px 增加到 44px，提升移动端可点击性
+        - 调整背景色或文字色以改善对比度和易读性
+        - 使用响应式栅格确保小屏幕显示正常
+    validations:
+      required: true
+
+  - type: textarea
+    id: design-reference
+    attributes:
+      label: 设计稿/参考资料（可选）
+      description: Figma 链接、截图、原型图或其他参考信息。
+      placeholder: "粘贴 Figma 链接或截图"
