@@ -4,11 +4,10 @@ title: "[documentation] "
 labels:
   - documentation
 
-body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve our docs!
+        Thanks for the feedback!
         
         Please note:
         - For Wiki and Docs updates, please submit to [MontageSubs/wiki](https://github.com/MontageSubs/wiki) or [MontageSubs/docs](https://github.com/MontageSubs/docs) repositories
