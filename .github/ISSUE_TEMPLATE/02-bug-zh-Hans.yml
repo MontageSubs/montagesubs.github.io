@@ -70,7 +70,6 @@ body:
       label: 严重程度
       description: 这个问题的影响程度如何？
       options:
-        - None（待分配）
         - Critical（严重 - 功能完全不可用）
         - High（高 - 主要功能受影响）
         - Medium（中 - 部分功能受影响）
