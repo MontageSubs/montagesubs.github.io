@@ -1,0 +1,42 @@
+name: "[中文] 功能需求"
+about: 提出新功能或功能改进
+title: "[功能] "
+labels: ["feature"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你提出功能建议！请尽可能详细地描述，这将帮助我们更好地理解和实施。
+
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      description: 为什么需要这个功能？涉及哪些用户或使用场景？
+      placeholder: "例如：当前在...场景下...会很困难，如果能..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 需求描述
+      description: 具体要实现什么？请分点列举
+      placeholder: |
+        - 功能点 1
+        - 功能点 2
+        - 功能点 3
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收标准
+      description: 如何判断这个功能完成？
+      placeholder: |
+        - [ ] 验收点 1
+        - [ ] 验收点 2
+    validations:
+      required: true
