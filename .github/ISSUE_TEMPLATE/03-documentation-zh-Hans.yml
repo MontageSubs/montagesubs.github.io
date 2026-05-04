@@ -1,8 +1,8 @@
 name: 文档改进
 description: 改进或补充网站文档内容
 title: "[文档] "
-labels: ["documentation"]
-assignees: ''
+labels:
+  - documentation
 
 body:
   - type: markdown
