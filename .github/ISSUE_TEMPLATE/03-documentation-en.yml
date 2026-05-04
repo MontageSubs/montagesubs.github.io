@@ -1,8 +1,7 @@
 name: Documentation Improvement
 description: Improve or add to the website documentation
-title: "[documentation] "
-labels:
-  - documentation
+title: "[Documentation] "
+labels: ["documentation"]
 
 body:
   - type: markdown
