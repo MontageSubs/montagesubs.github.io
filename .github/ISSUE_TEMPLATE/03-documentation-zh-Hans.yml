@@ -15,23 +15,6 @@ body:
         - Blog 内容改进，请到 [MontageSubs/blog](https://github.com/MontageSubs/blog) 仓库提交
         - 社区工具的反馈请优先使用工具作者留下的渠道；无官方渠道时，请在此提供工具名称和具体意见
 
-  - type: dropdown
-    id: doc-section
-    attributes:
-      label: 文档所属区域
-      description: 请选择这是关于哪个部分的改进。
-      options:
-        - 网站首页/概览
-        - 关于我们
-        - 项目页面
-        - 工具页面
-        - 学习页面
-        - 社区页面
-        - 贡献页面
-        - 其他
-    validations:
-      required: true
-
   - type: input
     id: url
     attributes:
