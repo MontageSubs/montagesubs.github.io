@@ -1,41 +1,71 @@
 name: 功能需求
 description: 提出新功能或改进
-title: "[功能] "
+title: "[Feature] "
 labels: ["feature"]
 
 body:
   - type: markdown
     attributes:
       value: |
-        感谢你提出功能建议！请尽可能详细地描述。
+        感谢你提出功能建议！请清晰地描述需求，这将帮助我们更快地理解和实施。
 
   - type: textarea
     id: background
     attributes:
-      label: 背景
-      description: 为什么需要这个功能？涉及哪些用户或使用场景？
-      placeholder: "例如：当前在...场景下...会很困难"
+      label: 背景与用途
+      description: 为什么需要这个功能？涉及哪些使用场景或用户需求？
+      placeholder: "例如：当前在...场景下...会很困难，如果能..."
     validations:
       required: true
 
   - type: textarea
     id: description
     attributes:
-      label: 需求描述
-      description: 具体要实现什么？请分点列举
+      label: 功能描述
+      description: 具体要实现什么？请分点列举，包含功能涉及的模块范围
       placeholder: |
         - 功能点 1
         - 功能点 2
+        - 功能点 3（涉及的模块）
     validations:
       required: true
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: 实施约束（可选）
+      description: 有什么需要注意的限制条件？例如时间要求、技术约束、兼容性需求等
+      placeholder: |
+        例如：
+        - 时间限制：需要在 X 月 X 日前完成
+        - 技术约束：不能影响现有性能
+        - 兼容性：需要支持 IE11+
 
   - type: textarea
     id: acceptance
     attributes:
       label: 验收标准
-      description: 如何判断这个功能完成？
+      description: 如何判断这个功能完成？列举可验证的标准
       placeholder: |
-        - [ ] 验收点 1
-        - [ ] 验收点 2
+        - [ ] 功能正常运行
+        - [ ] 在浏览器 X、Y、Z 上测试通过
+        - [ ] 性能指标达到 X
     validations:
       required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: 参考资料（可选）
+      description: 截图、设计稿、相关链接或其他参考信息
+      placeholder: "粘贴截图、链接或其他有用的上下文"
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 提交前检查
+      options:
+        - label: 我已搜索相似功能，确认不存在重复
+          required: true
+        - label: 我的描述清晰、完整、易于理解
+          required: true
