@@ -1,8 +1,7 @@
 name: Discussion and Ideas
 description: Open discussion, feedback, and collaborative improvement
-title: "[discussion] "
-labels:
-  - discussion
+title: "[Discussion] "
+labels: ["discussion"]
 
 body:
   - type: markdown
