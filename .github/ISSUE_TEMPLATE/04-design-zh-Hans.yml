@@ -1,8 +1,7 @@
 name: 设计改进
 description: UI/UX 设计相关的改进或新功能
-title: "[design] "
-labels:
-  - design
+title: "[Design] "
+labels: ["design"]
 
 body:
   - type: markdown
