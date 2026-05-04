@@ -38,9 +38,9 @@ const alternatePath = translationPath
 
       <!-- Logo -->
       <a href={`/${lang}/`} class="flex items-center gap-3 shrink-0 group" aria-label="MontageSubs">
-        <div class="w-9 h-9 bg-ink border border-signal-yellow/40 rounded-md flex items-center justify-center group-hover:border-signal-yellow/70 transition-colors">
-          <span class="text-signal-yellow font-black text-xl leading-none select-none">M</span>
-        </div>
+        <img src="/brand/m-mark-header.svg" alt="" width="36" height="36"
+             class="w-9 h-9 rounded-md transition-transform group-hover:scale-105"
+             aria-hidden="true" />
         <div class="hidden sm:flex flex-col leading-tight">
           <span class="text-bone text-[13px] font-medium tracking-wide">
             {isZh ? '蒙太奇字幕社区' : 'MontageSubs'}

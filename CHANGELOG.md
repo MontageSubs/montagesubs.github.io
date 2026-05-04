@@ -8,6 +8,11 @@
 
 品牌色定锚后的一次对齐：把全站的"近似黄"换成品牌定的那支金黄，背景顺手暖了一档。
 
+### 新增
+
+- **品牌 logo 接入**：Header 左上角的 M 从 CSS 画的方块（带边框 + `<span>M</span>`）换成品牌矢量文件 `m-mono-yellow-on-ink.svg`（5KB，黄 `#FBC100` M + ink `#0E0B07` 圆角底）；hover 时改为轻微放大 5% 替代原来的边框变亮。
+- **完整 favicon 套件接入**：`favicon.{svg,ico}` + `favicon-{16,32,48,192,256,384,512}.png` + `apple-touch-icon.png` + `manifest.webmanifest`，全部从品牌资产仓库直接搬过来。BaseLayout `<head>` 补全引用，加 `<meta theme-color="#0E0B07">`。装到桌面/Home Screen 时图标和品牌名都对得上。
+
 ### 改进
 
 - **Hero CRT 外壳换材质**：从米黄塑料（Apple II / VT100 那种 beige）换成品牌 amber 棕调电木——`#A85B00 → #7A3D00 → #3D1800` 三档渐变（顶部亮、中部、底部深），顶边一条 `#FCAB02` 高光模拟塑料反光。屏幕周围 bezel 同步加深到 `#1F0A00 / #0a0500`，保留「凹进去」的层次感。铭牌文字从黑字改成 amber 暗色才读得出来。整体观感从「老 Apple」变成「老电视/老示波器」，跟我们的暖黄磷光更搭。

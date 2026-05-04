@@ -1,0 +1,14 @@
+{
+  "name": "MontageSubs · 蒙太奇字幕组",
+  "short_name": "MontageSubs",
+  "description": "用爱发电 · Powered by Love",
+  "background_color": "#0E0B07",
+  "theme_color": "#0E0B07",
+  "display": "standalone",
+  "icons": [
+    { "src": "favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "favicon-256.png", "sizes": "256x256", "type": "image/png" },
+    { "src": "favicon-384.png", "sizes": "384x384", "type": "image/png" },
+    { "src": "favicon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
