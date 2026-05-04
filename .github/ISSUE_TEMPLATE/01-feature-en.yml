@@ -7,14 +7,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thank you for your feature suggestion. Please provide a clear description to help us understand and prioritize your request.
+        Thank you for your feature suggestion! Please describe your request clearly to help us understand and implement it faster.
 
   - type: textarea
     id: background
     attributes:
       label: Background and Use Case
       description: Why is this feature needed? What scenarios or user needs does it address?
-      placeholder: "Example: Currently, when working with...scenario...it becomes difficult. If we could support..."
+      placeholder: "For example: Currently in...scenario...it becomes difficult, if we could..."
     validations:
       required: true
 
@@ -22,11 +22,11 @@ body:
     id: description
     attributes:
       label: Feature Description
-      description: What exactly should be implemented? List specific points and mention affected modules.
+      description: What specifically should be implemented? List key points and mention the modules involved.
       placeholder: |
         - Feature point 1
         - Feature point 2
-        - Feature point 3 (module: X)
+        - Feature point 3 (module involved)
     validations:
       required: true
 
@@ -34,22 +34,22 @@ body:
     id: constraints
     attributes:
       label: Implementation Constraints (Optional)
-      description: Are there any limitations to consider? For example, timeline, performance, or compatibility requirements.
+      description: What limitations should be considered? For example, timeline requirements, technical constraints, compatibility needs.
       placeholder: |
-        Examples:
+        For example:
         - Timeline: Must be completed by [date]
-        - Performance: Cannot degrade existing response times
-        - Compatibility: Must support Chrome, Firefox, Safari
+        - Technical constraint: Cannot impact existing performance
+        - Compatibility: Must support IE11+
 
   - type: textarea
     id: acceptance
     attributes:
       label: Acceptance Criteria
-      description: How will we verify this feature is complete? List measurable success criteria.
+      description: How will we verify this feature is complete? List verifiable standards.
       placeholder: |
-        - Feature works correctly in all intended scenarios
-        - Tested on Chrome, Firefox, Safari
-        - Performance meets target threshold
+        - [ ] Feature works correctly
+        - [ ] Tested on browsers X, Y, Z
+        - [ ] Performance metrics meet target X
     validations:
       required: true
 
@@ -57,8 +57,8 @@ body:
     id: reference
     attributes:
       label: References (Optional)
-      description: Screenshots, design mockups, links, or other supporting information.
-      placeholder: "Include screenshots, links, or relevant context"
+      description: Screenshots, design mockups, relevant links, or other supporting information.
+      placeholder: "Paste screenshots, links, or other helpful context"
 
   - type: dropdown
     id: priority
@@ -70,14 +70,11 @@ body:
         - Medium
         - Low
     validations:
-      required: true
 
   - type: checkboxes
     id: checklist
     attributes:
       label: Before Submitting
       options:
-        - label: I have searched for similar requests and confirmed this is not a duplicate
-          required: true
-        - label: My description is clear, complete, and easy to understand
+        - label: I have searched for similar features and confirmed this is not a duplicate; my description is clear, complete, and easy to understand
           required: true
