@@ -9,15 +9,24 @@ body:
       value: |
         感谢你报告这个问题！清晰的问题描述将帮助我们更快地定位和修复。请填写以下信息。
 
+  - type: input
+    id: summary
+    attributes:
+      label: 问题概述
+      description: 用一句话简洁描述问题，便于其他成员快速预览
+      placeholder: "例如：点击功能按钮后页面显示404错误"
+    validations:
+      required: true
+
   - type: textarea
     id: description
     attributes:
-      label: 问题描述（含截图/视频）
-      description: 发生了什么问题？请说明预期行为与实际行为的对比，如有必要请附上截图或录屏。
+      label: 详细描述
+      description: 详细说明预期行为与实际行为的对比，如有必要请附上截图或录屏。
       placeholder: |
-        **预期行为：** 点击按钮后，页面应该正常加载
+        **预期行为：** 点击按钮后，页面应该正常加载并显示功能列表
 
-        **实际行为：** 页面显示404错误
+        **实际行为：** 页面显示404错误，无法加载任何内容
 
         **截图/视频：** [粘贴或上传]
     validations:
