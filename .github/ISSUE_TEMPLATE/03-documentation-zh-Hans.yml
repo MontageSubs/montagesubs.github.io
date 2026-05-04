@@ -32,12 +32,21 @@ body:
     validations:
       required: true
 
+  - type: input
+    id: url
+    attributes:
+      label: 文档 URL
+      description: 完整的页面地址。
+      placeholder: "https://example.com/about"
+    validations:
+      required: true
+
   - type: textarea
     id: location
     attributes:
       label: 具体位置
-      description: 提供文档的准确位置（页面 URL、章节名称等）。
-      placeholder: "例如：https://xxx.com/docs/installation 的『环境要求』章节"
+      description: 页面中的具体位置。
+      placeholder: "例如：『社群成员』章节"
     validations:
       required: true
 
@@ -46,7 +55,10 @@ body:
     attributes:
       label: 现存问题
       description: 文档哪里不清楚、不完整或有误？具体描述问题。
-      placeholder: "例如：缺少示例代码、步骤不够详细、表述容易误解等"
+      placeholder: |
+        例如：缺少示例代码、步骤不够详细、表述容易误解等
+        
+        可附带截图说明（如涉及界面交互）
     validations:
       required: true
 
@@ -55,7 +67,7 @@ body:
     attributes:
       label: 改进建议
       description: 应该如何改进？提供具体的改进方案或示例。
-      placeholder: "例如：添加代码示例、补充配置参数说明、修正错误信息等"
+      placeholder: "例如：补充说明、修正错误信息等"
     validations:
       required: true
 
