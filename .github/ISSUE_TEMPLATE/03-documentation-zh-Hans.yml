@@ -74,6 +74,6 @@ body:
   - type: textarea
     id: reference
     attributes:
-      label: 参考资料（可选）
-      description: 相关的链接、截图或其他参考信息。
-      placeholder: "粘贴链接、截图或其他有用的上下文"
+      label: 其他信息（可选）
+      description: 相关的链接或其他参考信息。
+      placeholder: "粘贴链接或其他有用的上下文"
