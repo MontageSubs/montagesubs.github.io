@@ -61,7 +61,7 @@ body:
     id: severity
     attributes:
       label: 严重程度
-      description: 这个问题的影响程度如何？（可选，由开发者负责分配）
+      description: 这个问题的影响程度如何？
       options:
         - None（待分配）
         - Critical（严重 - 功能完全不可用）
