@@ -1,8 +1,7 @@
 name: 讨论与建议
 description: 开放讨论、建议反馈或协作改进
-title: "[discussion] "
-labels:
-  - discussion
+title: "[Discussion] "
+labels: ["discussion"]
 
 body:
   - type: markdown
