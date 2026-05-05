@@ -20,5 +20,6 @@ Thumbs.db
 # Local tooling / editor configs
 .claude/
 CLAUDE.md
+AGENTS.md
 .idea/
 .vscode/
