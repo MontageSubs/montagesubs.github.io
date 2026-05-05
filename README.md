@@ -34,8 +34,7 @@ npm run preview      # 预览构建产物
 src/
 ├── pages/
 │   ├── zh-hans/             简体中文页面（默认语言）
-│   ├── en/                  英文页面
-│   └── index.astro          根路径，跳转到默认语言
+│   └── en/                  英文页面
 ├── components/              全局组件（Header / Footer / Hero / ...）
 ├── layouts/
 │   └── BaseLayout.astro     全站统一壳：head / Header / Footer / motion
@@ -52,7 +51,7 @@ src/
 │   └── global.css           全局样式 + 动画原语
 └── env.d.ts
 
-public/                      静态资源
+public/                      静态资源（含 index.html 根重定向页）
 .github/workflows/deploy.yml 部署流水线
 astro.config.mjs             Astro 配置（含 sitemap）
 tailwind.config.mjs          设计 tokens（颜色 / 字号 / 间距）
@@ -117,11 +116,13 @@ draft: false
 
 | Token | 值 | 用途 |
 |---|---|---|
-| `ink` | `#0a0a0a` | 主背景（近黑） |
+| `ink` | `#0E0B07` | 主背景（暖近黑） |
 | `bone` | `#f5f1e8` | 主文字（暖白） |
 | `bone-dim` | `#cfc9bb` | 次要文字 |
 | `bone-mute` | `#8a857a` | 标注 / 元数据 |
-| `signal-yellow` | `#FACC15` | 品牌主色 |
+| `signal-yellow` | `#FBC100` | 品牌主色 |
+| `signal-yellow-lit` | `#FDD338` | 主色亮起态（按钮 hover） |
+| `signal-yellow-soft` | `#fbe27a` | 主色柔色（链接 hover / typography） |
 | `live` | `#22c55e` | 在线状态点 |
 
 **字号**
