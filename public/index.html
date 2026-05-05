@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>MontageSubs · 蒙太奇字幕社区</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#000000">
+<script>
+(function () {
+  try {
+    var l = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+    location.replace(/^zh\b/i.test(l) ? './zh-hans/' : './en/');
+  } catch (_) {
+    location.replace('./en/');
+  }
+})();
+</script>
+<meta http-equiv="refresh" content="0; url=./en/">
+<link rel="alternate" hreflang="zh-Hans" href="./zh-hans/">
+<link rel="alternate" hreflang="en" href="./en/">
+<link rel="alternate" hreflang="x-default" href="./zh-hans/">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
+<style>
+:root { color-scheme: dark; }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  min-height: 100vh;
+  background: #000;
+  color: #f5f1e8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  line-height: 1.5;
+}
+main { max-width: 34rem; text-align: center; }
+h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+p { margin: 0 0 2rem; color: #cfc9bb; font-size: 0.95rem; }
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+a {
+  display: inline-block;
+  padding: 0.7rem 1.4rem;
+  border: 1px solid #FBC100;
+  color: #FBC100;
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+a:hover { background: #FBC100; color: #000; }
+a:focus-visible {
+  background: #FBC100;
+  color: #000;
+  outline: 2px solid #FBC100;
+  outline-offset: 3px;
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>Redirecting</h1>
+  <p>
+    If this doesn&rsquo;t work, please choose a language below.<br>
+    如未自动跳转，请选择语言。
+  </p>
+  <ul>
+    <li><a href="./zh-hans/" hreflang="zh-Hans" lang="zh-Hans">简体中文</a></li>
+    <li><a href="./en/" hreflang="en" lang="en">English</a></li>
+  </ul>
+</main>
+</body>
+</html>

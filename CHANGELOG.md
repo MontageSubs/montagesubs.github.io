@@ -4,6 +4,26 @@
 
 ---
 
+## 2026-05-05
+
+修首页重定向：之前不论浏览器语言一律落到 `/zh-hans/`，英文用户被强行带到中文版。顺手补上多层兜底。
+
+### 修复
+
+- **首页根路径语言识别**：根 `/` 之前是一段把 `location.replace("/zh-hans/")` 写死的 `src/pages/index.astro`，浏览器语言完全没参与判断。现在 head 里一段内联 JS 读 `navigator.languages[0] || navigator.language`，`zh*` → `/zh-hans/`，其余 → `/en/`。
+
+### 改进
+
+- **重定向改成三层冗余**：
+  - 第一层 JS 跑在 `<head>` 顶部、同步执行，正常环境下用户感知不到这一跳；
+  - 第二层 `<meta http-equiv="refresh" content="0; url=./en/">` 兜禁用 JS 的环境（`en` 作为国际访客的安全 fallback，中文用户只要 JS 能跑就会被 JS 路径接走）；
+  - 第三层是一张纯黑页，写一行 "Redirecting" 大标题 + 中英双行提示 + 两个黄色描边的语言按钮（简体中文 / English），任何环境下都能让用户手动到达正确语种。
+- **从 Astro 页搬到纯静态 `public/index.html`**：之前是 `.astro` 文件，构建出来会被自动挂上 43KB 的全局 Tailwind bundle 和 `data-astro-cid-*` 作用域属性，对一张 1ms 后就要消失的重定向页是纯浪费。现在直接走 `public/`，**产物 2.4KB，零外部依赖，无 Tailwind / 无 BaseLayout / 无 Header & Footer 闪烁**，符合 issue 里"极致加载速度、禁止无用代码"的要求。
+- **链接全部相对路径**（`./zh-hans/`、`./en/`），不绑死 `montagesubs.github.io` 这一个域，迁去自定义域 / Codeberg 都不用改。
+- **sitemap 自然剔除根路径**：`/` 不再是 Astro 路由，重定向页本来也不该被搜索引擎单独索引（页面带 `noindex,follow`）；语种页通过 `hreflang=zh-Hans / en / x-default` 继续正常向爬虫声明对应关系。
+
+---
+
 ## 2026-05-04
 
 品牌色定锚后的一次对齐：把全站的"近似黄"换成品牌定的那支金黄，背景顺手暖了一档。
