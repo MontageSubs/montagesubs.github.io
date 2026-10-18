@@ -1,0 +1,11 @@
+<script>
+  import { LOCALE_STORAGE_KEY } from '../i18n/storage';
+
+  document.addEventListener('click', (event) => {
+    const link = (event.target as Element).closest<HTMLAnchorElement>('a[data-locale]');
+    if (!link?.dataset.locale) return;
+    try {
+      localStorage.setItem(LOCALE_STORAGE_KEY, link.dataset.locale);
+    } catch {}
+  });
+</script>

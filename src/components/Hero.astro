@@ -1,5 +1,6 @@
 ---
 import { ui, type Lang } from '../i18n';
+import { telegramJoinUrl } from '../data/social';
 
 interface Props { lang: string; }
 const { lang } = Astro.props;
@@ -94,7 +95,7 @@ const finalLine = isZh ? '让字幕成为桥梁_' : 'SUBTITLES AS A BRIDGE_';
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <span class="magnetic">
-            <a href="https://t.me/MontageSubs" target="_blank" rel="noopener noreferrer" class="btn-primary">
+            <a href={telegramJoinUrl} target="_blank" rel="noopener noreferrer" class="btn-primary">
               {t('home.hero.cta_primary')}
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/>

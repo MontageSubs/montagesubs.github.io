@@ -37,21 +37,28 @@ src/
 │   └── en/                  英文页面
 ├── components/              全局组件（Header / Footer / Hero / ...）
 ├── layouts/
-│   └── BaseLayout.astro     全站统一壳：head / Header / Footer / motion
+│   ├── BaseLayout.astro     全站统一壳：head / 公告条 / Header / Footer / motion
+│   └── LocaleGateway.astro  无语言前缀路径的语言跳转页
 ├── content/
 │   ├── config.ts            内容集合 schema（Zod）
 │   └── blog/                博客 markdown，按语言分目录
 ├── data/
 │   ├── projects.ts          字幕项目数据
 │   ├── tools.ts             工具数据
-│   └── community.ts         成员数据
+│   ├── community.ts         成员数据
+│   └── social.ts            社交平台与外部入口链接
 ├── i18n/
-│   └── index.ts             双语 key map（扁平结构）
+│   ├── index.ts             双语 key map（扁平结构）
+│   ├── locales.ts           语言清单与默认/兜底语言
+│   ├── storage.ts           浏览器存储 key 命名空间（montagesubs:）
+│   ├── routes.ts            语言网关页路由枚举
+│   ├── inlineScripts.ts     网关页与 404 的内联脚本渲染
+│   └── inline/              内联脚本源码（语言解析）
 ├── styles/
 │   └── global.css           全局样式 + 动画原语
 └── env.d.ts
 
-public/                      静态资源（含 index.html 根重定向页）
+public/                      静态资源
 .github/workflows/deploy.yml 部署流水线
 astro.config.mjs             Astro 配置（含 sitemap）
 tailwind.config.mjs          设计 tokens（颜色 / 字号 / 间距）
@@ -158,7 +165,6 @@ draft: false
 
 ## 社区与联系
 
-- Telegram：<https://t.me/MontageSubs>
+- Telegram 频道：<https://t.me/s/MTSubs>
 - Discord：<https://discord.gg/montagesubs>
-- GitHub Discussions：<https://github.com/MontageSubs/community/discussions>
-- 邮件：dev@montagesubs.org（技术合作）/ press@montagesubs.org（媒体）
+

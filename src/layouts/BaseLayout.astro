@@ -1,8 +1,11 @@
 ---
 import '../styles/global.css';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import LocalePreference from '../components/LocalePreference.astro';
 import MotionScripts from '../components/MotionScripts.astro';
+import { htmlLangTags, type Lang } from '../i18n/locales';
 
 interface Props {
   title: string;
@@ -11,6 +14,8 @@ interface Props {
   hasTranslation?: boolean;
   translationPath?: string;
   ogImage?: string;
+  chrome?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -20,11 +25,13 @@ const {
   hasTranslation = true,
   translationPath,
   ogImage,
+  chrome = true,
+  noindex = false,
 } = Astro.props;
 
 const siteURL = Astro.site ?? new URL('https://montagesubs.github.io');
 const currentURL = Astro.url.href;
-const htmlLang = lang === 'zh-hans' ? 'zh-Hans' : 'en';
+const htmlLang = htmlLangTags[lang as Lang];
 const alternateLang = lang === 'zh-hans' ? 'en' : 'zh-hans';
 const alternatePath = translationPath
   ? new URL(translationPath, siteURL).href
@@ -40,6 +47,7 @@ const alternatePath = translationPath
 
     <title>{title} · MontageSubs</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
 
     <link rel="canonical" href={currentURL} />
     <link rel="alternate" hreflang={htmlLang} href={currentURL} />
@@ -78,14 +86,16 @@ const alternatePath = translationPath
   </head>
 
   <body class="bg-ink text-bone min-h-screen flex flex-col antialiased">
-    <Header lang={lang} hasTranslation={hasTranslation} translationPath={translationPath} />
+    {chrome && <AnnouncementBar lang={lang} />}
+    {chrome && <Header lang={lang} hasTranslation={hasTranslation} translationPath={translationPath} />}
 
     <main class="flex-1 relative">
       <slot />
     </main>
 
-    <Footer lang={lang} />
+    {chrome && <Footer lang={lang} />}
 
     <MotionScripts />
+    <LocalePreference />
   </body>
 </html>

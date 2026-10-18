@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import { ui } from '../../i18n';
+import { socialLinks } from '../../data/social';
 const lang = 'en';
 const t = (k: keyof typeof ui['zh-hans']) => ui['en'][k];
 const values = [
@@ -14,12 +15,6 @@ const governance = [
   { id: 'governance', title: t('about.governance.nonprofit.title'), body: t('about.governance.nonprofit.body') },
   { id: 'license',    title: t('about.governance.license.title'),   body: t('about.governance.license.body') },
   { id: 'copyright',  title: t('about.governance.copyright.title'), body: t('about.governance.copyright.body') },
-  { id: 'dmca',       title: t('about.governance.dmca.title'),      body: t('about.governance.dmca.body') },
-];
-const contacts = [
-  { label: t('about.contact.media.label'),     email: 'press@montagesubs.org' },
-  { label: t('about.contact.copyright.label'), email: 'copyright@montagesubs.org' },
-  { label: t('about.contact.tech.label'),      email: 'dev@montagesubs.org' },
 ];
 ---
 <BaseLayout title="About" description="MontageSubs is a nonprofit, open-source subtitle community." lang={lang}>
@@ -53,7 +48,7 @@ const contacts = [
   <section id="governance" class="py-24 md:py-32 border-b border-bone/[0.08]">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
       <SectionHeader num="" kicker={t('about.governance.title')} title="Transparency &" serifAccent="governance" />
-      <div class="mt-16 grid md:grid-cols-2 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
+      <div class="mt-16 grid md:grid-cols-3 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
         {governance.map((g, i) => (
           <article id={g.id} class="bg-ink p-8 md:p-10">
             <div class="flex items-baseline gap-3 mb-5">
@@ -68,13 +63,13 @@ const contacts = [
   </section>
   <section class="py-24 md:py-32">
     <div class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-      <SectionHeader num="" kicker={t('about.contact.title')} title="Get in" serifAccent="touch" />
-      <div class="mt-16 grid md:grid-cols-3 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
-        {contacts.map(c => (
-          <a href={`mailto:${c.email}`} class="group bg-ink p-8 hover:bg-ink-800 transition-colors">
-            <p class="font-mono text-[11px] text-bone-mute tracking-[0.2em] uppercase">— {c.label}</p>
-            <p class="mt-6 font-display text-2xl text-bone group-hover:text-signal-yellow transition-colors">{c.email}</p>
-            <p class="mt-4 font-mono text-[11px] text-bone-mute">→ {c.label}</p>
+      <SectionHeader num="" kicker={t('about.community.title')} title="Join the" serifAccent="community" />
+      <div class="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-bone/[0.08] border border-bone/[0.08] reveal-up-stagger">
+        {socialLinks.map(({ name, handle, href }) => (
+          <a href={href} target="_blank" rel="noopener noreferrer" class="group bg-ink p-8 hover:bg-ink-800 transition-colors">
+            <p class="font-mono text-[11px] text-bone-mute tracking-[0.2em] uppercase">— {name}</p>
+            <p class="mt-6 font-display text-2xl text-bone break-words group-hover:text-signal-yellow transition-colors">{handle}</p>
+            <p class="mt-4 font-mono text-[11px] text-bone-mute" aria-hidden="true">↗</p>
           </a>
         ))}
       </div>

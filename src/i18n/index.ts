@@ -1,10 +1,6 @@
-export const languages = {
-  'zh-hans': '简体中文',
-  'en': 'English',
-} as const;
+import { defaultLang, languages, type Lang } from './locales';
 
-export type Lang = keyof typeof languages;
-export const defaultLang: Lang = 'zh-hans';
+export * from './locales';
 
 export const ui = {
   'zh-hans': {
@@ -29,8 +25,6 @@ export const ui = {
     'footer.nonprofit': '非营利声明',
     'footer.opensource': '开源协议',
     'footer.copyright_notice': '版权声明',
-    'footer.dmca': 'DMCA 投诉',
-    'footer.privacy': '隐私政策',
     'footer.colophon': '版本说明',
 
     // ── Home ─────────────────────────────────
@@ -90,16 +84,11 @@ export const ui = {
     'about.governance.license.body': '社区内容采用 CC BY-SA 4.0 许可证，代码采用 MIT 许可证。',
     'about.governance.copyright.title': '版权声明',
     'about.governance.copyright.body': '本社区尊重原始版权持有者的权利，数据集来自 TMDB，会自动应用范围限制。我们不允许任何盗版内容的传播。',
-    'about.governance.dmca.title': 'DMCA 投诉',
-    'about.governance.dmca.body': '如果你认为我们的内容侵犯了你的版权，请通过 dmca@montagesubs.org 联系我们。我们将于 48 小时内回应。',
     'about.brand.title': '品牌资产',
     'about.brand.body': '如需在媒体报道、合作材料中使用我们的品牌资产，请遵循以下规范。',
     'about.brand.color': '主色调：#FBC100。深背景：#0E0B07。',
     'about.brand.logo': 'Logo 含义：蒙太奇是电影学中的剪辑艺术，字幕也是一种"剪辑"。',
-    'about.contact.title': '联系我们',
-    'about.contact.media.label': '媒体合作',
-    'about.contact.copyright.label': '版权事务',
-    'about.contact.tech.label': '技术合作',
+    'about.community.title': '社区',
 
     // ── Projects ─────────────────────────────
     'projects.kicker': '项目 / Projects',
@@ -121,9 +110,6 @@ export const ui = {
     'tools.filter.installable': '安装型',
     'tools.filter.beta': '开发中',
     'tools.empty': '这个筛选下暂时没有工具',
-    'tools.submit.title': '有好工具想分享？',
-    'tools.submit.body': '我们欢迎社区成员提交自己开发的字幕工具。目前处于审核阶段，请通过邮件联系我们。',
-    'tools.submit.cta': '提交工具申请',
 
     // ── Learn ────────────────────────────────
     'learn.kicker': '学习 / Learn',
@@ -168,7 +154,6 @@ export const ui = {
     'community.conduct.open.body': '对开放协作与多元背景持开放心态',
     'community.conduct.zero.title': '零容忍',
     'community.conduct.zero.body': '不容忍骚扰、歧视、人身攻击等任何形式的不当行为',
-    'community.conduct.report': '如遇违反行为，请发送邮件至',
 
     // ── Contribute ───────────────────────────
     'contribute.kicker': '贡献 / Contribute',
@@ -197,7 +182,6 @@ export const ui = {
     'contribute.docs.s2': '工具使用教程',
     'contribute.docs.s3': '字幕技术标准撰写',
     'contribute.docs.s4': '现有文档的校对与改进',
-    'contribute.docs.cta': '发邮件联系我们',
     'contribute.support.title': '支持我们',
     'contribute.support.body': '我们运营一个完全志愿者驱动的字幕社区。你的支持将用于服务器费用、域名维护和社区活动。',
     'contribute.support.options_title': '目前我们更接受以下方式之一：',
@@ -205,6 +189,14 @@ export const ui = {
     'contribute.support.docs': '撰写文档',
     'contribute.support.share': '分享推广',
     'contribute.support.feedback': '反馈建议',
+
+    'announcement.text': '本站处于内测阶段，正在建设中，当前页面仅为模板。',
+
+    'notfound.title': '频道丢失 · 404',
+    'notfound.eyebrow': 'No Signal · 频道丢失',
+    'notfound.message': '这个频道暂时没有内容。',
+    'notfound.home': '返回首页',
+    'notfound.footer': 'Montage-CRT 14" · 频道未找到',
 
     // ── Common ───────────────────────────────
     'common.read_more': '阅读更多',
@@ -243,8 +235,6 @@ export const ui = {
     'footer.nonprofit': 'Nonprofit',
     'footer.opensource': 'Open Source',
     'footer.copyright_notice': 'Copyright',
-    'footer.dmca': 'DMCA',
-    'footer.privacy': 'Privacy',
     'footer.colophon': 'Colophon',
 
     'home.hero.eyebrow': 'Nonprofit / Open Source / Community-driven',
@@ -302,16 +292,11 @@ export const ui = {
     'about.governance.license.body': 'Content is released under CC BY-SA 4.0; code under the MIT license.',
     'about.governance.copyright.title': 'Copyright notice',
     'about.governance.copyright.body': 'We respect rightsholders. Our datasets come from TMDB and apply scope limits automatically. We do not allow piracy.',
-    'about.governance.dmca.title': 'DMCA',
-    'about.governance.dmca.body': 'If you believe content here infringes your copyright, contact dmca@montagesubs.org. We respond within 48 hours.',
     'about.brand.title': 'Brand assets',
     'about.brand.body': 'For media and partnerships, please follow these guidelines when using our brand.',
     'about.brand.color': 'Primary: #FBC100. Background: #0E0B07.',
     'about.brand.logo': 'Montage is the art of editing in cinema; subtitling is its own kind of edit.',
-    'about.contact.title': 'Get in touch',
-    'about.contact.media.label': 'Press',
-    'about.contact.copyright.label': 'Copyright',
-    'about.contact.tech.label': 'Technical',
+    'about.community.title': 'Community',
 
     'projects.kicker': 'Projects',
     'projects.title': 'Subtitle Projects',
@@ -331,9 +316,6 @@ export const ui = {
     'tools.filter.installable': 'Installable',
     'tools.filter.beta': 'In progress',
     'tools.empty': 'No tools match this filter yet.',
-    'tools.submit.title': 'Built something useful?',
-    'tools.submit.body': 'We welcome community-built subtitle tools. Submissions are currently reviewed by email.',
-    'tools.submit.cta': 'Submit a tool',
 
     'learn.kicker': 'Learn',
     'learn.title': 'Learning Resources',
@@ -376,7 +358,6 @@ export const ui = {
     'community.conduct.open.body': 'Stay open to collaboration and to people unlike yourself.',
     'community.conduct.zero.title': 'Zero tolerance',
     'community.conduct.zero.body': 'No harassment, discrimination or personal attacks of any kind.',
-    'community.conduct.report': 'To report a violation, email',
 
     'contribute.kicker': 'Contribute',
     'contribute.title': 'Take part',
@@ -404,7 +385,6 @@ export const ui = {
     'contribute.docs.s2': 'Tool tutorials',
     'contribute.docs.s3': 'Technical standards drafting',
     'contribute.docs.s4': 'Editing and improving existing docs',
-    'contribute.docs.cta': 'Email us',
     'contribute.support.title': 'Support us',
     'contribute.support.body': 'We run on volunteers. Support keeps the servers up, the domain renewed, and the events running.',
     'contribute.support.options_title': 'For now we accept these forms of support:',
@@ -412,6 +392,14 @@ export const ui = {
     'contribute.support.docs': 'Write docs',
     'contribute.support.share': 'Spread the word',
     'contribute.support.feedback': 'Send feedback',
+
+    'announcement.text': 'This site is in closed beta and under construction. What you see here is a template.',
+
+    'notfound.title': 'No Signal · 404',
+    'notfound.eyebrow': 'No Signal',
+    'notfound.message': 'This channel has no content.',
+    'notfound.home': 'Back to home',
+    'notfound.footer': 'Montage-CRT 14" · Channel not found',
 
     'common.read_more': 'Read More',
     'common.back': 'Back',

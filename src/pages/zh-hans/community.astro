@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ui } from '../../i18n';
 import { members } from '../../data/community';
+import { discussionsUrl } from '../../data/social';
 
 const lang = 'zh-hans';
 const t = (k: keyof typeof ui['zh-hans']) => ui['zh-hans'][k];
@@ -70,8 +71,8 @@ const conduct = [
           <p class="font-mono text-[11px] text-bone-mute uppercase tracking-[0.2em] mb-3">— GitHub Discussions</p>
           <p class="text-bone-dim leading-relaxed">{t('community.discussions.body')}</p>
         </div>
-        <a href="https://github.com/MontageSubs/community/discussions" target="_blank" rel="noopener noreferrer" class="btn-ghost shrink-0">
-          {t('community.discussions.cta')} ↗
+        <a href={discussionsUrl} class="btn-ghost shrink-0">
+          {t('community.discussions.cta')}
         </a>
       </div>
     </div>
@@ -95,9 +96,6 @@ const conduct = [
           </div>
         ))}
       </div>
-      <p class="mt-8 text-bone-mute text-sm reveal">
-        {t('community.conduct.report')} <a href="mailto:conduct@montagesubs.org" class="text-signal-yellow hover:underline">conduct@montagesubs.org</a>
-      </p>
     </div>
   </section>
 </BaseLayout>

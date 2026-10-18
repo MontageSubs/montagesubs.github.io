@@ -1,21 +1,21 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ui } from '../../i18n';
+import { telegramJoinUrl } from '../../data/social';
 const lang = 'en';
 const t = (k: keyof typeof ui['zh-hans']) => ui['en'][k];
 const tracks = [
   { id:'translate', num:'01', title:t('contribute.translator.title'), body:t('contribute.translator.body'),
     skillsTitle:t('contribute.translator.skills_title'),
     skills:[t('contribute.translator.s1'),t('contribute.translator.s2'),t('contribute.translator.s3'),t('contribute.translator.s4')],
-    cta:t('contribute.translator.cta'), href:'https://t.me/MontageSubs' },
+    cta:t('contribute.translator.cta'), href:telegramJoinUrl },
   { id:'develop', num:'02', title:t('contribute.dev.title'), body:t('contribute.dev.body'),
     skillsTitle:t('contribute.dev.skills_title'),
     skills:[t('contribute.dev.s1'),t('contribute.dev.s2'),t('contribute.dev.s3'),t('contribute.dev.s4')],
     cta:t('contribute.dev.cta'), href:'https://github.com/MontageSubs' },
   { id:'docs', num:'03', title:t('contribute.docs.title'), body:t('contribute.docs.body'),
     skillsTitle:t('contribute.docs.skills_title'),
-    skills:[t('contribute.docs.s1'),t('contribute.docs.s2'),t('contribute.docs.s3'),t('contribute.docs.s4')],
-    cta:t('contribute.docs.cta'), href:'mailto:docs@montagesubs.org' },
+    skills:[t('contribute.docs.s1'),t('contribute.docs.s2'),t('contribute.docs.s3'),t('contribute.docs.s4')] },
 ];
 const supportOptions = [
   { label:t('contribute.support.code'), n:'01' }, { label:t('contribute.support.docs'), n:'02' },
@@ -44,8 +44,10 @@ const supportOptions = [
             <ul class="mt-4 space-y-2 flex-1">
               {tr.skills.map(s => (<li class="flex gap-3 text-bone-dim text-sm"><span class="font-mono text-signal-yellow text-[11px] mt-1">●</span><span>{s}</span></li>))}
             </ul>
-            <a href={tr.href} target={tr.href.startsWith('http')?'_blank':undefined} rel="noopener noreferrer"
-              class="mt-8 inline-flex items-center gap-2 text-signal-yellow text-sm border-b border-signal-yellow/40 hover:border-signal-yellow pb-1 self-start">{tr.cta} →</a>
+            {tr.href && (
+              <a href={tr.href} target={tr.href.startsWith('http')?'_blank':undefined} rel="noopener noreferrer"
+                class="mt-8 inline-flex items-center gap-2 text-signal-yellow text-sm border-b border-signal-yellow/40 hover:border-signal-yellow pb-1 self-start">{tr.cta} →</a>
+            )}
           </article>
         ))}
       </div>

@@ -1,0 +1,13 @@
+---
+import { useTranslations, type Lang } from '../i18n';
+
+interface Props {
+  lang: string;
+}
+
+const t = useTranslations(Astro.props.lang as Lang);
+---
+
+<div role="note" class="bg-signal-yellow text-ink px-5 py-2 text-center font-mono text-[11px] tracking-[0.08em]" data-pagefind-ignore>
+  {t('announcement.text')}
+</div>

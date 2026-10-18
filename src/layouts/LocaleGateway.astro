@@ -1,0 +1,78 @@
+---
+import LocalePreference from '../components/LocalePreference.astro';
+import { renderGatewayScript } from '../i18n/inlineScripts';
+import { htmlLangTags, languages, supportedLangs } from '../i18n/locales';
+
+interface Props {
+  subPath: string;
+}
+
+const { subPath } = Astro.props;
+const siteURL = Astro.site ?? new URL('https://montagesubs.github.io');
+const targets = supportedLangs.map((code) => ({
+  code,
+  name: languages[code],
+  href: `/${code}/${subPath}`,
+  hreflang: htmlLangTags[code],
+}));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,follow" />
+    <meta name="theme-color" content="#0E0B07" />
+    <title>MontageSubs · 蒙太奇字幕社区</title>
+    <script is:inline set:html={renderGatewayScript(subPath)} />
+    {targets.map(({ href, hreflang }) => (
+      <link rel="alternate" hreflang={hreflang} href={new URL(href, siteURL).href} />
+    ))}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <main>
+      <h1>Select Language</h1>
+      <ul>
+        {targets.map(({ code, name, href, hreflang }) => (
+          <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
+        ))}
+      </ul>
+    </main>
+    <LocalePreference />
+  </body>
+</html>
+
+<style is:global>
+  :root { color-scheme: dark; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.5rem;
+    background: #0e0b07;
+    color: #f5f1e8;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.5;
+  }
+  main { max-width: 34rem; text-align: center; }
+  h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+  ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  a {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid #fbc100;
+    color: #fbc100;
+    text-decoration: none;
+    font-size: 0.875rem;
+    letter-spacing: 0.05em;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  a:hover, a:focus-visible { background: #fbc100; color: #000; }
+  a:focus-visible { outline: 2px solid #fbc100; outline-offset: 3px; }
+</style>

@@ -1,0 +1,13 @@
+---
+import LocaleGateway from '../layouts/LocaleGateway.astro';
+import { listLocalizedRoutes } from '../i18n/routes';
+
+export async function getStaticPaths() {
+  const routes = await listLocalizedRoutes();
+  return routes.map((route) => ({ params: { path: route || undefined } }));
+}
+
+const { path } = Astro.params;
+---
+
+<LocaleGateway subPath={path ? `${path}/` : ''} />

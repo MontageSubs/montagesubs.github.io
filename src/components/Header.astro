@@ -1,5 +1,6 @@
 ---
 import { ui, type Lang } from '../i18n';
+import { telegramJoinUrl } from '../data/social';
 
 interface Props {
   lang: string;
@@ -32,7 +33,7 @@ const alternatePath = translationPath
   : currentPath.replace(`/${lang}/`, `/${alternateLang}/`);
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-ink/80 border-b border-bone/[0.06]" data-pagefind-ignore>
+<header class="sticky top-0 z-50 backdrop-blur-md bg-ink/80 border-b border-bone/[0.06]" data-pagefind-ignore>
   <nav class="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
     <div class="flex items-center justify-between h-16">
 
@@ -84,7 +85,7 @@ const alternatePath = translationPath
           </button>
           <div class="absolute right-0 top-full pt-1 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all">
             <div class="w-44 py-1 bg-ink-700 border border-bone/10">
-              <a href={isZh ? '#' : alternatePath.replace('/en/', '/zh-hans/')}
+              <a href={isZh ? '#' : alternatePath.replace('/en/', '/zh-hans/')} data-locale={isZh ? undefined : 'zh-hans'}
                 class={`flex items-center justify-between px-4 py-2.5 text-sm transition-colors ${isZh ? 'text-signal-yellow cursor-default' : 'text-bone-dim hover:bg-bone/5'}`}>
                 <span>简体中文</span>
                 {isZh && <span class="font-mono text-[10px]">▸</span>}
@@ -95,7 +96,7 @@ const alternatePath = translationPath
                   <span class="font-mono text-[10px]">▸</span>
                 </a>
               ) : hasTranslation ? (
-                <a href={alternatePath} class="flex items-center justify-between px-4 py-2.5 text-sm text-bone-dim hover:bg-bone/5 transition-colors">
+                <a href={alternatePath} data-locale="en" class="flex items-center justify-between px-4 py-2.5 text-sm text-bone-dim hover:bg-bone/5 transition-colors">
                   <span>English</span>
                 </a>
               ) : (
@@ -109,7 +110,7 @@ const alternatePath = translationPath
         </div>
 
         <!-- CTA -->
-        <a href="https://t.me/MontageSubs"
+        <a href={telegramJoinUrl}
            class="hidden sm:inline-flex items-center gap-1.5 bg-signal-yellow text-ink text-[12px] font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition-colors"
            target="_blank" rel="noopener noreferrer">
           {t('nav.join')}
@@ -139,13 +140,10 @@ const alternatePath = translationPath
           );
         })}
       </div>
-      <a href="https://t.me/MontageSubs" target="_blank" rel="noopener noreferrer"
+      <a href={telegramJoinUrl} target="_blank" rel="noopener noreferrer"
          class="mt-4 flex items-center justify-center gap-2 bg-signal-yellow text-ink text-sm font-semibold py-3 rounded-full">
         {t('nav.join')}
       </a>
     </div>
   </nav>
 </header>
-
-<!-- Spacer -->
-<div class="h-16"></div>
