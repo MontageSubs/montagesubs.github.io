@@ -4,7 +4,6 @@ export interface SocialLink {
   href: string;
 }
 
-export const telegramJoinUrl = 'https://t.me/MontageSubs';
 export const telegramChannelUrl = 'https://t.me/s/MTSubs';
 export const discussionsUrl = '#';
 

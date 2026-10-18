@@ -11,7 +11,7 @@ export const ui = {
     'nav.learn': '学习',
     'nav.community': '社区',
     'nav.contribute': '贡献',
-    'nav.join': '加入社区',
+    'nav.join': '关注我们',
     'nav.search': '搜索',
     'nav.index': '索引',
 
@@ -222,7 +222,7 @@ export const ui = {
     'nav.learn': 'Learn',
     'nav.community': 'Community',
     'nav.contribute': 'Contribute',
-    'nav.join': 'Join',
+    'nav.join': 'Follow us',
     'nav.search': 'Search',
     'nav.index': 'Index',
 

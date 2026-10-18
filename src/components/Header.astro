@@ -1,6 +1,6 @@
 ---
 import { ui, type Lang } from '../i18n';
-import { telegramJoinUrl } from '../data/social';
+import { telegramChannelUrl } from '../data/social';
 
 interface Props {
   lang: string;
@@ -110,7 +110,7 @@ const alternatePath = translationPath
         </div>
 
         <!-- CTA -->
-        <a href={telegramJoinUrl}
+        <a href={telegramChannelUrl}
            class="hidden sm:inline-flex items-center gap-1.5 bg-signal-yellow text-ink text-[12px] font-semibold px-4 py-2 rounded-full hover:bg-yellow-300 transition-colors"
            target="_blank" rel="noopener noreferrer">
           {t('nav.join')}
@@ -140,7 +140,7 @@ const alternatePath = translationPath
           );
         })}
       </div>
-      <a href={telegramJoinUrl} target="_blank" rel="noopener noreferrer"
+      <a href={telegramChannelUrl} target="_blank" rel="noopener noreferrer"
          class="mt-4 flex items-center justify-center gap-2 bg-signal-yellow text-ink text-sm font-semibold py-3 rounded-full">
         {t('nav.join')}
       </a>

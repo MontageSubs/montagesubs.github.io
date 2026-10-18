@@ -38,6 +38,6 @@ We believe subtitle creation should be **open, collaborative, and democratic**. 
 - Tool library under construction — first tools launching soon
 - Translation notes series coming soon
 - Technical standards documentation in progress
-- Welcome to join our [Telegram](https://t.me/MontageSubs) and [Discord](https://discord.gg/montagesubs) communities
+- Welcome to join our [Telegram](https://t.me/s/MTSubs) and [Discord](https://discord.gg/montagesubs) communities
 
 Thank you for your attention. We look forward to building this community with you.

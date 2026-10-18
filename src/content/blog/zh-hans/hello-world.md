@@ -38,6 +38,6 @@ description: 蒙太奇字幕社区正式成立，我们将致力于构建开放�
 - 工具库正在建设中，第一批工具即将上线
 - 翻译笔记系列即将发布
 - 技术规范文档正在撰写
-- 欢迎加入我们的 [Telegram](https://t.me/MontageSubs) 和 [Discord](https://discord.gg/montagesubs) 社群
+- 欢迎加入我们的 [Telegram](https://t.me/s/MTSubs) 和 [Discord](https://discord.gg/montagesubs) 社群
 
 感谢你的关注，我们期待与你一起构建这个社区。

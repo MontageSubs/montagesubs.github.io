@@ -1,14 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { ui } from '../../i18n';
-import { telegramJoinUrl } from '../../data/social';
+import { telegramChannelUrl } from '../../data/social';
 const lang = 'en';
 const t = (k: keyof typeof ui['zh-hans']) => ui['en'][k];
 const tracks = [
   { id:'translate', num:'01', title:t('contribute.translator.title'), body:t('contribute.translator.body'),
     skillsTitle:t('contribute.translator.skills_title'),
     skills:[t('contribute.translator.s1'),t('contribute.translator.s2'),t('contribute.translator.s3'),t('contribute.translator.s4')],
-    cta:t('contribute.translator.cta'), href:telegramJoinUrl },
+    cta:t('contribute.translator.cta'), href:telegramChannelUrl },
   { id:'develop', num:'02', title:t('contribute.dev.title'), body:t('contribute.dev.body'),
     skillsTitle:t('contribute.dev.skills_title'),
     skills:[t('contribute.dev.s1'),t('contribute.dev.s2'),t('contribute.dev.s3'),t('contribute.dev.s4')],
