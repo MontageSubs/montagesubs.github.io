@@ -1,7 +1,17 @@
-<link rel="icon" href="/favicon.ico" sizes="48x48" />
-<link rel="icon" href="/favicon.svg" type="image/svg+xml" sizes="any" />
-<link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
-<link rel="icon" href="/favicon-192.png" type="image/png" sizes="192x192" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
-<link rel="manifest" href="/manifest.webmanifest" />
+---
+import { versionedIcon } from '../config/icons';
+---
+
+<link rel="icon" href={versionedIcon('/favicon.ico')} sizes="48x48" />
+<link rel="icon" href={versionedIcon('/favicon.svg')} type="image/svg+xml" sizes="any" />
+<link rel="icon" href={versionedIcon('/favicon-96x96.png')} type="image/png" sizes="96x96" />
+<link rel="icon" href={versionedIcon('/favicon-192x192.png')} type="image/png" sizes="192x192" />
+<link rel="apple-touch-icon" href={versionedIcon('/apple-touch-icon.png')} sizes="180x180" />
+<link rel="apple-touch-icon" href={versionedIcon('/apple-touch-icon-167x167.png')} sizes="167x167" />
+<link rel="apple-touch-icon" href={versionedIcon('/apple-touch-icon-152x152.png')} sizes="152x152" />
+<link rel="apple-touch-icon" href={versionedIcon('/apple-touch-icon-120x120.png')} sizes="120x120" />
+<link rel="mask-icon" href={versionedIcon('/safari-pinned-tab.svg')} color="#FBC100" />
+<link rel="manifest" href={versionedIcon('/manifest.webmanifest')} />
+<meta name="msapplication-config" content={versionedIcon('/browserconfig.xml')} />
+<meta name="msapplication-TileColor" content="#0E0B07" />
 <meta name="theme-color" content="#0E0B07" />

@@ -14,8 +14,8 @@ const { subPath } = Astro.props;
 const siteURL = Astro.site ?? new URL('https://subs.js.org');
 const isRoot = subPath === '';
 const canonicalURL = isRoot ? siteURL.href : new URL(`/${defaultLang}/${subPath}`, siteURL).href;
-const rootTitle = 'MontageSubs · 蒙太奇字幕社区';
-const rootDescription = 'MontageSubs · 蒙太奇字幕社区 — a nonprofit, open-source subtitle community. 非营利、开源的字幕社区，用爱发电。';
+const rootTitle = 'MontageSubs';
+const rootDescription = 'MontageSubs is a nonprofit, open-source subtitle community.';
 const targets = supportedLangs.map((code) => ({
   code,
   name: languages[code],
@@ -49,7 +49,6 @@ const targets = supportedLangs.map((code) => ({
           <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
         ))}
       </ul>
-      {isRoot && <p>Powered by Love ❤ · 用爱发电</p>}
     </main>
     <LocalePreference />
   </body>
@@ -72,7 +71,6 @@ const targets = supportedLangs.map((code) => ({
   }
   main { max-width: 34rem; text-align: center; }
   h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
-  p { margin: 1.5rem 0 0; color: rgba(245, 241, 232, 0.6); font-size: 0.875rem; }
   ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
   a {
     display: inline-block;

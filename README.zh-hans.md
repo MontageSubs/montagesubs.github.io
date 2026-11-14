@@ -1,0 +1,187 @@
+# 蒙太奇字幕社区 · MontageSubs
+
+<div align="right">
+
+**中文 | [English](./README.md)**
+
+</div>
+
+蒙太奇字幕社区（MontageSubs）的官方网站。一个非营利、开源的字幕生态社区，连接观众、译者、开发者与影视工作者。
+
+🌐 线上：<https://subs.js.org>
+
+---
+
+## 技术栈
+
+- [Astro 4](https://astro.build/) + TypeScript（静态站点生成）
+- [Tailwind CSS 3](https://tailwindcss.com/)（样式）
+- [Pagefind](https://pagefind.app/)（站内搜索，构建后注入）
+- 部署：GitHub Pages，通过 GitHub Actions 自动构建（见 [.github/workflows/deploy.yml](.github/workflows/deploy.yml)）
+
+---
+
+## 本地开发
+
+需要 Node 20+。
+
+```bash
+npm install
+npm run dev          # 启动开发服务器（默认 http://localhost:4321）
+npm run build        # 构建到 dist/
+npm run preview      # 预览构建产物
+```
+
+---
+
+## 目录结构
+
+```
+src/
+├── pages/
+│   ├── zh-hans/             简体中文页面（默认语言）
+│   └── en/                  英文页面
+├── components/              全局组件（Header / Footer / Hero / ...）
+├── layouts/
+│   ├── BaseLayout.astro     全站统一壳：head / 公告条 / Header / Footer / motion
+│   └── LocaleGateway.astro  无语言前缀路径的语言跳转页
+├── content/
+│   ├── config.ts            内容集合 schema（Zod）
+│   └── blog/                博客 markdown，按语言分目录
+├── config/
+│   ├── icons.ts             图标 URL 版本号（更新图标时递增）
+│   └── indexing.ts          不参与索引的路由
+├── data/
+│   ├── projects.ts          字幕项目数据
+│   ├── tools.ts             工具数据
+│   ├── community.ts         成员数据
+│   └── social.ts            社交平台与外部入口链接
+├── i18n/
+│   ├── index.ts             双语 key map（扁平结构）
+│   ├── locales.ts           语言清单与默认/兜底语言
+│   ├── storage.ts           浏览器存储 key 命名空间（montagesubs:）
+│   ├── routes.ts            语言网关页路由枚举
+│   ├── inlineScripts.ts     网关页与 404 的内联脚本渲染
+│   └── inline/              内联脚本源码（语言解析）
+├── styles/
+│   └── global.css           全局样式 + 动画原语
+└── env.d.ts
+
+public/                      静态资源（favicon、各平台图标、robots.txt、llms.txt）
+.github/workflows/deploy.yml 部署流水线
+astro.config.mjs             Astro 配置（含 sitemap）
+tailwind.config.mjs          设计 tokens（颜色 / 字号 / 间距）
+```
+
+---
+
+## 添加内容
+
+### 写一篇博客
+
+在 `src/content/blog/zh-hans/`（或 `en/`）下新建 markdown 文件：
+
+```markdown
+---
+title: 文章标题
+date: 2026-05-02
+lang: zh-hans
+author: 你的 ID
+has_translation: false
+tags: [标签1, 标签2]
+description: 摘要（会用于 RSS / OG）
+draft: false
+---
+
+正文…
+```
+
+文件路径自动决定 URL：`src/content/blog/zh-hans/hello-world.md` → `/zh-hans/learn/blog/hello-world/`
+
+### 加一个项目 / 工具 / 成员
+
+直接编辑对应的 TS 数据文件：
+
+| 类型 | 文件 |
+|---|---|
+| 项目 | [src/data/projects.ts](src/data/projects.ts) |
+| 工具 | [src/data/tools.ts](src/data/tools.ts) |
+| 成员 | [src/data/community.ts](src/data/community.ts) |
+
+每个文件顶部有 TS 接口定义，照着加一条记录就行。
+
+### 改文案 / 加翻译
+
+所有页面文案集中在 [src/i18n/index.ts](src/i18n/index.ts)，是一个扁平的双语 key map：
+
+```ts
+'home.hero.line1': '让字幕',     // 中文
+// 对应位置
+'home.hero.line1': 'Subtitles', // 英文
+```
+
+新增 key 时两边都要补，否则缺失语种会 fallback 到中文。
+
+---
+
+## 设计 Tokens
+
+集中在 [tailwind.config.mjs](tailwind.config.mjs)。
+
+**颜色**
+
+| Token | 值 | 用途 |
+|---|---|---|
+| `ink` | `#0E0B07` | 主背景（暖近黑） |
+| `bone` | `#f5f1e8` | 主文字（暖白） |
+| `bone-dim` | `#cfc9bb` | 次要文字 |
+| `bone-mute` | `#8a857a` | 标注 / 元数据 |
+| `signal-yellow` | `#FBC100` | 品牌主色 |
+| `signal-yellow-lit` | `#FDD338` | 主色亮起态（按钮 hover） |
+| `signal-yellow-soft` | `#fbe27a` | 主色柔色（链接 hover / typography） |
+| `live` | `#22c55e` | 在线状态点 |
+
+**字号**
+
+| Token | 用途 |
+|---|---|
+| `text-display` | 首屏 / 二级页 hero h1 |
+| `text-mega` | section h2 |
+
+**字体**：纯系统字体栈，**不引入任何外部字体文件**（不加载 Google Fonts、不打包字体）。具体显示哪个字体由用户的操作系统决定——Mac/iOS 是 SF Pro + PingFang SC，Windows 是 Segoe UI + Microsoft YaHei，Android/Linux 走 Noto Sans SC。
+
+---
+
+## 部署
+
+推送到 `main` 即触发 GitHub Actions 构建并部署到 GitHub Pages。流程：
+
+1. `npm ci`
+2. `npm run build`
+3. `npx pagefind --site dist`（生成搜索索引）
+4. 上传 `dist/` 到 Pages
+
+首次部署前需要在仓库 Settings → Pages 把 Source 设为 **GitHub Actions**。
+
+---
+
+## 协议
+
+- 内容（博客文章 / 文档 / 翻译）：[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- 代码：[MIT](https://opensource.org/licenses/MIT)
+
+---
+
+## 社区与联系
+
+- Telegram 频道：<https://t.me/s/MTSubs>
+- Discord：<https://discord.gg/montagesubs>
+
+---
+
+<div align="center">
+
+**蒙太奇字幕社区 (MontageSubs)**  
+"用爱发电 ❤"
+
+</div>

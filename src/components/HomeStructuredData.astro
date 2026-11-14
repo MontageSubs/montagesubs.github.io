@@ -25,9 +25,8 @@ const profiles = {
   },
 };
 
-const profile = lang
-  ? profiles[lang]
-  : { ...profiles.en, slogan: '用爱发电 · Powered by Love ❤' };
+const { alternateName: _omitted, ...rootProfile } = profiles.en;
+const profile = lang ? profiles[lang] : rootProfile;
 
 const organization = {
   '@type': 'Organization',
@@ -36,7 +35,7 @@ const organization = {
   url: origin,
   logo: {
     '@type': 'ImageObject',
-    url: new URL('/favicon-512.png', siteURL).href,
+    url: new URL('/android-chrome-512x512.png', siteURL).href,
     width: 512,
     height: 512,
   },
@@ -47,7 +46,6 @@ const website = {
   '@type': 'WebSite',
   '@id': `${origin}#website`,
   name: 'MontageSubs',
-  alternateName: '蒙太奇字幕社区',
   url: origin,
   inLanguage: ['zh-Hans', 'en'],
   publisher: { '@id': organization['@id'] },
