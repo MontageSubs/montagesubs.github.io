@@ -1,0 +1,21 @@
+# MontageSubs · 蒙太奇字幕社区
+
+> MontageSubs is a nonprofit, open-source subtitle community that connects viewers, translators, developers and filmmakers. It builds free browser-based subtitle tools, with no sign-up required, and works toward an open, transparent subtitle ecosystem. 蒙太奇字幕社区是一个非营利、开源的字幕社区，连接观众、译者、开发者与影视工作者。
+
+The tools below are independent web apps hosted under subs.js.org. Each one runs in the browser and is free to use.
+
+## Tools
+
+- [Montage Subtitle Translator](https://subs.js.org/subtitle-translator/): online subtitle translator that merges split cues into complete sentences by scene before neural machine translation, then maps the result back onto the original timing. Supports 200+ languages, SRT, VTT and ASS files, and bilingual output. Its own guide for AI assistants is at [llms.txt](https://subs.js.org/subtitle-translator/llms.txt).
+- [SVG to ASS Draw](https://subs.js.org/svg-to-ass/): converts SVG vector paths from Illustrator or Inkscape into ASS/SSA \p drawing commands, with smart cleanup, 8x/16x precision scaling and live preview.
+- [ASS Subsetter](https://subs.js.org/ass-subset/): subsets or fully embeds fonts in ASS/SSA subtitles; supports TTF, OTF, TTC, OTC, WOFF, WOFF2, batch processing and drawing-command optimization.
+- [ASS to SVG](https://subs.js.org/ass-to-svg/): restores ASS/SSA \p1 to \p5 drawing commands into SVG vector graphics, with automatic precision detection, live preview, and one-click copy or download.
+
+## Community
+
+- [Home](https://subs.js.org/en/): who we are and what we are building. 简体中文: [首页](https://subs.js.org/zh-hans/).
+- [Toolkit](https://subs.js.org/en/tools/): every community tool in one place.
+- [About](https://subs.js.org/en/about/): mission, values and nonprofit statement.
+- [Contribute](https://subs.js.org/en/contribute/): ways for translators, developers and writers to take part.
+- [Learn](https://subs.js.org/en/learn/): writing on translation, localization and subtitle technology.
+- [GitHub organization](https://github.com/MontageSubs): source code for all tools, released under open licenses.

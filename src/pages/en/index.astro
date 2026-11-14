@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import HomeStructuredData from '../../components/HomeStructuredData.astro';
 import Hero from '../../components/Hero.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
 import { ui } from '../../i18n';
@@ -15,6 +16,7 @@ const focusItems = [
 const langPairs = ['EN → 中文', '日本語 → 中文', '한국어 → 中文', 'Français → 中文', 'Deutsch → 中文', 'Español → 中文', 'Italiano → 中文', 'Русский → 中文'];
 ---
 <BaseLayout title="MontageSubs" description="A nonprofit, open-source subtitle community." lang={lang} hasTranslation={true} translationPath="/zh-hans/">
+  <HomeStructuredData slot="head" lang={lang} />
   <a id="top"></a>
   <Hero lang={lang} />
 

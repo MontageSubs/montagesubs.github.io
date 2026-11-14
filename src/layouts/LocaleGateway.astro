@@ -1,14 +1,21 @@
 ---
+import HomeStructuredData from '../components/HomeStructuredData.astro';
+import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
+import SocialMeta from '../components/SocialMeta.astro';
 import { renderGatewayScript } from '../i18n/inlineScripts';
-import { htmlLangTags, languages, supportedLangs } from '../i18n/locales';
+import { defaultLang, htmlLangTags, languages, supportedLangs } from '../i18n/locales';
 
 interface Props {
   subPath: string;
 }
 
 const { subPath } = Astro.props;
-const siteURL = Astro.site ?? new URL('https://montagesubs.github.io');
+const siteURL = Astro.site ?? new URL('https://subs.js.org');
+const isRoot = subPath === '';
+const canonicalURL = isRoot ? siteURL.href : new URL(`/${defaultLang}/${subPath}`, siteURL).href;
+const rootTitle = 'MontageSubs · 蒙太奇字幕社区';
+const rootDescription = 'MontageSubs · 蒙太奇字幕社区 — a nonprofit, open-source subtitle community. 非营利、开源的字幕社区，用爱发电。';
 const targets = supportedLangs.map((code) => ({
   code,
   name: languages[code],
@@ -22,15 +29,17 @@ const targets = supportedLangs.map((code) => ({
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex,follow" />
-    <meta name="theme-color" content="#0E0B07" />
-    <title>MontageSubs · 蒙太奇字幕社区</title>
+    <title>{rootTitle}</title>
+    {isRoot && <meta name="description" content={rootDescription} />}
+    <link rel="canonical" href={canonicalURL} />
+    {isRoot && <link rel="alternate" hreflang="x-default" href={siteURL.href} />}
+    {isRoot && <SocialMeta title={rootTitle} description={rootDescription} url={siteURL.href} />}
+    {isRoot && <HomeStructuredData />}
     <script is:inline set:html={renderGatewayScript(subPath)} />
     {targets.map(({ href, hreflang }) => (
       <link rel="alternate" hreflang={hreflang} href={new URL(href, siteURL).href} />
     ))}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <IconLinks />
   </head>
   <body>
     <main>
@@ -40,6 +49,7 @@ const targets = supportedLangs.map((code) => ({
           <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
         ))}
       </ul>
+      {isRoot && <p>Powered by Love ❤ · 用爱发电</p>}
     </main>
     <LocalePreference />
   </body>
@@ -62,6 +72,7 @@ const targets = supportedLangs.map((code) => ({
   }
   main { max-width: 34rem; text-align: center; }
   h1 { margin: 0 0 1.5rem; font-size: clamp(2rem, 6vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+  p { margin: 1.5rem 0 0; color: rgba(245, 241, 232, 0.6); font-size: 0.875rem; }
   ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
   a {
     display: inline-block;

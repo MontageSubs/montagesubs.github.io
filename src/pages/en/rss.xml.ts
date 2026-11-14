@@ -10,7 +10,7 @@ export const GET: APIRoute = async (context) => {
   return rss({
     title: 'MontageSubs Blog',
     description: 'Translation notes, technical research, subtitle industry insights',
-    site: context.site ?? 'https://montagesubs.github.io',
+    site: context.site ?? 'https://subs.js.org',
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

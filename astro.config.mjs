@@ -2,8 +2,20 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import { supportedLangs } from './src/i18n/locales.ts';
+import { isUnindexedPath } from './src/config/indexing.ts';
+import { tools } from './src/data/tools.ts';
 
-const SITE_URL = 'https://montagesubs.github.io';
+const SITE_URL = 'https://subs.js.org';
+
+const toolSitemaps = tools
+  .filter((tool) => tool.type === 'online' && tool.url)
+  .map((tool) => new URL('sitemap.xml', tool.url).href);
+
+const isListedPage = (page) => {
+  const { pathname } = new URL(page);
+  if (pathname === '/') return true;
+  return supportedLangs.includes(pathname.split('/')[1]) && !isUnindexedPath(pathname);
+};
 
 export default defineConfig({
   site: SITE_URL,
@@ -11,7 +23,8 @@ export default defineConfig({
   integrations: [
     tailwind(),
     sitemap({
-      filter: (page) => supportedLangs.includes(new URL(page).pathname.split('/')[1]),
+      filter: isListedPage,
+      customSitemaps: toolSitemaps,
     }),
   ],
 

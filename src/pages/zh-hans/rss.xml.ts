@@ -10,7 +10,7 @@ export const GET: APIRoute = async (context) => {
   return rss({
     title: '蒙太奇字幕社区博客',
     description: '翻译笔记、技术研究、字幕行业见解',
-    site: context.site ?? 'https://montagesubs.github.io',
+    site: context.site ?? 'https://subs.js.org',
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,

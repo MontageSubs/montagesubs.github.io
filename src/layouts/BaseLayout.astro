@@ -3,9 +3,12 @@ import '../styles/global.css';
 import AnnouncementBar from '../components/AnnouncementBar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
 import MotionScripts from '../components/MotionScripts.astro';
-import { htmlLangTags, type Lang } from '../i18n/locales';
+import SocialMeta from '../components/SocialMeta.astro';
+import { isUnindexedPath } from '../config/indexing';
+import { defaultLang, htmlLangTags, type Lang } from '../i18n/locales';
 
 interface Props {
   title: string;
@@ -29,13 +32,18 @@ const {
   noindex = false,
 } = Astro.props;
 
-const siteURL = Astro.site ?? new URL('https://montagesubs.github.io');
+const siteURL = Astro.site ?? new URL('https://subs.js.org');
 const currentURL = Astro.url.href;
 const htmlLang = htmlLangTags[lang as Lang];
 const alternateLang = lang === 'zh-hans' ? 'en' : 'zh-hans';
 const alternatePath = translationPath
   ? new URL(translationPath, siteURL).href
   : currentURL.replace(`/${lang}/`, `/${alternateLang}/`);
+const isHome = Astro.url.pathname === `/${lang}/`;
+const defaultLanguageURL =
+  lang === defaultLang || !hasTranslation ? currentURL : alternatePath;
+const defaultEntryURL = isHome ? siteURL.href : defaultLanguageURL;
+const excludedFromIndex = noindex || isUnindexedPath(Astro.url.pathname);
 ---
 
 <!DOCTYPE html>
@@ -47,26 +55,16 @@ const alternatePath = translationPath
 
     <title>{title} · MontageSubs</title>
     <meta name="description" content={description} />
-    {noindex && <meta name="robots" content="noindex" />}
+    {excludedFromIndex && <meta name="robots" content="noindex" />}
 
     <link rel="canonical" href={currentURL} />
     <link rel="alternate" hreflang={htmlLang} href={currentURL} />
     {hasTranslation && (
       <link rel="alternate" hreflang={lang === 'zh-hans' ? 'en' : 'zh-Hans'} href={alternatePath} />
     )}
-    <link rel="alternate" hreflang="x-default" href={new URL('/zh-hans/', siteURL).href} />
+    <link rel="alternate" hreflang="x-default" href={defaultEntryURL} />
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={currentURL} />
-    <meta property="og:title" content={`${title} · MontageSubs`} />
-    <meta property="og:description" content={description} />
-    <meta property="og:site_name" content="MontageSubs" />
-    {ogImage && <meta property="og:image" content={ogImage} />}
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} · MontageSubs`} />
-    <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={ogImage} />}
+    <SocialMeta title={`${title} · MontageSubs`} description={description} url={currentURL} image={ogImage} />
 
     <link
       rel="alternate"
@@ -75,14 +73,8 @@ const alternatePath = translationPath
       href={`/${lang}/rss.xml`}
     />
 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="theme-color" content="#0E0B07" />
+    <IconLinks />
+    <slot name="head" />
   </head>
 
   <body class="bg-ink text-bone min-h-screen flex flex-col antialiased">

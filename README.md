@@ -2,7 +2,7 @@
 
 蒙太奇字幕社区（MontageSubs）的官方网站。一个非营利、开源的字幕生态社区，连接观众、译者、开发者与影视工作者。
 
-🌐 线上：<https://montagesubs.github.io>
+🌐 线上：<https://subs.js.org>
 
 ---
 
