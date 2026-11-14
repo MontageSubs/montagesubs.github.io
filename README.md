@@ -109,6 +109,6 @@ The icons are generated from the flat logo in the [brand assets](https://github.
 <div align="center">
 
 **MontageSubs**  
-"Powered by Love ❤"
+Powered by Love ❤
 
 </div>
