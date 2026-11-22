@@ -2,7 +2,9 @@
 import HomeStructuredData from '../components/HomeStructuredData.astro';
 import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
+import SiteVerification from '../components/SiteVerification.astro';
 import SocialMeta from '../components/SocialMeta.astro';
+import { siteName } from '../config/site';
 import { renderGatewayScript } from '../i18n/inlineScripts';
 import { defaultLang, htmlLangTags, languages, supportedLangs } from '../i18n/locales';
 
@@ -14,7 +16,7 @@ const { subPath } = Astro.props;
 const siteURL = Astro.site ?? new URL('https://subs.js.org');
 const isRoot = subPath === '';
 const canonicalURL = isRoot ? siteURL.href : new URL(`/${defaultLang}/${subPath}`, siteURL).href;
-const rootTitle = 'MontageSubs';
+const rootTitle = siteName;
 const rootDescription = 'MontageSubs is a nonprofit, open-source subtitle community.';
 const targets = supportedLangs.map((code) => ({
   code,
@@ -40,11 +42,12 @@ const targets = supportedLangs.map((code) => ({
       <link rel="alternate" hreflang={hreflang} href={new URL(href, siteURL).href} />
     ))}
     <IconLinks />
+    {isRoot && <SiteVerification />}
   </head>
   <body>
     <main>
-      <h1>Select Language</h1>
-      <ul>
+      <h1>{siteName}</h1>
+      <ul aria-label="Select Language">
         {targets.map(({ code, name, href, hreflang }) => (
           <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
         ))}

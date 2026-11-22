@@ -6,8 +6,10 @@ import Footer from '../components/Footer.astro';
 import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
 import MotionScripts from '../components/MotionScripts.astro';
+import SiteVerification from '../components/SiteVerification.astro';
 import SocialMeta from '../components/SocialMeta.astro';
 import { isUnindexedPath } from '../config/indexing';
+import { siteName } from '../config/site';
 import { defaultLang, htmlLangTags, type Lang } from '../i18n/locales';
 
 interface Props {
@@ -32,6 +34,7 @@ const {
   noindex = false,
 } = Astro.props;
 
+const pageTitle = title.startsWith(siteName) ? title : `${title} · ${siteName}`;
 const siteURL = Astro.site ?? new URL('https://subs.js.org');
 const currentURL = Astro.url.href;
 const htmlLang = htmlLangTags[lang as Lang];
@@ -53,7 +56,7 @@ const excludedFromIndex = noindex || isUnindexedPath(Astro.url.pathname);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <title>{title} · MontageSubs</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
     {excludedFromIndex && <meta name="robots" content="noindex" />}
 
@@ -64,16 +67,17 @@ const excludedFromIndex = noindex || isUnindexedPath(Astro.url.pathname);
     )}
     <link rel="alternate" hreflang="x-default" href={defaultEntryURL} />
 
-    <SocialMeta title={`${title} · MontageSubs`} description={description} url={currentURL} image={ogImage} />
+    <SocialMeta title={pageTitle} description={description} url={currentURL} image={ogImage} />
 
     <link
       rel="alternate"
       type="application/rss+xml"
-      title={`MontageSubs ${lang === 'zh-hans' ? '博客' : 'Blog'}`}
+      title={`${siteName} ${lang === 'zh-hans' ? '博客' : 'Blog'}`}
       href={`/${lang}/rss.xml`}
     />
 
     <IconLinks />
+    {isHome && <SiteVerification />}
     <slot name="head" />
   </head>
 

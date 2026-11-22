@@ -1,0 +1,7 @@
+---
+const googleToken = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+const bingToken = import.meta.env.PUBLIC_BING_SITE_VERIFICATION;
+---
+
+{googleToken && <meta name="google-site-verification" content={googleToken} />}
+{bingToken && <meta name="msvalidate.01" content={bingToken} />}

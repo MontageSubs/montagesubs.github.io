@@ -1,37 +1,33 @@
 ---
 import { socialLinks } from '../data/social';
+import { siteName } from '../config/site';
 import type { Lang } from '../i18n/locales';
 
 interface Props {
   lang?: Lang;
 }
 
-const { lang } = Astro.props;
+const { lang = 'en' } = Astro.props;
 const siteURL = Astro.site ?? new URL('https://subs.js.org');
 const origin = siteURL.href;
 
 const profiles = {
   'zh-hans': {
-    name: '蒙太奇字幕社区',
-    alternateName: 'MontageSubs',
     slogan: '用爱发电',
     description: '非营利、开源的字幕社区，连接观众、译者、开发者与影视工作者，共同构建开放、透明的字幕生态。',
   },
   en: {
-    name: 'MontageSubs',
-    alternateName: '蒙太奇字幕社区',
     slogan: 'Powered by Love ❤',
     description: 'A nonprofit, open-source subtitle community that connects viewers, translators, developers and filmmakers.',
   },
 };
 
-const { alternateName: _omitted, ...rootProfile } = profiles.en;
-const profile = lang ? profiles[lang] : rootProfile;
-
 const organization = {
   '@type': 'Organization',
   '@id': `${origin}#organization`,
-  ...profile,
+  name: siteName,
+  alternateName: '蒙太奇字幕社区',
+  ...profiles[lang],
   url: origin,
   logo: {
     '@type': 'ImageObject',
@@ -45,13 +41,11 @@ const organization = {
 const website = {
   '@type': 'WebSite',
   '@id': `${origin}#website`,
-  name: 'MontageSubs',
+  name: siteName,
   url: origin,
   inLanguage: ['zh-Hans', 'en'],
   publisher: { '@id': organization['@id'] },
 };
-
-const graph = lang ? [organization] : [organization, website];
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, website] })} />

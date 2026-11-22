@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { siteName } from '../config/site';
 import { versionedIcon } from '../config/icons';
 
 const icon = (path: string, size: number, purpose: 'any' | 'maskable') => ({
@@ -11,8 +12,8 @@ const icon = (path: string, size: number, purpose: 'any' | 'maskable') => ({
 export const GET: APIRoute = () => {
   const manifest = {
     id: '/',
-    name: 'MontageSubs',
-    short_name: 'MontageSubs',
+    name: siteName,
+    short_name: siteName,
     description: 'A nonprofit, open-source subtitle community.',
     lang: 'en',
     start_url: '/',
