@@ -50,9 +50,11 @@ src/
 │   └── blog/                Blog markdown, one folder per language
 ├── config/
 │   ├── icons.ts             Icon URL version (bump it whenever the icons change)
+│   ├── indexNowKey.js       IndexNow key format shared by the build and the submit script
 │   ├── indexing.ts          Routes excluded from search indexing
 │   └── structuredData.ts    JSON-LD builders (Organization / WebSite / language gateway)
 ├── integrations/
+│   ├── emitIndexNowKey.ts   Emits the IndexNow key file when INDEXNOW_KEY is set
 │   └── mirrorSitemapIndex.ts  Copies sitemap-index.xml to sitemap.xml after build
 ├── data/
 │   ├── projects.ts          Subtitle project data
@@ -72,6 +74,7 @@ src/
 
 public/                      Static assets (favicons, platform icons, robots.txt, llms.txt)
 .github/workflows/deploy.yml Deployment pipeline
+.github/scripts/             IndexNow URL collection and submission
 astro.config.mjs             Astro configuration (including the sitemap; sitemap.xml mirrors sitemap-index.xml)
 tailwind.config.mjs          Design tokens (colours / type sizes / spacing)
 ```
@@ -100,6 +103,12 @@ Body…
 ```
 
 The file path decides the URL: `src/content/blog/en/hello-world.md` → `/en/learn/blog/hello-world/`
+
+---
+
+## Enabling IndexNow
+
+Set the repository variable `INDEXNOW_KEY` (Settings → Secrets and variables → Actions → Variables) to a string of 8–128 letters, digits or dashes. While it is empty, IndexNow stays off. Once set, every deploy publishes `/<key>.txt` and then submits the pages listed in this repository's own sitemap; the sitemaps of the other tools under the same domain are not included.
 
 ---
 

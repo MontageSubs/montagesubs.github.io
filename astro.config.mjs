@@ -5,6 +5,7 @@ import { supportedLangs } from './src/i18n/locales.ts';
 import { isUnindexedPath } from './src/config/indexing.ts';
 import { tools } from './src/data/tools.ts';
 import { mirrorSitemapIndex } from './src/integrations/mirrorSitemapIndex.ts';
+import { emitIndexNowKey } from './src/integrations/emitIndexNowKey.ts';
 
 const SITE_URL = 'https://subs.js.org';
 
@@ -28,6 +29,7 @@ export default defineConfig({
       customSitemaps: toolSitemaps,
     }),
     mirrorSitemapIndex(),
+    emitIndexNowKey(),
   ],
 
   output: 'static',

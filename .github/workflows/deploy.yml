@@ -41,9 +41,21 @@ jobs:
         env:
           PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.GOOGLE_SITE_VERIFICATION }}
           PUBLIC_BING_SITE_VERIFICATION: ${{ vars.BING_SITE_VERIFICATION }}
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
 
       - name: Run Pagefind (build search index)
         run: npx pagefind --site dist --glob "**/*.html"
+
+      - name: Collect IndexNow URLs
+        if: vars.INDEXNOW_KEY != ''
+        run: node .github/scripts/collect-indexnow-urls.mjs dist indexnow-urls.txt
+
+      - name: Upload IndexNow URLs
+        if: vars.INDEXNOW_KEY != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: indexnow-urls
+          path: indexnow-urls.txt
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -61,3 +73,28 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    name: Submit to IndexNow
+    needs: deploy
+    if: vars.INDEXNOW_KEY != ''
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Download IndexNow URLs
+        uses: actions/download-artifact@v4
+        with:
+          name: indexnow-urls
+
+      - name: Submit URLs
+        continue-on-error: true
+        env:
+          INDEXNOW_KEY: ${{ vars.INDEXNOW_KEY }}
+        run: node .github/scripts/submit-indexnow.mjs indexnow-urls.txt

@@ -50,9 +50,11 @@ src/
 │   └── blog/                博客 markdown，按语言分目录
 ├── config/
 │   ├── icons.ts             图标 URL 版本号（更新图标时递增）
+│   ├── indexNowKey.js       IndexNow 密钥格式（构建与提交脚本共用）
 │   ├── indexing.ts          不参与索引的路由
 │   └── structuredData.ts    JSON-LD 构造（Organization / WebSite / 语言选择页）
 ├── integrations/
+│   ├── emitIndexNowKey.ts   设置 INDEXNOW_KEY 时输出 IndexNow 密钥文件
 │   └── mirrorSitemapIndex.ts  构建后将 sitemap-index.xml 复制为 sitemap.xml
 ├── data/
 │   ├── projects.ts          字幕项目数据
@@ -72,6 +74,7 @@ src/
 
 public/                      静态资源（favicon、各平台图标、robots.txt、llms.txt）
 .github/workflows/deploy.yml 部署流水线
+.github/scripts/             IndexNow URL 收集与提交
 astro.config.mjs             Astro 配置（含 sitemap；sitemap.xml 为 sitemap-index.xml 的镜像）
 tailwind.config.mjs          设计 tokens（颜色 / 字号 / 间距）
 ```
@@ -165,6 +168,10 @@ draft: false
 4. 上传 `dist/` 到 Pages
 
 首次部署前需要在仓库 Settings → Pages 把 Source 设为 **GitHub Actions**。
+
+### 启用 IndexNow
+
+在仓库变量（Settings → Secrets and variables → Actions → Variables）中设置 `INDEXNOW_KEY`，取值为 8–128 位的字母、数字或连字符。未填写时不开启；填写后每次部署都会发布 `/<key>.txt`，并提交本仓库自身 sitemap 中列出的页面，同域名下其他工具的 sitemap 不在提交范围内。
 
 ---
 
