@@ -50,7 +50,10 @@ src/
 │   └── blog/                Blog markdown, one folder per language
 ├── config/
 │   ├── icons.ts             Icon URL version (bump it whenever the icons change)
-│   └── indexing.ts          Routes excluded from search indexing
+│   ├── indexing.ts          Routes excluded from search indexing
+│   └── structuredData.ts    JSON-LD builders (Organization / WebSite / language gateway)
+├── integrations/
+│   └── mirrorSitemapIndex.ts  Copies sitemap-index.xml to sitemap.xml after build
 ├── data/
 │   ├── projects.ts          Subtitle project data
 │   ├── tools.ts             Tool data
@@ -69,7 +72,7 @@ src/
 
 public/                      Static assets (favicons, platform icons, robots.txt, llms.txt)
 .github/workflows/deploy.yml Deployment pipeline
-astro.config.mjs             Astro configuration (including the sitemap)
+astro.config.mjs             Astro configuration (including the sitemap; sitemap.xml mirrors sitemap-index.xml)
 tailwind.config.mjs          Design tokens (colours / type sizes / spacing)
 ```
 

@@ -6,7 +6,6 @@ import Footer from '../components/Footer.astro';
 import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
 import MotionScripts from '../components/MotionScripts.astro';
-import SiteVerification from '../components/SiteVerification.astro';
 import SocialMeta from '../components/SocialMeta.astro';
 import { isUnindexedPath } from '../config/indexing';
 import { siteName } from '../config/site';
@@ -77,7 +76,6 @@ const excludedFromIndex = noindex || isUnindexedPath(Astro.url.pathname);
     />
 
     <IconLinks />
-    {isHome && <SiteVerification />}
     <slot name="head" />
   </head>
 

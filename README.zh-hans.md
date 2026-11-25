@@ -50,7 +50,10 @@ src/
 │   └── blog/                博客 markdown，按语言分目录
 ├── config/
 │   ├── icons.ts             图标 URL 版本号（更新图标时递增）
-│   └── indexing.ts          不参与索引的路由
+│   ├── indexing.ts          不参与索引的路由
+│   └── structuredData.ts    JSON-LD 构造（Organization / WebSite / 语言选择页）
+├── integrations/
+│   └── mirrorSitemapIndex.ts  构建后将 sitemap-index.xml 复制为 sitemap.xml
 ├── data/
 │   ├── projects.ts          字幕项目数据
 │   ├── tools.ts             工具数据
@@ -69,7 +72,7 @@ src/
 
 public/                      静态资源（favicon、各平台图标、robots.txt、llms.txt）
 .github/workflows/deploy.yml 部署流水线
-astro.config.mjs             Astro 配置（含 sitemap）
+astro.config.mjs             Astro 配置（含 sitemap；sitemap.xml 为 sitemap-index.xml 的镜像）
 tailwind.config.mjs          设计 tokens（颜色 / 字号 / 间距）
 ```
 

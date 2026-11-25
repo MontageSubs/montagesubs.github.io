@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /subtitle-translator/beta/
 
-Sitemap: https://subs.js.org/sitemap-index.xml
+Sitemap: https://subs.js.org/sitemap.xml

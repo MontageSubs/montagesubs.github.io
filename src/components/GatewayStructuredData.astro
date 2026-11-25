@@ -1,0 +1,13 @@
+---
+import { buildLanguageGateway, buildOrganization, buildWebSite } from '../config/structuredData';
+
+interface Props {
+  description: string;
+}
+
+const { description } = Astro.props;
+const siteURL = Astro.site ?? new URL('https://subs.js.org');
+const graph = [buildOrganization(siteURL), buildWebSite(siteURL), ...buildLanguageGateway(siteURL, description)];
+---
+
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />

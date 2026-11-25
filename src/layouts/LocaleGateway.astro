@@ -1,5 +1,5 @@
 ---
-import HomeStructuredData from '../components/HomeStructuredData.astro';
+import GatewayStructuredData from '../components/GatewayStructuredData.astro';
 import IconLinks from '../components/IconLinks.astro';
 import LocalePreference from '../components/LocalePreference.astro';
 import SiteVerification from '../components/SiteVerification.astro';
@@ -36,7 +36,7 @@ const targets = supportedLangs.map((code) => ({
     <link rel="canonical" href={canonicalURL} />
     {isRoot && <link rel="alternate" hreflang="x-default" href={siteURL.href} />}
     {isRoot && <SocialMeta title={rootTitle} description={rootDescription} url={siteURL.href} />}
-    {isRoot && <HomeStructuredData />}
+    {isRoot && <GatewayStructuredData description={rootDescription} />}
     <script is:inline set:html={renderGatewayScript(subPath)} />
     {targets.map(({ href, hreflang }) => (
       <link rel="alternate" hreflang={hreflang} href={new URL(href, siteURL).href} />
@@ -47,11 +47,13 @@ const targets = supportedLangs.map((code) => ({
   <body>
     <main>
       <h1>{siteName}</h1>
-      <ul aria-label="Select Language">
-        {targets.map(({ code, name, href, hreflang }) => (
-          <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
-        ))}
-      </ul>
+      <nav aria-label="Select Language">
+        <ul>
+          {targets.map(({ code, name, href, hreflang }) => (
+            <li><a href={href} hreflang={hreflang} lang={hreflang} data-locale={code}>{name}</a></li>
+          ))}
+        </ul>
+      </nav>
     </main>
     <LocalePreference />
   </body>

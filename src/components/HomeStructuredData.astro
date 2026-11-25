@@ -1,6 +1,5 @@
 ---
-import { socialLinks } from '../data/social';
-import { siteName } from '../config/site';
+import { buildOrganization, buildWebSite } from '../config/structuredData';
 import type { Lang } from '../i18n/locales';
 
 interface Props {
@@ -9,43 +8,7 @@ interface Props {
 
 const { lang = 'en' } = Astro.props;
 const siteURL = Astro.site ?? new URL('https://subs.js.org');
-const origin = siteURL.href;
-
-const profiles = {
-  'zh-hans': {
-    slogan: '用爱发电',
-    description: '非营利、开源的字幕社区，连接观众、译者、开发者与影视工作者，共同构建开放、透明的字幕生态。',
-  },
-  en: {
-    slogan: 'Powered by Love ❤',
-    description: 'A nonprofit, open-source subtitle community that connects viewers, translators, developers and filmmakers.',
-  },
-};
-
-const organization = {
-  '@type': 'Organization',
-  '@id': `${origin}#organization`,
-  name: siteName,
-  alternateName: '蒙太奇字幕社区',
-  ...profiles[lang],
-  url: origin,
-  logo: {
-    '@type': 'ImageObject',
-    url: new URL('/android-chrome-512x512.png', siteURL).href,
-    width: 512,
-    height: 512,
-  },
-  sameAs: socialLinks.map((link) => link.href),
-};
-
-const website = {
-  '@type': 'WebSite',
-  '@id': `${origin}#website`,
-  name: siteName,
-  url: origin,
-  inLanguage: ['zh-Hans', 'en'],
-  publisher: { '@id': organization['@id'] },
-};
+const graph = [buildOrganization(siteURL, lang), buildWebSite(siteURL)];
 ---
 
-<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': [organization, website] })} />
+<script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })} />
